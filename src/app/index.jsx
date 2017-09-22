@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
-import {BrowserRouter,Route} from 'react-router-dom';
-import Home from "./Home";
+import {BrowserRouter} from 'react-router-dom';
 
-//import AppRouter from "./AppRouter";
+import App from "./routers/App";
 
-
-ReactDOM.render(<Home/>, document.getElementById('app'));
+ReactDOM.render(<BrowserRouter>
+  <App/>
+</BrowserRouter>, document.getElementById('app'));
 
