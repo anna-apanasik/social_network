@@ -6,6 +6,8 @@ class Home extends React.Component {
             <div className="container">
                 <h1 className="display-3">What is a Wall?</h1>
                 <div className="lead">
+                    <hr/>
+                    <br/>
                     <p>This is a new social network.</p>
                     <p>You can create a wall for watching the whole world... or only yourself... only your friends.</p>
                     <p>You can do as you want.</p>
@@ -19,7 +21,6 @@ class Home extends React.Component {
 }
 
 export default Home;
-
 
 
 // <!--Do you have your "wall"?<br>-->

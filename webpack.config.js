@@ -15,14 +15,18 @@ var config = {
         },
         extensions: ['.js', '.jsx'],
     },
-    module : {
-        loaders : [
+    module: {
+        loaders: [
             {
-                test : /\.jsx?/,
-                include : APP_DIR,
-                loader : 'babel-loader'
+                test: /\.jsx?/,
+                include: APP_DIR,
+                loader: 'babel-loader'
+            },
+            {
+                test: /\.css$/, loader: "style-loader!css-loader"
             }
         ]
+
     }
 };
 

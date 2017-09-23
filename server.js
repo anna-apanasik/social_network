@@ -15,6 +15,8 @@ app.use(expressValidator());
 
 app.use(express.static(path.join(__dirname, 'src/public/')));
 
+require('./routes')(app);
+
 app.listen(port, () => {
     console.log('Server listening on: ' + port);
 });
