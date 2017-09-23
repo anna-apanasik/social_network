@@ -1,5 +1,6 @@
 import React from 'react';
-import FieldGroup from 'FieldGroup'
+import FieldGroup from "./FieldGroup";
+
 const request = require('superagent');
 
 function getObject(array, searchValue) {
