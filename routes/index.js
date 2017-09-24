@@ -1,4 +1,5 @@
 module.exports = function(app) {
-    require('./signUp')(app);
-
+    require('./routeSignUp')(app);
+    require('./routeSignIn')(app);
+    require('./routeOtherPages')(app);
 };

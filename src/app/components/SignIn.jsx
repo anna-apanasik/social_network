@@ -5,6 +5,9 @@ const styles = {
     container: {
         marginTop: "100px"
     },
+    form:{
+        padding: "15px"
+    },
     h4: {
         textAlign: "center"
     }
@@ -19,9 +22,8 @@ class SignIn extends React.Component {
     render() {
         return (
             <div className="row justify-content-center">
-                <div className="col-4 ">
-                    <div className="card border-info mb-3">
-
+                <div className="col-3">
+                    <div className="card border-info mb-3" style={styles.form}>
                             <h4 className="card-title" style={styles.h4}>Sign in to Wall</h4>
                             <form>
                                 <div className="form-group">
