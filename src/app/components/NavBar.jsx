@@ -24,17 +24,17 @@ class NavBar extends React.Component {
                                 className="sr-only">(current)</span></a></Link>
                         </li>
                         <li className="nav-item">
-                            <Link to='/api/about'><a className="nav-link"> About Wall </a></Link>
+                            <Link to='/about'><a className="nav-link"> About Wall </a></Link>
                         </li>
                         <li className="nav-item">
-                            <Link to='/api/contact'><a className="nav-link disabled"> Contact us </a></Link>
+                            <Link to='/contact'><a className="nav-link disabled"> Contact us </a></Link>
                         </li>
                     </ul>
                     <form className="form-inline my-2 my-lg-0">
-                        <Link to='/api/login'>
+                        <Link to='/login'>
                             <button className="btn btn-outline-primary my-2 my-sm-0" type="submit"> Sign in</button>
                         </Link>
-                        <Link to='/api/registration'>
+                        <Link to='/signup'>
                             <button className="btn btn-outline-primary my-2 my-sm-0" type="submit"> Sign up</button>
                         </Link>
                     </form>

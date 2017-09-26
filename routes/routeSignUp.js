@@ -1,39 +1,43 @@
 const validationSignUp = require('../validation/validationSignUp');
-//const path = require('path');
+const signUpService = require('../services/signUpService');
 
 module.exports = function (app) {
+    app.route(/^(?!api)/)
+        .get(update);
+
     app.route('/api/build/bundle.js')
         .get(getBundle);
 
-    app.route('/api/registration')
-        .get(update);
-
-    app.route('/api/registration')
+    app.route('/api/signup')
         .post(registration);
 };
 
-function getBundle(req,res){
-    if (!req.body) return res.sendStatus(400);
-    res.sendFile('bundle.js', { root : 'src/public/build' });
+function getBundle(req, res) {
+    if (!req.body) {
+        return res.sendStatus(400);
+    }
+    res.sendFile('bundle.js', {root: 'src/public/build'});
 }
 
-function update(req,res) {
-    if (!req.body) return res.sendStatus(400);
-    res.sendFile('index.html', { root : 'src/public/' });
-    // res.sendFile( 'A:/courses/wall/src/public/index.html');
-    //res.render('index.html');
+function update(req, res) {
+    if (!req.body) {
+        return res.sendStatus(400);
+    }
+    res.sendFile('index.html', {root: 'src/public/'});
 }
 
 function registration(req, res) {
-
-    if (!req.body) return res.sendStatus(400);
-
+    if (!req.body) {
+        return res.sendStatus(400);
+    }
+    console.log('validation');
     let errors = validationSignUp(req);
-    console.log(errors);
+
     if (!errors) {
         res.status(200).json();
     } else {
         res.status(400).json({errors: errors});
     }
-
+    console.log('before email');
+    return signUpService.checkEmail(req.body.email)
 }

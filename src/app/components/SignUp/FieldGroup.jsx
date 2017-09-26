@@ -12,7 +12,7 @@ function FieldGroup({label,type, value, onChange, placeholder, errors, help}) {
                            value={value}
                            onChange={onChange}
                            placeholder={placeholder}/>
-                    <label>{errors}</label>
+                    <span className="badge badge-danger">{errors}</span>
                 </form>
                 <small className="form-text text-muted">{help}</small>
             </div>

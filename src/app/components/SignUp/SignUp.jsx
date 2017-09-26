@@ -68,7 +68,7 @@ class SignUp extends React.Component {
 
     sendPostRequest() {
         request
-            .post('/api/registration')
+            .post('/api/signup')
             .send({
                 name: this.state.name,
                 surname: this.state.surname,
@@ -88,8 +88,8 @@ class SignUp extends React.Component {
     }
 
     parseErrors(errors) {
-
         let error = getObject(errors.response.body.errors, 'login');
+
         if (error) {
             this.setState({errorLogin: error.msg});
         } else {
@@ -156,6 +156,7 @@ class SignUp extends React.Component {
                                 placeholder="Enter your login"
                                 errors={this.state.errorLogin}
                             />
+
                             <FieldGroup
                                 label="Email address"
                                 value={this.state.email}
@@ -164,6 +165,7 @@ class SignUp extends React.Component {
                                 errors={this.state.errorEmail}
                                 help={"We'll never share your email with anyone else."}
                             />
+
                             <FieldGroup
                                 label="Password"
                                 type="password"

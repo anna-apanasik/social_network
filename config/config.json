@@ -2,6 +2,8 @@
     "username": "root",
     "password": "root",
     "host": "localhost",
-    "database": "test_bd",
-    "dialect": "mysql"
+    "database": "mysql",
+    "dialect": "mysql",
+    "port": "3306",
+    "socketPath": "/var/run/mysqld/mysql.sock"
 }
