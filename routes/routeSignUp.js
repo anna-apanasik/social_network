@@ -34,15 +34,16 @@ function registration(req, res) {
     let errors = validationSignUp(req);
 
     if (!errors) {
-        res.status(200).json();
+        signUpService.signUp(req,res)
+            .then((user) => {
+                console.log('success ' +user);
+                return res.status(200).json()
+            })
+            .catch(e=>{
+                console.log('errors ' +e);
+                res.status(400).json({errors:[e]});
+            })
     } else {
         res.status(400).json({errors: errors});
     }
-      //return signUpService.signUp(req,res)
-
-// console.log("in reg "+ errors);
-//     if (!errors) {
-//         res.status(200).json();
-//     } else {
-//         res.status(400).json({errors: errors});
-    }
+}
