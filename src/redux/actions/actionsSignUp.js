@@ -113,6 +113,9 @@ export function postRequest(state) {
 function parseErrors(errors) {
 
     let error = getObject(errors.response.body.errors, 'email');
+    if(isEmptyObject(error)){
+        return ;
+    }
     let sendError = [];
 
     if (error) {
@@ -143,4 +146,7 @@ function getObject(array, searchValue) {
             return array[i];
         }
     }
+}
+function isEmptyObject(emptyObject) {
+    return JSON.stringify(emptyObject) === '{}';
 }

@@ -3,9 +3,9 @@ import {Route, Switch} from 'react-router-dom';
 import Home from "./components/Home";
 import NavBar from "./components/NavBar";
 import AwesomeComponent from "./components/AwesomeComponent";
-import SignUp from "./components/SignUp/SignUp";
 import SignUpContainer from "./components/SignUp/SignUpContainer";
 import SignIn from "./components/SignIn";
+import SignUpSuccess from "./components/SignUp/SignUpSuccess";
 
 const App = () => (
     <div>
@@ -18,6 +18,7 @@ const App = () => (
                 <Route path='/about' component={AwesomeComponent}/>
                 <Route path='/login' component={SignIn}/>
                 <Route path='/signup' component={SignUpContainer}/>
+                <Route path='/success_sign_up' component={SignUpSuccess}/>
             </Switch>
         </div>
     </div>

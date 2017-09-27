@@ -3,19 +3,23 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as signUpActions from '../../../redux/actions/actionsSignUp'
 import SignUp from "./SignUp";
+import {Redirect} from 'react-router'
 
 class SignUpContainer extends React.Component {
     render() {
-        const {name, surname, sex, login, email, password, errorLogin, errorEmail, errorPassword} = this.props;
+        const {name, surname, sex, login, email, password, errorLogin, errorEmail, errorPassword, success} = this.props;
         const {setName, setSurname, setSex, setLogin, setEmail, setPassword, postRequest} = this.props.signUpActions;
-        return (
-            <div>
-                <SignUp name={name} surname={surname} sex={sex} login={login} email={email} password={password}
-                        errorLogin={errorLogin} errorEmail={errorEmail} errorPassword={errorPassword}
-                        setName={setName} setSurname={setSurname} setSex={setSex} setLogin={setLogin}
-                        setEmail={setEmail} setPassword={setPassword} postRequest={postRequest}/>
-            </div>
-        )
+        if (success) {
+            return ( <Redirect to="/success_sign_up"/>)
+        } else
+            return (
+                <div>
+                    <SignUp name={name} surname={surname} sex={sex} login={login} email={email} password={password}
+                            errorLogin={errorLogin} errorEmail={errorEmail} errorPassword={errorPassword}
+                            setName={setName} setSurname={setSurname} setSex={setSex} setLogin={setLogin}
+                            setEmail={setEmail} setPassword={setPassword} postRequest={postRequest}/>
+                </div>
+            )
     }
 }
 

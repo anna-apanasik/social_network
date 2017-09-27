@@ -121,8 +121,6 @@ class SignUp extends React.Component {
     }
 }
 
-export default SignUp;
-
 SignUp.propTypes = {
     name: React.PropTypes.string.isRequired,
     surname: React.PropTypes.string.isRequired,
@@ -141,3 +139,4 @@ SignUp.propTypes = {
     setPassword: React.PropTypes.func.isRequired,
     postRequest: React.PropTypes.func.isRequired
 };
+export default SignUp;
