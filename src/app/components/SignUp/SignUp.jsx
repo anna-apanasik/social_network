@@ -1,115 +1,44 @@
 import React from 'react';
 import FieldGroup from "./FieldGroup";
 
-const request = require('superagent');
-
-function getObject(array, searchValue) {
-    let i = array.length;
-    while (i--) {
-        if (array[i].param == searchValue) {
-            return array[i];
-        }
-    }
-}
-
 class SignUp extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            name: '',
-            surname: '',
-            sex:'',
-            login: '',
-            email: '',
-            password: '',
-            errorLogin: '',
-            errorEmail: '',
-            errorPassword: '',
-        };
-
-        this.handleOnSubmit = this.handleOnSubmit.bind(this);
-        this.handleNameChange = this.handleNameChange.bind(this);
-        this.handleSurnameChange = this.handleSurnameChange.bind(this);
-        this.handleSexChange=this.handleSexChange.bind(this);
-        this.handleLoginChange = this.handleLoginChange.bind(this);
-        this.handleEmailChange = this.handleEmailChange.bind(this);
-        this.handlePasswordChange = this.handlePasswordChange.bind(this);
-        this.parseErrors = this.parseErrors.bind(this);
     }
 
     handleNameChange(e) {
-        this.setState({name: e.target.value});
+        this.props.setName(e.target.value)
     }
 
     handleSurnameChange(e) {
-        this.setState({surname: e.target.value});
+        this.props.setSurname(e.target.value);
     }
 
     handleLoginChange(e) {
-        this.setState({login: e.target.value});
+        this.props.setLogin(e.target.value);
     }
+
     handleSexChange(e) {
         e.preventDefault();
-        this.setState({sex: e.target.value});
+        this.props.setSex(e.target.value);
     }
+
     handleEmailChange(e) {
-        this.setState({email: e.target.value});
+        this.props.setEmail(e.target.value);
     }
 
     handlePasswordChange(e) {
-        this.setState({password: e.target.value});
+        this.props.setPassword(e.target.value);
     }
 
     handleOnSubmit(e) {
         e.preventDefault();
-        this.sendPostRequest();
-    }
-
-    sendPostRequest() {
-        request
-            .post('/api/signup')
-            .send({
-                name: this.state.name,
-                surname: this.state.surname,
-                login: this.state.login,
-                email: this.state.email,
-                password: this.state.password
-            })
-            .accept('application/json')
-            .withCredentials()
-            .then(res => {
-                console.log('okay ' + res);
-            })
-            .catch(err => {
-                this.parseErrors(err);
-                this.setState({name: '', surname: '', login: '', email: '', password: ''});
-            });
-    }
-
-    parseErrors(errors) {
-        let error = getObject(errors.response.body.errors, 'login');
-
-        if (error) {
-            this.setState({errorLogin: error.msg});
-        } else {
-            this.setState({errorLogin: ''});
-        }
-
-        if (error = getObject(errors.response.body.errors, 'email')) {
-            this.setState({errorEmail: error.msg});
-        } else {
-            this.setState({errorEmail: ''});
-        }
-
-        if (error = getObject(errors.response.body.errors, 'password')) {
-            this.setState({errorPassword: error.msg});
-        } else {
-            this.setState({errorPassword: ''});
-        }
+        this.props.postRequest(this.props)
     }
 
     render() {
+        const {name, surname, sex, login, email, password, errorLogin, errorEmail, errorPassword} = this.props;
         return (
             <div className="container">
                 <div className="row justify-content-center">
@@ -121,59 +50,63 @@ class SignUp extends React.Component {
                             </div>
                         </div>
 
-                        <form onSubmit={this.handleOnSubmit}>
+                        <form onSubmit={this.handleOnSubmit.bind(this)}>
                             <FieldGroup
                                 label="First name"
-                                value={this.state.name}
-                                onChange={this.handleNameChange}
+                                value={name}
+                                onChange={this.handleNameChange.bind(this)}
                                 placeholder="Enter your first name"
                             />
+
                             <FieldGroup
                                 label="Surname"
-                                value={this.state.surname}
-                                onChange={this.handleSurnameChange}
+                                value={surname}
+                                onChange={this.handleSurnameChange.bind(this)}
                                 placeholder="Enter your surname"
                             />
+
                             <div className="col-sm-12 col-md-8">
                                 <div className="btn-group"
                                      role="group">
-                                        <input className="btn btn-secondary  btn-sm"
-                                               value="Female"
-                                               type="button"
-                                               onSubmit = {this.handleSexChange}/>
-                                        <input className="btn btn-secondary  btn-sm"
-                                               value="Male"
-                                               type="button"
-                                               onSubmit = {this.handleSexChange}/>
-                                    <label>{this.state.sex} </label>
+                                    <input className="btn btn-secondary  btn-sm"
+                                           value="Female"
+                                           type="button"
+                                           onClick={this.handleSexChange.bind(this)}/>
+                                    <input className="btn btn-secondary  btn-sm"
+                                           value="Male"
+                                           type="button"
+                                           onClick={this.handleSexChange.bind(this)}/>
+                                    <label>{sex}</label>
                                 </div>
                             </div>
+
                             <br></br>
+
                             <FieldGroup
                                 label="Login"
-                                value={this.state.login}
-                                onChange={this.handleLoginChange}
+                                value={login}
+                                onChange={this.handleLoginChange.bind(this)}
                                 placeholder="Enter your login"
-                                errors={this.state.errorLogin}
+                                errors={errorLogin}
                             />
 
                             <FieldGroup
                                 label="Email address"
-                                value={this.state.email}
-                                onChange={this.handleEmailChange}
+                                value={email}
+                                onChange={this.handleEmailChange.bind(this)}
                                 placeholder="Enter email"
-                                errors={this.state.errorEmail}
+                                errors={errorEmail}
                                 help={"We'll never share your email with anyone else."}
                             />
 
                             <FieldGroup
                                 label="Password"
                                 type="password"
-                                value={this.state.password}
-                                onChange={this.handlePasswordChange}
+                                value={password}
+                                onChange={this.handlePasswordChange.bind(this)}
                                 placeholder="Password"
-                                errors={this.state.errorPassword}
-                                help={"Enter a combination of a least six numbers,\n"+"letter and punctuation marks (like ! and &)."}
+                                errors={errorPassword}
+                                help={"Enter a combination of a least six numbers,\n" + "letter and punctuation marks (like ! and &)."}
                             />
 
                             <div className="col-sm-12 col-md-4">
@@ -189,3 +122,22 @@ class SignUp extends React.Component {
 }
 
 export default SignUp;
+
+SignUp.propTypes = {
+    name: React.PropTypes.string.isRequired,
+    surname: React.PropTypes.string.isRequired,
+    sex: React.PropTypes.string.isRequired,
+    login: React.PropTypes.string.isRequired,
+    email: React.PropTypes.string.isRequired,
+    password: React.PropTypes.string.isRequired,
+    errorEmail: React.PropTypes.string.isRequired,
+    errorLogin: React.PropTypes.string.isRequired,
+    errorPassword: React.PropTypes.string.isRequired,
+    setName: React.PropTypes.func.isRequired,
+    setSurname: React.PropTypes.func.isRequired,
+    setSex: React.PropTypes.func.isRequired,
+    setLogin: React.PropTypes.func.isRequired,
+    setEmail: React.PropTypes.func.isRequired,
+    setPassword: React.PropTypes.func.isRequired,
+    postRequest: React.PropTypes.func.isRequired
+};

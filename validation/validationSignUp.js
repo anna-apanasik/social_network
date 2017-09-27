@@ -1,8 +1,10 @@
 function validationSignUp(req) {
-
-    req.check('login','Invalid login').notEmpty().isAlpha();
-    req.check('email', 'Invalid email address').notEmpty().isEmail();
-    req.check('password', 'Password is invalid').notEmpty().isLength({min: 4});
+    req.check('login','Use only English letters').isAlpha();
+    req.check('login','Enter login').notEmpty();
+    req.check('email', 'Invalid email address').isEmail();
+    req.check('email', 'Enter email address').notEmpty();
+    req.check('password', 'Minimum length 4 symbols').isLength({min: 4});
+    req.check('password', 'Enter password').notEmpty();
 
     return req.validationErrors();
 }

@@ -1,5 +1,5 @@
 const validationSignUp = require('../validation/validationSignUp');
-const signUpService = require('../services/signUpService');
+const signUpService = require('../services/serviceSignUp');
 
 module.exports = function (app) {
     app.route(/^(?!api)/)
@@ -30,7 +30,7 @@ function registration(req, res) {
     if (!req.body) {
         return res.sendStatus(400);
     }
-    console.log('validation');
+
     let errors = validationSignUp(req);
 
     if (!errors) {
@@ -38,6 +38,11 @@ function registration(req, res) {
     } else {
         res.status(400).json({errors: errors});
     }
-    console.log('before email');
-    return signUpService.checkEmail(req.body.email)
-}
+      //return signUpService.signUp(req,res)
+
+// console.log("in reg "+ errors);
+//     if (!errors) {
+//         res.status(200).json();
+//     } else {
+//         res.status(400).json({errors: errors});
+    }

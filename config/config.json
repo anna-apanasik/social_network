@@ -1,7 +1,7 @@
 {
     "username": "root",
     "password": "root",
-    "host": "localhost",
+    "host": "127.0.0.1",
     "database": "mysql",
     "dialect": "mysql",
     "port": "3306",
