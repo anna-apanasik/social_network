@@ -1,5 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux'
+import ButtonsSignUpAndSignIn from "./ButtonsSignUpAndSignIn";
+import AuthorizedUser from "./AuthorizedUser";
 
 
 class NavBar extends React.Component {
@@ -9,6 +12,8 @@ class NavBar extends React.Component {
     }
 
     render() {
+        const {success} = this.props;
+
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <a className="navbar-brand"> Wall </a>
@@ -30,18 +35,18 @@ class NavBar extends React.Component {
                             <Link to='/contact'><a className="nav-link disabled"> Contact us </a></Link>
                         </li>
                     </ul>
-                    <form className="form-inline my-2 my-lg-0">
-                        <Link to='/login'>
-                            <button className="btn btn-outline-primary my-2 my-sm-0" type="submit"> Sign in</button>
-                        </Link>
-                        <Link to='/signup'>
-                            <button className="btn btn-outline-primary my-2 my-sm-0" type="submit"> Sign up</button>
-                        </Link>
-                    </form>
+                    {success ? (<AuthorizedUser/>) : (<ButtonsSignUpAndSignIn/>)}
+
                 </div>
             </nav>
         );
     }
 }
 
-export default NavBar;
+function mapStateToProps(state) {
+    return {
+        success: state.reducerSignIn.success
+    }
+}
+
+export default connect(mapStateToProps)(NavBar)

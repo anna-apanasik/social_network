@@ -1,13 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
+import {Redirect} from 'react-router'
+
 import * as signInActions from '../../redux/actions/actionsSignIn'
 
 const styles = {
     container: {
         marginTop: "100px"
     },
-    form:{
+    form: {
         padding: "15px"
     },
     h4: {
@@ -27,16 +29,21 @@ class SignIn extends React.Component {
     handlePasswordChange(e) {
         this.props.signInActions.setPassword(e.target.value);
     }
-    handleClickSignIn(e){
+
+    handleClickSignIn(e) {
         e.preventDefault();
         this.props.signInActions.postRequest(this.props)
     }
+
     render() {
-        const { login, password,errorLogin, errorPassword, success} = this.props;
-        return (
-            <div className="row justify-content-center">
-                <div className="col-3">
-                    <div className="card border-info mb-3" style={styles.form}>
+        const {login, password, errorLogin, errorPassword, success} = this.props;
+        if (success) {
+            return ( <Redirect from="/login" to="/"/>)
+        } else
+            return (
+                <div className="row justify-content-center">
+                    <div className="col-3">
+                        <div className="card border-info mb-3" style={styles.form}>
                             <h4 className="card-title" style={styles.h4}>Sign in to Wall</h4>
                             <form>
                                 <div className="form-group">
@@ -61,22 +68,24 @@ class SignIn extends React.Component {
                                 <button type="signIn"
                                         className="btn btn-primary"
                                         onClick={this.handleClickSignIn.bind(this)}
-                                >Sign in</button>
+                                >Sign in
+                                </button>
                             </form>
                         </div>
 
+                    </div>
                 </div>
-            </div>
-        );
+            );
     }
 }
+
 function mapStateToProps(state) {
     return {
         login: state.reducerSignIn.login,
         password: state.reducerSignIn.password,
         errorLogin: state.reducerSignIn.errorLogin,
         errorPassword: state.reducerSignIn.errorPassword,
-        success: state.reducerSignUp.success
+        success: state.reducerSignIn.success
     }
 }
 
