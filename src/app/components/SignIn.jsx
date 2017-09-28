@@ -1,5 +1,7 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import React from 'react';
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import * as signInActions from '../../redux/actions/actionsSignIn'
 
 const styles = {
     container: {
@@ -16,10 +18,21 @@ const styles = {
 class SignIn extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {signIn: false};
     }
 
+    handleLoginChange(e) {
+        this.props.signInActions.setLogin(e.target.value);
+    }
+
+    handlePasswordChange(e) {
+        this.props.signInActions.setPassword(e.target.value);
+    }
+    handleClickSignIn(e){
+        e.preventDefault();
+        this.props.signInActions.postRequest(this.props)
+    }
     render() {
+        const { login, password,errorLogin, errorPassword, success} = this.props;
         return (
             <div className="row justify-content-center">
                 <div className="col-3">
@@ -27,18 +40,28 @@ class SignIn extends React.Component {
                             <h4 className="card-title" style={styles.h4}>Sign in to Wall</h4>
                             <form>
                                 <div className="form-group">
-                                    <label>Email address or login</label>
+                                    <label>Login</label>
                                     <input type="email"
+                                           value={login}
+                                           onChange={this.handleLoginChange.bind(this)}
                                            className="form-control form-control-sm"
-                                           placeholder="Enter email or login"/>
+                                           placeholder="Enter login"/>
+                                    <span className="badge badge-danger">{errorLogin}</span>
                                 </div>
                                 <div className="form-group">
                                     <label>Password</label>
                                     <input type="password"
+                                           value={password}
+                                           onChange={this.handlePasswordChange.bind(this)}
                                            className="form-control form-control-sm"
                                            placeholder="Enter password"/>
+                                    <span className="badge badge-danger">{errorPassword}</span>
                                 </div>
-                                <button type="signIn" className="btn btn-primary">Sign in</button>
+
+                                <button type="signIn"
+                                        className="btn btn-primary"
+                                        onClick={this.handleClickSignIn.bind(this)}
+                                >Sign in</button>
                             </form>
                         </div>
 
@@ -47,8 +70,24 @@ class SignIn extends React.Component {
         );
     }
 }
+function mapStateToProps(state) {
+    return {
+        login: state.reducerSignIn.login,
+        password: state.reducerSignIn.password,
+        errorLogin: state.reducerSignIn.errorLogin,
+        errorPassword: state.reducerSignIn.errorPassword,
+        success: state.reducerSignUp.success
+    }
+}
 
-export default SignIn;
+function mapDispatchToProps(dispatch) {
+    return {
+        signInActions: bindActionCreators(signInActions, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
+
 
 /*<img className="card-img-top"  alt="Card image cap"/>*/
 

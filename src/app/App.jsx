@@ -24,6 +24,4 @@ const App = () => (
     </div>
 );
 
-
 export default App;
-// <Route path="/api" component={Api}/>

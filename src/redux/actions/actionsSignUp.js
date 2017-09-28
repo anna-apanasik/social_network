@@ -139,7 +139,7 @@ function parseErrors(errors) {
     return sendError;
 }
 
-function getObject(array, searchValue) {
+export default function getObject(array, searchValue) {
     let i = array.length;
     while (i--) {
         if (array[i].param == searchValue) {
@@ -147,6 +147,6 @@ function getObject(array, searchValue) {
         }
     }
 }
-function isEmptyObject(emptyObject) {
+ function isEmptyObject(emptyObject) {
     return JSON.stringify(emptyObject) === '{}';
 }

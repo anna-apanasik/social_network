@@ -10,7 +10,7 @@ class SignUpContainer extends React.Component {
         const {name, surname, sex, login, email, password, errorLogin, errorEmail, errorPassword, success} = this.props;
         const {setName, setSurname, setSex, setLogin, setEmail, setPassword, postRequest} = this.props.signUpActions;
         if (success) {
-            return ( <Redirect to="/success_sign_up"/>)
+            return ( <Redirect from="/signup" to="/success_sign_up"/>)
         } else
             return (
                 <div>
