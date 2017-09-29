@@ -20,23 +20,27 @@ const styles = {
 class SignIn extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            login: '',
+            email: ''
+        };
     }
 
     handleLoginChange(e) {
-        this.props.signInActions.setLogin(e.target.value);
+        this.setState({login: e.target.value});
     }
 
     handlePasswordChange(e) {
-        this.props.signInActions.setPassword(e.target.value);
+        this.setState({password: e.target.value});
     }
 
     handleClickSignIn(e) {
         e.preventDefault();
-        this.props.signInActions.postRequest(this.props)
+        this.props.signInActions.postRequest(this.state)
     }
 
     render() {
-        const {login, password, errorLogin, errorPassword, success} = this.props;
+        const {errorLogin, errorPassword, success} = this.props;
         if (success) {
             return ( <Redirect from="/login" to="/"/>)
         } else
@@ -46,19 +50,21 @@ class SignIn extends React.Component {
                         <div className="card border-info mb-3" style={styles.form}>
                             <h4 className="card-title" style={styles.h4}>Sign in to Wall</h4>
                             <form>
+
                                 <div className="form-group">
                                     <label>Login</label>
                                     <input type="email"
-                                           value={login}
+                                           value={this.state.login}
                                            onChange={this.handleLoginChange.bind(this)}
                                            className="form-control form-control-sm"
                                            placeholder="Enter login"/>
                                     <span className="badge badge-danger">{errorLogin}</span>
                                 </div>
+
                                 <div className="form-group">
                                     <label>Password</label>
                                     <input type="password"
-                                           value={password}
+                                           value={this.state.password}
                                            onChange={this.handlePasswordChange.bind(this)}
                                            className="form-control form-control-sm"
                                            placeholder="Enter password"/>
@@ -81,8 +87,6 @@ class SignIn extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        login: state.reducerSignIn.login,
-        password: state.reducerSignIn.password,
         errorLogin: state.reducerSignIn.errorLogin,
         errorPassword: state.reducerSignIn.errorPassword,
         success: state.reducerSignIn.success

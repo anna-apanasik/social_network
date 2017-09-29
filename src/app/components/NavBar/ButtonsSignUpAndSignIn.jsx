@@ -21,4 +21,5 @@ class ButtonsSignUpAndSignIn extends React.Component {
         );
     }
 }
+
 export default ButtonsSignUpAndSignIn;

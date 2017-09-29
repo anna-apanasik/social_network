@@ -1,6 +1,6 @@
 import React from 'react';
 
-function FieldGroup({label,type, value, onChange, placeholder, errors, help}) {
+function FieldGroup({label, type, value, onChange, placeholder, requiredParam, errors, help}) {
     let currentType = type || 'text';
     return (
         <div className="form-group">
@@ -12,6 +12,7 @@ function FieldGroup({label,type, value, onChange, placeholder, errors, help}) {
                            value={value}
                            onChange={onChange}
                            placeholder={placeholder}/>
+                    <label>{requiredParam ? ' * ' : ''}</label>
                     <span className="badge badge-danger">{errors}</span>
                 </form>
                 <small className="form-text text-muted">{help}</small>
@@ -19,4 +20,5 @@ function FieldGroup({label,type, value, onChange, placeholder, errors, help}) {
         </div>
     );
 }
+
 export default FieldGroup;

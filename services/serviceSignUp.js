@@ -16,21 +16,17 @@ module.exports = {
         return models.users.findOne({where: {email: data.email}})
             .then(user => {
                 if (user) {
-                    return Promise.reject({param: 'email', msg: ' This address is busy'});
+                    return Promise.reject({param: 'email', msg: 'This email is already in use\''});
                 }
                 return models.users.findOne({where: {login: data.login}});
             })
             .then((user) => {
                 if (user) {
-                    return Promise.reject({param: 'login', msg: ' This login is busy'});
+                    return Promise.reject({param: 'login', msg: 'This login is already in use\''});
                 }
                 return models.users.create(data);
             })
-            .then(newUser => {
-                return Promise.resolve(newUser)
-            })
-            .catch(e => {
-                return Promise.reject(e)
-            });
+            //      .then(newUser => Promise.resolve(newUser))
+            .catch(e => Promise.reject(e))
     }
 };

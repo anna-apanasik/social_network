@@ -34,14 +34,12 @@ function registration(req, res) {
     let errors = validationSignUp(req);
 
     if (!errors) {
-        signUpService.signUp(req,res)
-            .then((user) => {
-                console.log('success ' +user);
+        signUpService.signUp(req, res)
+            .then(() => {
                 return res.status(200).json()
             })
-            .catch(e=>{
-                console.log('errors ' +e);
-                res.status(400).json({errors:[e]});
+            .catch(e => {
+                res.status(400).json({errors: [e]});
             })
     } else {
         res.status(400).json({errors: errors});

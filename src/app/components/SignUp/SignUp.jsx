@@ -5,40 +5,56 @@ class SignUp extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            name: '',
+            surname: '',
+            sex:'',
+            login: '',
+            email: '',
+            password: '',
+        };
+
+        // this.handleOnSubmit = this.handleOnSubmit.bind(this);
+        // this.handleNameChange = this.handleNameChange.bind(this);
+        // this.handleSurnameChange = this.handleSurnameChange.bind(this);
+        // this.handleSexChange=this.handleSexChange.bind(this);
+        // this.handleLoginChange = this.handleLoginChange.bind(this);
+        // this.handleEmailChange = this.handleEmailChange.bind(this);
+        // this.handlePasswordChange = this.handlePasswordChange.bind(this);
     }
 
     handleNameChange(e) {
-        this.props.setName(e.target.value)
+        this.setState({name: e.target.value});
     }
 
     handleSurnameChange(e) {
-        this.props.setSurname(e.target.value);
+        this.setState({surname: e.target.value});
     }
 
     handleLoginChange(e) {
-        this.props.setLogin(e.target.value);
+        this.setState({login: e.target.value});
     }
 
     handleSexChange(e) {
         e.preventDefault();
-        this.props.setSex(e.target.value);
+        this.setState({sex: e.target.value});
     }
 
     handleEmailChange(e) {
-        this.props.setEmail(e.target.value);
+        this.setState({email: e.target.value});
     }
 
     handlePasswordChange(e) {
-        this.props.setPassword(e.target.value);
+        this.setState({password: e.target.value});
     }
 
     handleOnSubmit(e) {
         e.preventDefault();
-        this.props.postRequest(this.props)
+        this.props.postRequest(this.state)
     }
 
     render() {
-        const {name, surname, sex, login, email, password, errorLogin, errorEmail, errorPassword} = this.props;
+        const {errorLogin, errorEmail, errorPassword} = this.props;
         return (
             <div className="container">
                 <div className="row justify-content-center">
@@ -53,14 +69,14 @@ class SignUp extends React.Component {
                         <form onSubmit={this.handleOnSubmit.bind(this)}>
                             <FieldGroup
                                 label="First name"
-                                value={name}
+                                value={this.state.name}
                                 onChange={this.handleNameChange.bind(this)}
                                 placeholder="Enter your first name"
                             />
 
                             <FieldGroup
                                 label="Surname"
-                                value={surname}
+                                value={this.state.surname}
                                 onChange={this.handleSurnameChange.bind(this)}
                                 placeholder="Enter your surname"
                             />
@@ -76,7 +92,6 @@ class SignUp extends React.Component {
                                            value="Male"
                                            type="button"
                                            onClick={this.handleSexChange.bind(this)}/>
-                                    <label>{sex}</label>
                                 </div>
                             </div>
 
@@ -84,17 +99,19 @@ class SignUp extends React.Component {
 
                             <FieldGroup
                                 label="Login"
-                                value={login}
+                                value={this.state.login}
                                 onChange={this.handleLoginChange.bind(this)}
                                 placeholder="Enter your login"
+                                requiredParam={true}
                                 errors={errorLogin}
                             />
 
                             <FieldGroup
                                 label="Email address"
-                                value={email}
+                                value={this.state.email}
                                 onChange={this.handleEmailChange.bind(this)}
                                 placeholder="Enter email"
+                                requiredParam={true}
                                 errors={errorEmail}
                                 help={"We'll never share your email with anyone else."}
                             />
@@ -102,9 +119,10 @@ class SignUp extends React.Component {
                             <FieldGroup
                                 label="Password"
                                 type="password"
-                                value={password}
+                                value={this.state.password}
                                 onChange={this.handlePasswordChange.bind(this)}
                                 placeholder="Password"
+                                requiredParam={true}
                                 errors={errorPassword}
                                 help={"Enter a combination of a least six numbers,\n" + "letter and punctuation marks (like ! and &)."}
                             />
@@ -122,21 +140,9 @@ class SignUp extends React.Component {
 }
 
 SignUp.propTypes = {
-    name: React.PropTypes.string.isRequired,
-    surname: React.PropTypes.string.isRequired,
-    sex: React.PropTypes.string.isRequired,
-    login: React.PropTypes.string.isRequired,
-    email: React.PropTypes.string.isRequired,
-    password: React.PropTypes.string.isRequired,
     errorEmail: React.PropTypes.string.isRequired,
     errorLogin: React.PropTypes.string.isRequired,
     errorPassword: React.PropTypes.string.isRequired,
-    setName: React.PropTypes.func.isRequired,
-    setSurname: React.PropTypes.func.isRequired,
-    setSex: React.PropTypes.func.isRequired,
-    setLogin: React.PropTypes.func.isRequired,
-    setEmail: React.PropTypes.func.isRequired,
-    setPassword: React.PropTypes.func.isRequired,
     postRequest: React.PropTypes.func.isRequired
 };
 export default SignUp;

@@ -10,50 +10,20 @@ import isEmptyObject from './actionsSignUp'
 
 const request = require('superagent');
 
-export function setLogin(login) {
-    return (dispatch) =>
-        dispatch({
-            type: SET_LOGIN,
-            payload: login
-        })
-}
+export const successRequest = () => (dispatch, getState) => {
+    //const user = getState().reducerSignUp.name;
+    dispatch({type: SIGN_IN_SUCCESS})
+};
 
-export function setPassword(password) {
-    return (dispatch) =>
-        dispatch({
-            type: SET_PASSWORD,
-            payload: password
-        })
-}
-
-export function sendRequest() {
-    return (dispatch) => {
-        dispatch({
-            type: SIGN_IN_REQUEST
-        })
-    }
-}
-
-export function successRequest() {
-    return (dispatch) => {
-        dispatch({
-            type: SIGN_IN_SUCCESS
-        })
-    }
-}
-
-export function failureRequest(error) {
-    return (dispatch) => {
-        dispatch({
-            type: SIGN_IN_FAILURE,
-            payload: error
-        })
-    }
-}
+export const failureRequest = (error) => (dispatch) => {
+    dispatch({
+        type: SIGN_IN_FAILURE,
+        payload: error
+    })
+};
 
 export function postRequest(state) {
     return (dispatch) => {
-        dispatch(sendRequest());
         request
             .post('/api/login')
             .send({
