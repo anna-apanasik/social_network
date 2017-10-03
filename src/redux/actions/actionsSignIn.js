@@ -10,7 +10,7 @@ import isEmptyObject from './actionsSignUp'
 
 const request = require('superagent');
 
-export const successRequest = () => (dispatch, getState) => {
+export const successRequest = () => (dispatch) => {
     //const user = getState().reducerSignUp.name;
     dispatch({type: SIGN_IN_SUCCESS})
 };
