@@ -1,5 +1,5 @@
-import * as types from '../../src/constants/actionsConstants'
-import reducer from '../../src/redux/reducers/reducerSignUp'
+import * as types from '../../../src/constants/actionsConstants'
+import reducer from '../../../src/redux/reducers/reducerSignUp'
 
 
 describe('reducer Sign Up', () => {

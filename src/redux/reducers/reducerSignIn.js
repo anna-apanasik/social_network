@@ -3,7 +3,8 @@ import {
     SIGN_IN_FAILURE,
 } from "../../constants/actionsConstants";
 
-const initialState = {
+export const initialState = {
+    login:'',
     errorLogin: '',
     errorPassword: '',
     success: false
@@ -12,7 +13,7 @@ const initialState = {
 export default function reducerSignIn(state = initialState, action) {
     switch (action.type) {
         case SIGN_IN_SUCCESS:
-            return Object.assign({}, state, {errorLogin: '', errorPassword: '', success: true});
+            return Object.assign({}, state, {login:action.payload, errorLogin: '', errorPassword: '', success: true});
         case SIGN_IN_FAILURE:
             return Object.assign({}, state, {
                 errorLogin: action.payload[0],

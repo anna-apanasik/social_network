@@ -10,9 +10,12 @@ import isEmptyObject from './actionsSignUp'
 
 const request = require('superagent');
 
-export const successRequest = () => (dispatch) => {
+export const successRequest = (login) => (dispatch) => {
     //const user = getState().reducerSignUp.name;
-    dispatch({type: SIGN_IN_SUCCESS})
+    dispatch({
+        type: SIGN_IN_SUCCESS,
+        payload: login
+    })
 };
 
 export const failureRequest = (error) => (dispatch) => {
@@ -33,7 +36,7 @@ export function postRequest(state) {
             .accept('application/json')
             .withCredentials()
             .then(() => {
-                dispatch(successRequest())
+                dispatch(successRequest(state.login))
             })
             .catch(err => {
                 dispatch(failureRequest(parseErrors(err)))
@@ -45,9 +48,9 @@ export function postRequest(state) {
 function parseErrors(errors) {
 
     let error = getObject(errors.response.body.errors, 'login');
- //   if (isEmptyObject(error)) {
-  //      return;
-  //  }
+    //   if (isEmptyObject(error)) {
+    //      return;
+    //  }
     let sendError = [];
 
     if (error) {

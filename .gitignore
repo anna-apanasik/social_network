@@ -2,3 +2,4 @@
 /.idea
 /src/public/build
  .env
+ /test/jasmine/jasmine-standalone-2.8.0/lib/jasmine-2.8.0

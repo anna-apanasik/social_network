@@ -1,5 +1,5 @@
-import * as types from '../../src/constants/actionsConstants'
-import reducer from '../../src/redux/reducers/reducerSignIn'
+import * as types from '../../../src/constants/actionsConstants'
+import reducer from '../../../src/redux/reducers/reducerSignIn'
 
 
 describe('reducer Sign In', () => {
@@ -10,7 +10,8 @@ describe('reducer Sign In', () => {
         });
 
         it('State in field errorLogin', function () {
-            expect(this.initialState).to.have.property('errorLogin', '');
+          //  expect(this.initialState).to.have.property('errorLogin', '');
+            expect(this.initialState.errorLogin).toBe('');
             //expect(this.initialState.errorLogin).to.eql('')
         });
 

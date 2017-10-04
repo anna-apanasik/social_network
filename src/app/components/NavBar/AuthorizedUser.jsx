@@ -1,4 +1,5 @@
 import React from 'react';
+import {Redirect} from 'react-router'
 
 const styles = {
     container: {
@@ -20,6 +21,7 @@ class AuthorizedUser extends React.Component {
                     <div className="dropdown-divider"></div>
                     <button className="dropdown-item" type="button">Sign Out</button>
                 </div>
+                <Redirect  to="/profile"/>
             </div>
         );
     }
