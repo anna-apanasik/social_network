@@ -1,17 +1,13 @@
 import {
-    SIGN_IN_REQUEST,
     SIGN_IN_SUCCESS,
     SIGN_IN_FAILURE,
-    SET_LOGIN,
-    SET_PASSWORD
 } from "../../constants/actionsConstants";
-import getObject from './actionsSignUp'
-import isEmptyObject from './actionsSignUp'
+import functions from './functionsForActions'
+
 
 const request = require('superagent');
 
 export const successRequest = (login) => (dispatch) => {
-    //const user = getState().reducerSignUp.name;
     dispatch({
         type: SIGN_IN_SUCCESS,
         payload: login
@@ -47,10 +43,10 @@ export function postRequest(state) {
 
 function parseErrors(errors) {
 
-    let error = getObject(errors.response.body.errors, 'login');
-    //   if (isEmptyObject(error)) {
-    //      return;
-    //  }
+    let error = functions.getObject(errors.response.body.errors, 'login');
+      if (functions.isEmptyObject(error)) {
+         return;
+     }
     let sendError = [];
 
     if (error) {
@@ -59,7 +55,7 @@ function parseErrors(errors) {
         sendError.push('');
     }
 
-    if (error = getObject(errors.response.body.errors, 'password')) {
+    if (error = functions.getObject(errors.response.body.errors, 'password')) {
         sendError.push(error.msg);
     } else {
         sendError.push('');

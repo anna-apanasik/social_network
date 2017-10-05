@@ -2,6 +2,7 @@ import {
     SIGN_UP_SUCCESS,
     SIGN_UP_FAILURE
 } from '../../constants/actionsConstants';
+import functions from './functionsForActions'
 
 const request = require('superagent');
 
@@ -43,8 +44,8 @@ export function postRequest(state) {
 
 function parseErrors(errors) {
 
-    let error = getObject(errors.response.body.errors, 'email');
-    if (isEmptyObject(error)) {
+    let error = functions.getObject(errors.response.body.errors, 'email');
+    if (functions.isEmptyObject(error)) {
         return;
     }
     let sendError = [];
@@ -55,13 +56,13 @@ function parseErrors(errors) {
         sendError.push('');
     }
 
-    if (error = getObject(errors.response.body.errors, 'login')) {
+    if (error = functions.getObject(errors.response.body.errors, 'login')) {
         sendError.push(error.msg);
     } else {
         sendError.push('');
     }
 
-    if (error = getObject(errors.response.body.errors, 'password')) {
+    if (error = functions.getObject(errors.response.body.errors, 'password')) {
         sendError.push(error.msg);
     } else {
         sendError.push('');
@@ -70,15 +71,15 @@ function parseErrors(errors) {
     return sendError;
 }
 
-export default function getObject(array, searchValue) {
-    let i = array.length;
-    while (i--) {
-        if (array[i].param == searchValue) {
-            return array[i];
-        }
-    }
-}
-
-function isEmptyObject(emptyObject) {
-    return JSON.stringify(emptyObject) === '{}';
-}
+// export default function getObject(array, searchValue) {
+//     let i = array.length;
+//     while (i--) {
+//         if (array[i].param == searchValue) {
+//             return array[i];
+//         }
+//     }
+// }
+//
+// function isEmptyObject(emptyObject) {
+//     return JSON.stringify(emptyObject) === '{}';
+// }

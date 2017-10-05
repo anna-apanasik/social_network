@@ -13,14 +13,6 @@ class SignUp extends React.Component {
             email: '',
             password: '',
         };
-
-        // this.handleOnSubmit = this.handleOnSubmit.bind(this);
-        // this.handleNameChange = this.handleNameChange.bind(this);
-        // this.handleSurnameChange = this.handleSurnameChange.bind(this);
-        // this.handleSexChange=this.handleSexChange.bind(this);
-        // this.handleLoginChange = this.handleLoginChange.bind(this);
-        // this.handleEmailChange = this.handleEmailChange.bind(this);
-        // this.handlePasswordChange = this.handlePasswordChange.bind(this);
     }
 
     handleNameChange(e) {

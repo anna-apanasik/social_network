@@ -3,21 +3,17 @@
 const models = require('../models');
 
 module.exports = {
-    logIn: function (req) {
+    getProfileInformation: function (req) {
         let data = {
             login: req.body.login,
-            password: req.body.password
         };
 
-        return models.users.findOne({where: {login: data.login, password: data.password}})
+        return models.users.findOne({where: {login: data.login}})
             .then(user => {
                 if (user) {
-                    return Promise.resolve({msg: ' all i ok'});
+                    return Promise.resolve(user);
                 }
-                return Promise.reject([{param: 'login', msg: "Wrong login or password"}, {
-                    param: 'password',
-                    msg: "Wrong login or password"
-                }])
+                return Promise.reject({param: 'login', msg: "Didn't find this profile"})
             })
             .catch(e => {
                 return Promise.reject(e)

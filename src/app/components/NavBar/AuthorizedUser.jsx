@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {Redirect} from 'react-router'
 
 const styles = {
@@ -16,12 +17,16 @@ class AuthorizedUser extends React.Component {
                     User
                 </button>
                 <div className="dropdown-menu dropdown-menu-right">
-                    <button className="dropdown-item" type="button">Wall</button>
-                    <button className="dropdown-item" type="button">Profile</button>
+                    <Link to='/profile'>
+                        <button className="dropdown-item" type="button">Profile</button>
+                    </Link>
+                    <Link to='/profile_edit'>
+                        <button className="dropdown-item" type="button">Edit</button>
+                    </Link>
                     <div className="dropdown-divider"></div>
                     <button className="dropdown-item" type="button">Sign Out</button>
                 </div>
-                <Redirect  to="/profile"/>
+                <Redirect to="/profile"/>
             </div>
         );
     }

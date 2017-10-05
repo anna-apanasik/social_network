@@ -1,8 +1,12 @@
-import {GET_LOGIN,RECEIVE_INFORMATION} from "../../constants/actionsConstants";
+import {GET_LOGIN, RECEIVE_INFORMATION} from "../../constants/actionsConstants";
 
 const initialState = {
-   login: 'ZZZ',
-
+    login: '',
+    name: '',
+    surname: '',
+    sex: '',
+    email: '',
+    dataOfRegistration:''
 };
 
 export default function reducerProfileInformation(state = initialState, action) {
@@ -10,15 +14,15 @@ export default function reducerProfileInformation(state = initialState, action) 
         case GET_LOGIN:
             return Object.assign({}, state, {login: action.payload});
         case RECEIVE_INFORMATION:
-            return Object.assign({}, state, {});
+            return Object.assign({}, state, {
+                login: action.payload.login,
+                name: action.payload.name,
+                surname: action.payload.surname,
+                sex:action.payload.sex,
+                email: action.payload.email,
+                dataOfRegistration: action.payload.createdAt
+            });
 
-        //case SIGN_IN_SUCCESS:
-       // case SIGN_IN_FAILURE:
-       //      return Object.assign({}, state, {
-       //          errorLogin: action.payload[0],
-       //          errorPassword: action.payload[1],
-       //          success: false
-       //      });
 
         default:
             return state

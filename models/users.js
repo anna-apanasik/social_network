@@ -7,7 +7,7 @@ module.exports = function (sequelize, DataTypes) {
         email: {type: DataTypes.STRING, unique: true,allowNull: false, field: 'EMAIL'},
         password: {type: DataTypes.STRING,allowNull: false, field: 'PASSWORD'},
         surname: {type: DataTypes.STRING, field: 'SURNAME'},
-        firstName: {type: DataTypes.STRING, field: 'FIRST_NAME'},
+        name: {type: DataTypes.STRING, field: 'FIRST_NAME'},
         sex: {type: DataTypes.STRING, field: 'SEX'}
     }, {
         freezeTableName: true
