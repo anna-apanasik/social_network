@@ -1,4 +1,4 @@
-import {GET_LOGIN, RECEIVE_INFORMATION} from "../../constants/actionsConstants";
+import {GET_LOGIN, RECEIVE_INFORMATION, PROFILE_EDIT_FAILURE} from "../../constants/actionsConstants";
 
 const initialState = {
     login: '',
@@ -6,7 +6,13 @@ const initialState = {
     surname: '',
     sex: '',
     email: '',
-    dataOfRegistration:''
+    password: '',
+    confirmPassword: '',
+    dataOfRegistration: '',
+    errorEmail: undefined,
+    errorPassword: undefined,
+    errorConfirmPassword: undefined,
+    success: true
 };
 
 export default function reducerProfileInformation(state = initialState, action) {
@@ -18,11 +24,17 @@ export default function reducerProfileInformation(state = initialState, action) 
                 login: action.payload.login,
                 name: action.payload.name,
                 surname: action.payload.surname,
-                sex:action.payload.sex,
+                sex: action.payload.sex,
                 email: action.payload.email,
+                password: action.payload.password,
                 dataOfRegistration: action.payload.createdAt
             });
-
+        case PROFILE_EDIT_FAILURE:
+            return Object.assign({}, state, {
+                errorEmail: action.payload[0],
+                errorPassword: action.payload[1],
+                errorConfirmPassword: action.payload[2]
+            });
 
         default:
             return state

@@ -7,6 +7,8 @@ import SignUpContainer from "./components/SignUp/SignUpContainer";
 import SignIn from "./components/SignIn";
 import SignUpSuccess from "./components/SignUp/SignUpSuccess";
 import ProfileContainer from "./components/Profile/ProfileContainer";
+import ProfileEdit from "./components/Profile/ProfileEdit";
+
 
 const App = () => (
     <div>
@@ -21,7 +23,7 @@ const App = () => (
                 <Route path='/signup' component={SignUpContainer}/>
                 <Route path='/success_sign_up' component={SignUpSuccess}/>
                 <Route path='/profile' component={ProfileContainer}/>
-                <Route path='/profile_edit' component={AwesomeComponent}/>
+                <Route path='/profile_edit' component={ProfileEdit}/>
             </Switch>
         </div>
     </div>

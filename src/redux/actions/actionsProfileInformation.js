@@ -1,5 +1,11 @@
-import {GET_LOGIN, RECEIVE_INFORMATION, RECEIVE_ERROR} from "../../constants/actionsConstants";
-
+import {
+    GET_LOGIN,
+    RECEIVE_INFORMATION,
+    RECEIVE_ERROR,
+    PROFILE_EDIT_SUCCESS,
+    PROFILE_EDIT_FAILURE
+} from "../../constants/actionsConstants";
+import functions from './functionsForActions'
 
 const request = require('superagent');
 
@@ -21,6 +27,12 @@ export const receiveInformation = (information) => (dispatch) => {
 export const receiveError = (error) => (dispatch) => {
     dispatch({
         type: RECEIVE_ERROR,
+        payload: error
+    })
+};
+export const failureRequest = (error) => (dispatch) => {
+    dispatch({
+        type: PROFILE_EDIT_FAILURE,
         payload: error
     })
 };
@@ -48,3 +60,57 @@ export function getProfileInformation() {
     }
 }
 
+export function postRequestEditProfile(state) {
+    return (dispatch) => {
+        request
+            .post('/api/update')
+            .send({
+                name: state.name,
+                surname: state.surname,
+                sex: state.sex,
+                login: state.login,
+                email: state.email,
+                password: state.password,
+                confirmPassword: state.confirmPassword
+            })
+            .accept('application/json')
+            .withCredentials()
+            .then(() => {
+
+                // dispatch(successRequest())
+            })
+            .catch(err => {
+                console.log(err);
+                dispatch(failureRequest(parseErrors(err)))
+            })
+    }
+}
+
+function parseErrors(errors) {
+    if (functions.isEmptyObject(errors.response.body.errors)) {
+        return;
+    }
+
+    let error = functions.getObject(errors.response.body.errors, 'email');
+    let sendError = [];
+
+    if (error) {
+        sendError.push(error.msg);
+    } else {
+        sendError.push('');
+    }
+
+    if (error = functions.getObject(errors.response.body.errors, 'password')) {
+        sendError.push(error.msg);
+    } else {
+        sendError.push('');
+    }
+
+    if (error = functions.getObject(errors.response.body.errors, 'confirmPassword')) {
+        sendError.push(error.msg);
+    } else {
+        sendError.push('');
+    }
+
+    return sendError;
+}
