@@ -42,11 +42,11 @@ export function postRequest(state) {
 }
 
 function parseErrors(errors) {
+    if (functions.isEmptyObject(errors.response.body.errors)) {
+        return;
+    }
 
     let error = functions.getObject(errors.response.body.errors, 'login');
-      if (functions.isEmptyObject(error)) {
-         return;
-     }
     let sendError = [];
 
     if (error) {

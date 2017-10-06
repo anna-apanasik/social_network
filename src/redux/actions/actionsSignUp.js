@@ -43,11 +43,11 @@ export function postRequest(state) {
 }
 
 function parseErrors(errors) {
-
-    let error = functions.getObject(errors.response.body.errors, 'email');
-    if (functions.isEmptyObject(error)) {
+    if (functions.isEmptyObject(errors.response.body.errors)) {
         return;
     }
+
+    let error = functions.getObject(errors.response.body.errors, 'email');
     let sendError = [];
 
     if (error) {

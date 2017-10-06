@@ -2,7 +2,7 @@ function validationProfileInformation(req){
     req.check('email', 'Invalid email address').isEmail();
     req.check('email', 'Enter email address').notEmpty();
 
-    req.check('confirmPassword','Don\' match').equals(req.body.password);
+    req.check('confirmPassword','Don\'t match').equals(req.body.password);
 
     req.check('password', 'Minimum length 4 symbols').isLength({min: 4});
     req.check('confirmPassword', 'Minimum length 4 symbols').isLength({min: 4});
