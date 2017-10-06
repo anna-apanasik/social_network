@@ -18,5 +18,19 @@ module.exports = {
             .catch(e => {
                 return Promise.reject(e)
             });
+    },
+    update: function(updates, login){
+        return models.users.update({
+            login:updates.login,
+            email:updates.email,
+            password:updates.password,
+            surname:updates.surname,
+            name:updates.name,
+            sex:updates.sex
+        },{
+            where:{login:login}
+        })
+            .then(()=> models.users.findOne({ where:{login:login}}))
+            .catch(e=>Promise.reject(e))
     }
 };

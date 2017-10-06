@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux'
 import FieldGroup from '../SignUp/FieldGroup'
 import {bindActionCreators} from 'redux'
+import {Redirect} from 'react-router'
 import * as profileInformationActions from '../../../redux/actions/actionsProfileInformation'
 
 
@@ -20,7 +21,7 @@ class ProfileEdit extends React.Component {
     }
 
     handleNameChange(e) {
-        this.props.setState({name: e.target.value});
+        this.setState({name: e.target.value});
     }
 
     handleSurnameChange(e) {
@@ -50,7 +51,11 @@ class ProfileEdit extends React.Component {
     }
 
     render() {
-        const {errorEmail,errorPassword, errorConfirmPassword} =this.props;
+        const {errorEmail, errorPassword, errorConfirmPassword, success} = this.props;
+       if(success){
+           this.props.profileInformationActions.resetSuccess();
+           return ( <Redirect  to="/profile"/>)
+       }
         return (
 
             <div className="container">
@@ -166,10 +171,10 @@ function mapStateToProps(state) {
         email: state.reducerProfileInformation.email,
         password: state.reducerProfileInformation.password,
         confirmPassword: state.reducerProfileInformation.password,
-        errorEmail:state.reducerProfileInformation.errorEmail,
-        errorPassword:state.reducerProfileInformation.errorPassword,
-        errorConfirmPassword:state.reducerProfileInformation.errorConfirmPassword,
-
+        errorEmail: state.reducerProfileInformation.errorEmail,
+        errorPassword: state.reducerProfileInformation.errorPassword,
+        errorConfirmPassword: state.reducerProfileInformation.errorConfirmPassword,
+        success: state.reducerProfileInformation.success
     }
 }
 

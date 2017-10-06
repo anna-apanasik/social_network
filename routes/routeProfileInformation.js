@@ -1,5 +1,6 @@
 const profileService = require('../services/serviceProfileInformation');
 const validationProfileInformation =require('../validation/validationProfileInformation')
+
 module.exports = function (app) {
     app.route('/api/profile')
         .post(getProfileInformation);
@@ -14,11 +15,11 @@ function getProfileInformation(req, res) {
     try {
         profileService.getProfileInformation(req)
             .then((user) => {
-                res.status(200).json({user})
+                res.status(200).json({user});
             })
             .catch(e => {
                 console.log("error in catch in promise"+e);
-                res.status(400).json({errors: e})
+                res.status(400).json({errors: e});
             })
     }catch (errors) {
         console.log("error in catch"+errors);
@@ -33,8 +34,16 @@ function update(req,res){
 
     let errors = validationProfileInformation(req);
     if (!errors) {
+        profileService.update(req.body,req.body.login)
+            .then(user=>{
+                console.log("user after update "+user.login);
+                return res.status(200).json(user)
+            })
+            .catch(e=>{
+                console.log("errors "+e);
+            })
         // signUpService.signUp(req, res)
-        //     .then(() => {
+       //     .then(() => {
         //         return res.status(200).json()
         //     })
         //     .catch(e => {

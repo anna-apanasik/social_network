@@ -3,7 +3,8 @@ import {
     RECEIVE_INFORMATION,
     RECEIVE_ERROR,
     PROFILE_EDIT_SUCCESS,
-    PROFILE_EDIT_FAILURE
+    PROFILE_EDIT_FAILURE,
+    RESET_SUCCESS
 } from "../../constants/actionsConstants";
 import functions from './functionsForActions'
 
@@ -30,12 +31,32 @@ export const receiveError = (error) => (dispatch) => {
         payload: error
     })
 };
+
+export const successRequest = (user) => (dispatch) => {
+    dispatch({
+        type: PROFILE_EDIT_SUCCESS,
+        payload: user
+    })
+};
+
 export const failureRequest = (error) => (dispatch) => {
     dispatch({
         type: PROFILE_EDIT_FAILURE,
         payload: error
     })
 };
+
+export  function resetSuccess() {
+    return (dispatch) => {
+        dispatch({
+            type: RESET_SUCCESS
+        })
+    }
+}
+
+// export function resetSuccessAfterEdit() {
+//     return (dispatch) => (dispatch(resetSuccess()))
+// }
 
 export function getUserLogin() {
     return (dispatch) => (dispatch(getLogin()))
@@ -75,9 +96,8 @@ export function postRequestEditProfile(state) {
             })
             .accept('application/json')
             .withCredentials()
-            .then(() => {
-
-                // dispatch(successRequest())
+            .then(user => {
+                dispatch(successRequest(user.body))
             })
             .catch(err => {
                 console.log(err);
