@@ -14,8 +14,15 @@ export const RECEIVE_ERROR='RECEIVE_ERROR';
 //Profile edit
 export const PROFILE_EDIT_SUCCESS='PROFILE_EDIT_SUCCESS';
 export const PROFILE_EDIT_FAILURE='PROFILE_EDIT_FAILURE';
+export const OPEN_MODAL='OPEN_MODAL';
+export const CLOSE_MODAL='CLOSE_MODAL';
 
 export const RESET_SUCCESS='RESET_SUCCESS';
+
+//Notes
+export const CREATE_NEW_NOTE='CREATE_NEW_NOTE';
+
+
 
 
 

@@ -16,23 +16,27 @@ const styles = {
 
 
 class ProfileContainer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isOpen: false,
-        }
-    }
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         isOpen: this.props.isOpen,
+    //     }
+    // }
 
     componentWillMount() {
         this.props.profileInformationActions.getUserLogin();
         this.props.profileInformationActions.getProfileInformation();
     }
+
     openModal(e) {
         e.preventDefault();
-        this.setState({isOpen: true})
+        this.props.profileInformationActions.openModal()
+        //this.setState({isOpen: true})
     }
+
     render() {
-        const {login, name, surname, sex, email, dataOfRegistration} = this.props;
+        const {login, name, surname, sex, email, dataOfRegistration,isOpen} = this.props;
+        const {closeModal} = this.props.profileInformationActions;
         return (
             <div>
                 <div className="row" style={styles.h3}>
@@ -57,7 +61,9 @@ class ProfileContainer extends React.Component {
                     </div>
                 </div>
                 <div>
-                    <NewNote isOpen={this.state.isOpen}/>
+                    <NewNote
+                        isOpen={isOpen}
+                        closeModal={closeModal}/>
                 </div>
             </div>
         )
@@ -72,6 +78,7 @@ function mapStateToProps(state) {
         sex: state.reducerProfileInformation.sex,
         email: state.reducerProfileInformation.email,
         dataOfRegistration: state.reducerProfileInformation.dataOfRegistration,
+        isOpen:state.reducerProfileInformation.isOpen
     }
 }
 

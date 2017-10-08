@@ -4,7 +4,9 @@ import {
     RECEIVE_ERROR,
     PROFILE_EDIT_SUCCESS,
     PROFILE_EDIT_FAILURE,
-    RESET_SUCCESS
+    RESET_SUCCESS,
+    OPEN_MODAL,
+    CLOSE_MODAL
 } from "../../constants/actionsConstants";
 import functions from './functionsForActions'
 
@@ -53,10 +55,21 @@ export  function resetSuccess() {
         })
     }
 }
+export function openModal(){
+    return (dispatch) => {
+        dispatch({
+            type: OPEN_MODAL
+        })
+    }
+}
 
-// export function resetSuccessAfterEdit() {
-//     return (dispatch) => (dispatch(resetSuccess()))
-// }
+export function closeModal(){
+    return (dispatch) => {
+        dispatch({
+            type: CLOSE_MODAL
+        })
+    }
+}
 
 export function getUserLogin() {
     return (dispatch) => (dispatch(getLogin()))

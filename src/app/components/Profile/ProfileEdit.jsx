@@ -19,7 +19,6 @@ class ProfileEdit extends React.Component {
             confirmPassword: this.props.confirmPassword
         }
     }
-
     handleNameChange(e) {
         this.setState({name: e.target.value});
     }

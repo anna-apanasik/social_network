@@ -7,11 +7,16 @@ import {
     ModalBody,
     ModalFooter
 } from 'react-modal-bootstrap'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import * as notesActions from '../../../redux/actions/actionsNotes'
+
 
 class NewNote extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            userId:this.props.userId,
             title: '',
             text: ''
         }
@@ -25,17 +30,21 @@ class NewNote extends React.Component {
         this.setState({text: e.target.value});
     }
 
-    hideModal() {
+    hideModal(e) {
+        e.preventDefault();
+        this.props.closeModal()
 //TODO close modal
         //TODO create reducer with data, login,
         //TODO isOpen
-
         // this.setState({
         //     isOpen: false
         // });
     };
 
-    saveNote() {
+    saveNote(e) {
+        e.preventDefault();
+        this.props.notesActions.createNote(this.state);
+        this.hideModal(e)
         //TODO save a new note
         // this.setState({
         //     isOpen: false
@@ -43,13 +52,13 @@ class NewNote extends React.Component {
     }
 
     render() {
-        const{isOpen} =this.props;
-        return (
+        const {isOpen} = this.props;
+              return (
             <div>
                 <Modal isOpen={isOpen} onRequestHide={this.hideModal.bind(this)}>
                     <ModalHeader>
-                        <ModalClose onClick={this.hideModal.bind(this)}/>
                         <ModalTitle>Add a new note</ModalTitle>
+                        <ModalClose onClick={this.hideModal.bind(this)}/>
                     </ModalHeader>
                     <ModalBody>
                         <div className="form-group">
@@ -82,7 +91,23 @@ class NewNote extends React.Component {
 
     }
 }
-NewNote.PropTypes={
-    isOpen: React.PropTypes.boolean
+
+NewNote.PropTypes = {
+    isOpen: React.PropTypes.bool.isRequired,
+    closeModal: React.PropTypes.func.isRequired
+};
+function mapStateToProps(state) {
+    return {
+        userId: state.reducerNotes.userId
+       // title: state.reducerProfileInformation.title,
+      //  text: state.reducerProfileInformation.text
+    }
 }
-export default NewNote;
+
+function mapDispatchToProps(dispatch) {
+    return {
+        notesActions: bindActionCreators(notesActions, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewNote)
