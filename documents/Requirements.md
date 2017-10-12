@@ -17,9 +17,6 @@ The name of this social network is “The Wall”.
 ### 2.2 User Interfaces
 
 User interface will provide signing up, loging in, editing profile information, creating new posts  and editing them, also deleting posts, commenting on other people's posts.
-For more details see mockups.
-
-### 2.3 User Characteristics
 
 The application will contain 2 roles: user, guest.
 ####	User can:
@@ -29,10 +26,14 @@ The application will contain 2 roles: user, guest.
 4.	Make his account private
 5.	Comment on other people’s posts.
 
-Guest is allowed to look through other people’s posts and to read some information about this website
-
+Guest is allowed to look through other people’s posts and to read some information about this website.
+For more details see mockups.
+### 2.3 User Characteristics
+This web application can be suitable for any active user of the Internet and personal сomputer, which would like to share their thoughts with others or just save it for yourself.
 ### 2.4 Assumptions and Dependencies
- Easy extensibility and changeability of content.
+ * Easy extensibility and changeability of content.
+ * It is possible that frequently used library can not work in the old browser, and excellent display application from mockups ,because more appropriate solutions can occur.
+ * It is also needed the presence of the Internet to provide the proper operation of application.
 
 ## 3 System Requirements
  To use this application, you need a device with Internet access and latest web browser installed. Recommended browsers:
