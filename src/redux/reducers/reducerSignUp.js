@@ -1,7 +1,7 @@
 import {
     SIGN_UP_SUCCESS,
     SIGN_UP_FAILURE
-} from '../../constants/actionsConstants';
+} from 'constants/actionsConstants';
 
 
 const initialState = {

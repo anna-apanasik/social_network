@@ -1,7 +1,7 @@
 import {
     SIGN_IN_SUCCESS,
     SIGN_IN_FAILURE,
-} from "../../constants/actionsConstants";
+} from "constants/actionsConstants";
 import functions from './functionsForActions'
 
 
@@ -38,7 +38,6 @@ export function postRequest(state) {
                 dispatch(failureRequest(parseErrors(err)))
             })
     }
-
 }
 
 function parseErrors(errors) {

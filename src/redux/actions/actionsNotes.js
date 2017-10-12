@@ -1,4 +1,4 @@
-import {CREATE_NEW_NOTE} from "../../constants/actionsConstants"
+import {CREATE_NEW_NOTE} from "constants/actionsConstants"
 
 const request = require('superagent');
 

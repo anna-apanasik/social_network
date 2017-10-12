@@ -1,28 +1,24 @@
-const webpack = require('webpack');
-//const path = require('path');
-
 module.exports = function (config) {
     config.set({
-        browsers: ['Chrome'],
-        singleRun: true,
-        frameworks: ['mocha', 'chai'],
+        basePath: 'test',
+        singleRun: false,
+        autoWatch: true,
+        frameworks: ['jasmine'],
         files: [
-            'test/index.js'
+            {pattern: '**/*.spec.js', watched: true, served: true, included: true}
+            //  '*.spec.js'
         ],
         preprocessors: {
-            'test/index.js': ['webpack']
+            // add webpack as preprocessor
+            '**/*.spec.js': ['webpack','sourcemap']
+            //       'test/**/*_test.js': ['webpack']
         },
-        reporters: ['dots'],
-        webpack: {
-            devtool: 'inline-source-map',
-            module: {
-                loaders: [
-                    {test: /\.js$/, loader: 'babel-loader'}
-                ]
-            }
-        },
-        webpackServer: {
-            noInfo: true
-        }
+       webpack: configureWebpack()
     });
+
+    function configureWebpack(webpackConfigFunction) {
+        let webpackConfig = require('./webpack.config');
+        webpackConfig.entry = undefined; // karma will pass the proper argument for entry
+        return webpackConfig;
+    }
 };

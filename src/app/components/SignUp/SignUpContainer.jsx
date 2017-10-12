@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import * as signUpActions from '../../../redux/actions/actionsSignUp'
+import * as signUpActions from 'redux/actions/actionsSignUp'
 import SignUp from "./SignUp";
 import {Redirect} from 'react-router'
 

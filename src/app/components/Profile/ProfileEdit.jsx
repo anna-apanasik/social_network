@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import FieldGroup from '../SignUp/FieldGroup'
 import {bindActionCreators} from 'redux'
 import {Redirect} from 'react-router'
-import * as profileInformationActions from '../../../redux/actions/actionsProfileInformation'
+import * as profileInformationActions from 'redux/actions/actionsProfileInformation'
 
 
 class ProfileEdit extends React.Component {

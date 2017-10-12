@@ -7,7 +7,7 @@ import {
     RESET_SUCCESS,
     OPEN_MODAL,
     CLOSE_MODAL
-} from "../../constants/actionsConstants";
+} from "constants/actionsConstants";
 import functions from './functionsForActions'
 
 const request = require('superagent');
@@ -71,9 +71,9 @@ export function closeModal(){
     }
 }
 
-export function getUserLogin() {
-    return (dispatch) => (dispatch(getLogin()))
-}
+// export function getUserLogin() {
+//     return (dispatch) => (dispatch(getLogin()))
+// }
 
 export function getProfileInformation() {
     return (dispatch, getState) => {

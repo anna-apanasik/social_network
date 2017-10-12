@@ -2,7 +2,7 @@ import React from 'react';
 import ShortInformationProfile from "./ShortInformationProfile";
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import * as profileInformationActions from '../../../redux/actions/actionsProfileInformation'
+import * as profileInformationActions from 'redux/actions/actionsProfileInformation'
 import NewNote from "../Notes/NewNote";
 
 const styles = {
@@ -24,7 +24,7 @@ class ProfileContainer extends React.Component {
     // }
 
     componentWillMount() {
-        this.props.profileInformationActions.getUserLogin();
+        this.props.profileInformationActions.getLogin();
         this.props.profileInformationActions.getProfileInformation();
     }
 

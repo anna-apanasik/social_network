@@ -6,7 +6,7 @@ import {
     RESET_SUCCESS,
     OPEN_MODAL,
     CLOSE_MODAL
-} from "../../constants/actionsConstants";
+} from "constants/actionsConstants";
 
 const initialState = {
     login: '',

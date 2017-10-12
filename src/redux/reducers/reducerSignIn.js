@@ -1,7 +1,7 @@
 import {
     SIGN_IN_SUCCESS,
     SIGN_IN_FAILURE,
-} from "../../constants/actionsConstants";
+} from "constants/actionsConstants";
 
 export const initialState = {
     login:'',

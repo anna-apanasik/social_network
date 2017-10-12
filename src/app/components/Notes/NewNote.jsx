@@ -9,7 +9,7 @@ import {
 } from 'react-modal-bootstrap'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import * as notesActions from '../../../redux/actions/actionsNotes'
+import * as notesActions from 'redux/actions/actionsNotes'
 
 
 class NewNote extends React.Component {
