@@ -20,15 +20,16 @@ User interface will provide signing up, loging in, editing profile information, 
 For more details see mockups.
 
 ### 2.3 User Characteristics
-	The application will contain 2 roles: user, guest.
-####	User can:
-1.	create his own ‘wall’ with some post
-2.	edit profile information and change profile’s photo
-3.	add photos to posts
-4.	make his account private
-5.	comment on other people’s posts.
 
-	Guest is allowed to look through other people’s posts and to read some information about this website
+The application will contain 2 roles: user, guest.
+####	User can:
+1.	Create his own ‘wall’ with some post
+2.	Edit profile information and change profile’s photo
+3.	Add photos to posts
+4.	Make his account private
+5.	Comment on other people’s posts.
+
+Guest is allowed to look through other people’s posts and to read some information about this website
 
 ### 2.4 Assumptions and Dependencies
  Easy extensibility and changeability of content.
