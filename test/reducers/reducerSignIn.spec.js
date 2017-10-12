@@ -1,5 +1,5 @@
-import * as types from '../../../src/constants/actionsConstants'
-import reducer from '../../../src/redux/reducers/reducerSignIn'
+import * as types from 'constants/actionsConstants'
+import reducer from 'redux/reducers/reducerSignIn'
 
 
 describe('reducer Sign In', () => {
@@ -10,17 +10,15 @@ describe('reducer Sign In', () => {
         });
 
         it('State in field errorLogin', function () {
-          //  expect(this.initialState).to.have.property('errorLogin', '');
-            expect(this.initialState.errorLogin).toBe('');
-            //expect(this.initialState.errorLogin).to.eql('')
+           expect(this.initialState.errorLogin).toBe('');
         });
 
         it('State in field errorPassword', function () {
-            expect(this.initialState).to.have.property('errorPassword', '');
+            expect(this.initialState.errorPassword).toBe('');
         });
 
         it('State in field success', function () {
-            expect(this.initialState).to.have.property('success', false);
+            expect(this.initialState.success).toBe(false);
         });
 
     });
@@ -33,20 +31,19 @@ describe('reducer Sign In', () => {
         it('should reset errorLogin after action SIGN_IN_SUCCESS', function () {
             const stateAfter = reducer({}, this.createAction());
 
-            expect(stateAfter).to.have.property('errorLogin', '');
-            //  expect(stateAfter.errorLogin).to.eql('');
+            expect(stateAfter.errorLogin).toBe('');
         });
 
         it('should reset errorPassword after action SIGN_IN_SUCCESS', function () {
             const stateAfter = reducer({}, this.createAction());
 
-            expect(stateAfter).to.have.property('errorPassword', '');
+            expect(stateAfter.errorPassword).toBe('');
         });
 
         it('should change success after action SIGN_IN_SUCCESS', function () {
             const stateAfter = reducer({}, this.createAction());
 
-            expect(stateAfter).to.have.property('success', true);
+            expect(stateAfter.success).toBe(true);
         });
 
     });
@@ -59,19 +56,19 @@ describe('reducer Sign In', () => {
         it('should set error in field errorLogin after action SIGN_IN_FAILURE', function () {
             const stateAfter = reducer({}, this.createAction(['Wrong login']));
 
-            expect(stateAfter).to.have.property('errorLogin', 'Wrong login');
+            expect(stateAfter.errorLogin).toBe('Wrong login');
         });
 
         it('should set error in field errorPassword after action SIGN_IN_FAILURE', function () {
             const stateAfter = reducer({}, this.createAction(['','Wrong password']));
 
-            expect(stateAfter).to.have.property('errorPassword', 'Wrong password');
+            expect(stateAfter.errorPassword).toBe('Wrong password');
         });
 
         it('should change success after action SIGN_IN_FAILURE in field success', function () {
             const stateAfter = reducer({}, this.createAction(['','',false]));
 
-            expect(stateAfter).to.have.property('success', false);
+            expect(stateAfter.success).toBe(false);
         });
     });
 
