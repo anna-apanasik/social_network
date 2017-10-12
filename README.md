@@ -1,5 +1,3 @@
-# social_network
-
 # Social Network “Wall”
 
 This project is developed during the course "Technologies of Development and Testing Software"
