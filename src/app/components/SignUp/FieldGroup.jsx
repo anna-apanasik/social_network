@@ -15,7 +15,7 @@ function FieldGroup({label, type, value, onChange, placeholder, requiredParam, e
                     <label>{requiredParam ? ' * ' : ''}</label>
                     <span className="badge badge-danger">{errors}</span>
                 </form>
-                <small className="form-text text-muted">{help}</small>
+                <small className="form-text text-muted ">{help}</small>
             </div>
         </div>
     );

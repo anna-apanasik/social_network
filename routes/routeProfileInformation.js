@@ -1,5 +1,5 @@
 const profileService = require('../services/serviceProfileInformation');
-const validationProfileInformation =require('../validation/validationProfileInformation')
+const validationProfileInformation = require('../validation/validationProfileInformation')
 
 module.exports = function (app) {
     app.route('/api/profile')
@@ -12,43 +12,31 @@ function getProfileInformation(req, res) {
     if (!req.body) {
         return res.sendStatus(400);
     }
-    try {
-        profileService.getProfileInformation(req)
-            .then((user) => {
-                res.status(200).json({user});
-            })
-            .catch(e => {
-                console.log("error in catch in promise"+e);
-                res.status(400).json({errors: e});
-            })
-    }catch (errors) {
-        console.log("error in catch"+errors);
-        res.status(400).json({errors: errors});
-    }
+    profileService.getProfileInformation(req)
+        .then((user) => {
+            res.status(200).json({user});
+        })
+        .catch(e => {
+            console.log("error in catch in promise" + e);
+            res.status(400).json({errors: e});
+        })
 }
 
-function update(req,res){
+function update(req, res) {
     if (!req.body) {
         return res.sendStatus(400);
     }
 
     let errors = validationProfileInformation(req);
     if (!errors) {
-        profileService.update(req.body,req.body.login)
-            .then(user=>{
-                console.log("user after update "+user.login);
+        profileService.update(req.body, req.body.login)
+            .then(user => {
                 return res.status(200).json(user)
             })
-            .catch(e=>{
-                console.log("errors "+e);
+            .catch(e => {
+                //TODO error route prof info
+                console.log("errors " + e);
             })
-        // signUpService.signUp(req, res)
-       //     .then(() => {
-        //         return res.status(200).json()
-        //     })
-        //     .catch(e => {
-        //         res.status(400).json({errors: [e]});
-        //     })
     } else {
         res.status(400).json({errors: errors});
     }

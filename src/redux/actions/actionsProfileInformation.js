@@ -6,10 +6,12 @@ import {
     PROFILE_EDIT_FAILURE,
     RESET_SUCCESS,
     OPEN_MODAL,
-    CLOSE_MODAL
+    CLOSE_MODAL,
+    GET_LIST_OF_POSTS
 } from "constants/actionsConstants";
-import functions from './functionsForActions'
+import functions from './functionsForActions';
 
+//TODO check all actions: don't need functions
 const request = require('superagent');
 
 export const getLogin = () => (dispatch, getState) => {
@@ -55,6 +57,7 @@ export  function resetSuccess() {
         })
     }
 }
+
 export function openModal(){
     return (dispatch) => {
         dispatch({
@@ -71,9 +74,12 @@ export function closeModal(){
     }
 }
 
-// export function getUserLogin() {
-//     return (dispatch) => (dispatch(getLogin()))
-// }
+export const getListOfPosts = (posts) => (dispatch) => {
+    dispatch({
+        type: GET_LIST_OF_POSTS,
+        payload: posts
+    })
+};
 
 export function getProfileInformation() {
     return (dispatch, getState) => {
@@ -115,6 +121,26 @@ export function postRequestEditProfile(state) {
             .catch(err => {
                 console.log(err);
                 dispatch(failureRequest(parseErrors(err)))
+            })
+    }
+}
+
+export function getPosts() {
+    return (dispatch, getState) => {
+        request
+            .post('api/getposts')
+            .send({
+                userId: getState().reducerProfileInformation.userId
+            })
+            .accept('application/json')
+            .withCredentials()
+            .then(posts => {
+                dispatch(getListOfPosts(posts.body));
+            })
+            .catch(e => {
+                //TODO delete console.log
+                //TODO error in get posts
+                console.log("errors in find posts " + e);
             })
     }
 }

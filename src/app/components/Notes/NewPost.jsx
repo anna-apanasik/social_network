@@ -9,7 +9,7 @@ import {
 } from 'react-modal-bootstrap'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import * as notesActions from 'redux/actions/actionsNotes'
+import * as actionsPost from 'redux/actions/actionsPost'
 
 
 class NewNote extends React.Component {
@@ -33,22 +33,12 @@ class NewNote extends React.Component {
     hideModal(e) {
         e.preventDefault();
         this.props.closeModal()
-//TODO close modal
-        //TODO create reducer with data, login,
-        //TODO isOpen
-        // this.setState({
-        //     isOpen: false
-        // });
     };
 
     saveNote(e) {
         e.preventDefault();
-        this.props.notesActions.createNote(this.state);
+        this.props.notesActions.createPost(this.state);
         this.hideModal(e)
-        //TODO save a new note
-        // this.setState({
-        //     isOpen: false
-        // });
     }
 
     render() {
@@ -57,7 +47,7 @@ class NewNote extends React.Component {
             <div>
                 <Modal isOpen={isOpen} onRequestHide={this.hideModal.bind(this)}>
                     <ModalHeader>
-                        <ModalTitle>Add a new note</ModalTitle>
+                        <ModalTitle>Post</ModalTitle>
                         <ModalClose onClick={this.hideModal.bind(this)}/>
                     </ModalHeader>
                     <ModalBody>
@@ -98,15 +88,13 @@ NewNote.PropTypes = {
 };
 function mapStateToProps(state) {
     return {
-        userId: state.reducerNotes.userId
-       // title: state.reducerProfileInformation.title,
-      //  text: state.reducerProfileInformation.text
+        userId: state.reducerPost.userId
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        notesActions: bindActionCreators(notesActions, dispatch)
+        notesActions: bindActionCreators(actionsPost, dispatch)
     }
 }
 

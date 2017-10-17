@@ -5,7 +5,8 @@ import {
     PROFILE_EDIT_FAILURE,
     RESET_SUCCESS,
     OPEN_MODAL,
-    CLOSE_MODAL
+    CLOSE_MODAL,
+    GET_LIST_OF_POSTS
 } from "constants/actionsConstants";
 
 const initialState = {
@@ -21,6 +22,7 @@ const initialState = {
     errorEmail: undefined,
     errorPassword: undefined,
     errorConfirmPassword: undefined,
+    listOfPosts: [],
     success: false,
     isOpen: false
 };
@@ -75,6 +77,9 @@ export default function reducerProfileInformation(state = initialState, action) 
             return Object.assign({}, state, {
                 isOpen: false
             });
+
+        case GET_LIST_OF_POSTS:
+            return Object.assign({}, state, {listOfPosts: action.payload});
 
         default:
             return state

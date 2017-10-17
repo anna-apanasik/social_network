@@ -10,7 +10,8 @@ describe('reducer Sign In', () => {
         });
 
         it('State in field errorLogin', function () {
-           expect(this.initialState.errorLogin).toBe('');
+
+            expect(this.initialState.errorLogin).toBe('');
         });
 
         it('State in field errorPassword', function () {

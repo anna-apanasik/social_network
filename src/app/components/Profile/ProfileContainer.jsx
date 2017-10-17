@@ -3,7 +3,8 @@ import ShortInformationProfile from "./ShortInformationProfile";
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as profileInformationActions from 'redux/actions/actionsProfileInformation'
-import NewNote from "../Notes/NewNote";
+import NewPost from "../Notes/NewPost";
+import ListOfPosts from "../Notes/ListOfPosts";
 
 const styles = {
     container: {
@@ -16,12 +17,6 @@ const styles = {
 
 
 class ProfileContainer extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         isOpen: this.props.isOpen,
-    //     }
-    // }
 
     componentWillMount() {
         this.props.profileInformationActions.getLogin();
@@ -49,19 +44,20 @@ class ProfileContainer extends React.Component {
                             email={email}
                             dataOfRegistration={dataOfRegistration}/>
                     </div>
-                    <div className="col ool-3"></div>
-                    <div className="col ool-3"></div>
+                    <div className="col ool-6">
+                        <ListOfPosts/>
+                    </div>
                     <div className="col ool-3">
                         <div className=" col-sm-12 col-md-12 ">
                             <button type="button"
                                     className="btn btn-outline-primary btm-lg"
-                                    onClick={this.openModal.bind(this)}>Add a note
+                                    onClick={this.openModal.bind(this)}>What's new?
                             </button>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <NewNote
+                    <NewPost
                         isOpen={isOpen}
                         closeModal={closeModal}/>
                 </div>

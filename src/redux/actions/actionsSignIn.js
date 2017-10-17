@@ -41,6 +41,10 @@ export function postRequest(state) {
 }
 
 function parseErrors(errors) {
+    if (!errors.response.body.hasOwnProperty('errors')) {
+        return;
+    }
+
     if (functions.isEmptyObject(errors.response.body.errors)) {
         return;
     }

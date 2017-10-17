@@ -19,6 +19,7 @@ class ProfileEdit extends React.Component {
             confirmPassword: this.props.confirmPassword
         }
     }
+
     handleNameChange(e) {
         this.setState({name: e.target.value});
     }
@@ -51,10 +52,10 @@ class ProfileEdit extends React.Component {
 
     render() {
         const {errorEmail, errorPassword, errorConfirmPassword, success} = this.props;
-       if(success){
-           this.props.profileInformationActions.resetSuccess();
-           return ( <Redirect  to="/profile"/>)
-       }
+        if (success) {
+            this.props.profileInformationActions.resetSuccess();
+            return ( <Redirect to="/profile"/>)
+        }
         return (
 
             <div className="container">
