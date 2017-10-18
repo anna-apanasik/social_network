@@ -17,7 +17,17 @@ module.exports = {
                 return Promise.reject(e)
             })
     },
-
+    deletePost: function (req) {
+        return models.notes.destroy({where: {noteId: req.body.noteId}})
+            .then(() => {
+                //TODO delete console log
+                console.log("was deleted")
+            })
+            .catch(e => {
+//TODO delete
+                console.log("errorr in delete " + e)
+            })
+    },
     getPosts: function (req) {
         return models.notes.findAll({where: {userId: req.body.userId}})
             .then(posts => {

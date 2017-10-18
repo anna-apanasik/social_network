@@ -3,8 +3,9 @@ import ShortInformationProfile from "./ShortInformationProfile";
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as profileInformationActions from 'redux/actions/actionsProfileInformation'
-import NewPost from "../Notes/NewPost";
-import ListOfPosts from "../Notes/ListOfPosts";
+import NewPost from "../Posts/NewPost";
+import ListOfPosts from "../Posts/ListOfPosts";
+//import {savePost} from "../../../redux/actions/actionsProfileInformation";
 
 const styles = {
     container: {
@@ -26,16 +27,15 @@ class ProfileContainer extends React.Component {
     openModal(e) {
         e.preventDefault();
         this.props.profileInformationActions.openModal()
-        //this.setState({isOpen: true})
     }
 
     render() {
-        const {login, name, surname, sex, email, dataOfRegistration,isOpen} = this.props;
+        const {login, name, surname, sex, email, dataOfRegistration, isOpen, editPost} = this.props;
         const {closeModal} = this.props.profileInformationActions;
         return (
             <div>
                 <div className="row" style={styles.h3}>
-                    <div className="col col-3" style={styles.container}>
+                    <div className="col col-md-3 col-sm-3" style={styles.container}>
                         <ShortInformationProfile
                             login={login}
                             name={name}
@@ -44,21 +44,23 @@ class ProfileContainer extends React.Component {
                             email={email}
                             dataOfRegistration={dataOfRegistration}/>
                     </div>
-                    <div className="col ool-6">
+                    <div className="col ool-md-6 col-sm-6">
                         <ListOfPosts/>
                     </div>
-                    <div className="col ool-3">
-                        <div className=" col-sm-12 col-md-12 ">
+                    <div className="col ool-md-1 col-sm-1">
                             <button type="button"
                                     className="btn btn-outline-primary btm-lg"
                                     onClick={this.openModal.bind(this)}>What's new?
                             </button>
-                        </div>
+
                     </div>
                 </div>
                 <div>
                     <NewPost
                         isOpen={isOpen}
+                        editPost={editPost}
+                        title={''}
+                        text={''}
                         closeModal={closeModal}/>
                 </div>
             </div>
@@ -74,6 +76,7 @@ function mapStateToProps(state) {
         sex: state.reducerProfileInformation.sex,
         email: state.reducerProfileInformation.email,
         dataOfRegistration: state.reducerProfileInformation.dataOfRegistration,
+        editPost: state.reducerProfileInformation.editPost,
         isOpen:state.reducerProfileInformation.isOpen
     }
 }

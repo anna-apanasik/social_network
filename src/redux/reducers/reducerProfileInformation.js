@@ -6,6 +6,7 @@ import {
     RESET_SUCCESS,
     OPEN_MODAL,
     CLOSE_MODAL,
+    RESET_STATUS_OF_POST,
     GET_LIST_OF_POSTS
 } from "constants/actionsConstants";
 
@@ -24,6 +25,8 @@ const initialState = {
     errorConfirmPassword: undefined,
     listOfPosts: [],
     success: false,
+    createPost: false,
+    editPost: false,
     isOpen: false
 };
 
@@ -75,7 +78,13 @@ export default function reducerProfileInformation(state = initialState, action) 
 
         case CLOSE_MODAL:
             return Object.assign({}, state, {
-                isOpen: false
+                isOpen: false,
+                createPost: true
+            });
+
+        case RESET_STATUS_OF_POST:
+            return Object.assign({}, state, {
+                createPost: false
             });
 
         case GET_LIST_OF_POSTS:

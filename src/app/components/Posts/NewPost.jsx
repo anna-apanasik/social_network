@@ -16,11 +16,15 @@ class NewNote extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            userId:this.props.userId,
-            title: '',
-            text: ''
+            userId: this.props.userId,
+            title: this.props.title,
+            text: this.props.text
         }
     }
+
+    // componentWillMount() {
+    //     console.log("text and title " + this.state.text + this.state.title)
+    // }
 
     handleEnterTitle(e) {
         this.setState({title: e.target.value});
@@ -32,7 +36,8 @@ class NewNote extends React.Component {
 
     hideModal(e) {
         e.preventDefault();
-        this.props.closeModal()
+        this.props.closeModal();
+        this.setState({title: '', text: ''})
     };
 
     saveNote(e) {
@@ -42,8 +47,9 @@ class NewNote extends React.Component {
     }
 
     render() {
-        const {isOpen} = this.props;
-              return (
+        const {isOpen, editPost, title, text} = this.props;
+        console.log("text and title " + this.state.text + this.state.title);
+        return (
             <div>
                 <Modal isOpen={isOpen} onRequestHide={this.hideModal.bind(this)}>
                     <ModalHeader>
@@ -54,12 +60,12 @@ class NewNote extends React.Component {
                         <div className="form-group">
                             <label>Title</label>
                             <input type="text"
-                                   value={this.state.title}
+                                   value={editPost ? title : this.state.title}
                                    onChange={this.handleEnterTitle.bind(this)}
                                    className="form-control form-control-sm"
                                    placeholder="Enter title"/>
                             <div className="form-group">
-                                <label>Note</label>
+                                <label>Text</label>
                                 <textarea className="form-control"
                                           rows="3"
                                           value={this.state.text}
@@ -84,8 +90,12 @@ class NewNote extends React.Component {
 
 NewNote.PropTypes = {
     isOpen: React.PropTypes.bool.isRequired,
+    editPost: React.PropTypes.bool.isRequired,
+    title: React.PropTypes.string.isRequired,
+    text: React.PropTypes.string.isRequired,
     closeModal: React.PropTypes.func.isRequired
 };
+
 function mapStateToProps(state) {
     return {
         userId: state.reducerPost.userId

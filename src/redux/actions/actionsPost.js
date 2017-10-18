@@ -14,6 +14,7 @@ export const getUserID = () => (dispatch, getState) => {
 };
 
 export function createPost(data) {
+    //TODO check need dispatch
     return (dispatch, getState) => {
         request
             .post('api/newpost')
@@ -35,3 +36,22 @@ export function createPost(data) {
     }
 }
 
+export function deletePost(data) {
+    return () => {
+        request
+            .post('api/deletepost')
+            .send({
+                noteId: data.noteId
+            })
+            .accept('application/json')
+            .withCredentials()
+            .then(() => {
+                //TODO error in delete
+                console.log('note was deleted');
+            })
+            .catch(e => {
+                //TODO error in delete
+                console.log("errors in delete note " + e);
+            })
+    }
+}

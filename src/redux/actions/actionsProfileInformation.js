@@ -7,6 +7,7 @@ import {
     RESET_SUCCESS,
     OPEN_MODAL,
     CLOSE_MODAL,
+    RESET_STATUS_OF_POST,
     GET_LIST_OF_POSTS
 } from "constants/actionsConstants";
 import functions from './functionsForActions';
@@ -70,6 +71,14 @@ export function closeModal(){
     return (dispatch) => {
         dispatch({
             type: CLOSE_MODAL
+        })
+    }
+}
+
+export function resetStatusOfPost() {
+    return (dispatch) => {
+        dispatch({
+            type: RESET_STATUS_OF_POST
         })
     }
 }

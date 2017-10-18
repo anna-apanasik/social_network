@@ -16,12 +16,13 @@ export const PROFILE_EDIT_SUCCESS = 'PROFILE_EDIT_SUCCESS';
 export const PROFILE_EDIT_FAILURE = 'PROFILE_EDIT_FAILURE';
 export const OPEN_MODAL = 'OPEN_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
-
 export const RESET_SUCCESS = 'RESET_SUCCESS';
+
+export const RESET_STATUS_OF_POST = 'RESET_STATUS_OF_POST';
 
 export const GET_LIST_OF_POSTS = 'GET_LIST_OF_POSTS';
 
-//Notes
+//Posts
 export const GET_USER_ID = 'GET_USER_ID';
 
 
