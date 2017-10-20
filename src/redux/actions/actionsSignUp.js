@@ -1,6 +1,8 @@
 import {
     SIGN_UP_SUCCESS,
-    SIGN_UP_FAILURE
+    SIGN_UP_FAILURE,
+    OPEN_DROPZONE_MODAL,
+    CLOSE_DROPZONE_MODAL
 } from 'constants/actionsConstants';
 import functions from './functionsForActions'
 
@@ -16,6 +18,23 @@ export const failureRequest = (error) => (dispatch) => {
         payload: error
     })
 };
+
+export function openModal() {
+    return (dispatch) => {
+        dispatch({
+            type: OPEN_DROPZONE_MODAL
+        })
+    }
+}
+
+export function closeModal() {
+    return (dispatch) => {
+        dispatch({
+            type: CLOSE_DROPZONE_MODAL
+        })
+    }
+}
+
 
 export function postRequest(state) {
     return (dispatch) => {

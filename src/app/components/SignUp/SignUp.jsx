@@ -1,7 +1,8 @@
 import React from 'react';
 import FieldGroup from "./FieldGroup";
-import {CloudinaryContext, Transformation, Image} from 'cloudinary-react';
 import ProFilePhoto from "../Cloudinary/ProFilePhoto";
+import DropZoneImage from 'app/components/Cloudinary/DropZoneImage';
+import {Dropzone} from 'react-dropzone';
 
 const styles = {
     form: {
@@ -62,19 +63,22 @@ class SignUp extends React.Component {
 
     handleAddPhoto(e) {
         e.preventDefault();
-        let res = [];
-        cloudinary.openUploadWidget({cloud_name: 'anyablischik', upload_preset: 'ewtkco6g', tags: ['xmas']},
-            function (error, result) {
-                console.log(result[0]);
-                res = result;
-            });
-        this.setState({public_id: res[0]})
-        //this.props.getProfilePhoto(res[0])
-        //TODO delete console.log
+        this.props.openModal();
+        // let res = [];
+        // cloudinary.openUploadWidget({cloud_name: 'anyablischik', upload_preset: 'ewtkco6g', tags: ['xmas']},
+        //     function (error, result) {
+        //         console.log(result[0]);
+        //         res = result;
+        //     });
+        // this.setState({public_id: res[0]})
     }
 
+    handleDrop([{preview}]) {
+
+    }
     render() {
         const {errorLogin, errorEmail, errorPassword} = this.props;
+
         return (
             <div className="container">
                 <div className="row justify-content-center">
@@ -159,7 +163,8 @@ class SignUp extends React.Component {
                                 <div className="form-group" style={styles.photo}>
                                     {this.state.public_id === '' ?
                                         <ProFilePhoto public_id={"avatar_unknownl_sw63nu"}/> :
-                                        <ProFilePhoto public_id={this.state.public_id.public_id}/>}
+                                        <ProFilePhoto public_id={this.state.public_id}/>}
+
                                     <div className="card-body">
                                         <button type="button"
                                                 onClick={this.handleAddPhoto.bind(this)}
@@ -183,9 +188,12 @@ SignUp.propTypes = {
     errorLogin: React.PropTypes.string.isRequired,
     errorPassword: React.PropTypes.string.isRequired,
     postRequest: React.PropTypes.func.isRequired,
+    openModal: React.PropTypes.func.isRequired,
+
     getProfilePhoto: React.PropTypes.func.isRequired
 };
 export default SignUp;
 
 // {/*<img src={this.state.photo.url} />*/}
 //    <h4 className="card-title">Card title</h4>
+//TODO public_id

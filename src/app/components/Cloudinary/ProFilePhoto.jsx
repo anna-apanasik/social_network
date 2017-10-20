@@ -1,6 +1,6 @@
 import React from 'react';
 import {CloudinaryContext, Transformation, Image} from 'cloudinary-react';
-import {CLOUDINARY_NAME, CLOUDINARY_UPLOAD_URL} from "../../../constants/cloudinaryConstants";
+import {CLOUDINARY_NAME, CLOUDINARY_UPLOAD_URL} from "constants/cloudinaryConstants";
 
 class ProFilePhoto extends React.Component {
     constructor(props) {

@@ -1,6 +1,8 @@
 //Sign up  constants
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
+export const OPEN_DROPZONE_MODAL = 'OPEN_DROPZONE_MODAL';
+export const CLOSE_DROPZONE_MODAL = 'CLOSE_DROPZONE_MODAL';
 
 // Sign in constants
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
