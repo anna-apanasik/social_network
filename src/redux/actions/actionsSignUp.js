@@ -6,8 +6,7 @@ import functions from './functionsForActions'
 
 const request = require('superagent');
 
-export const successRequest = () => (dispatch, getState) => {
-    //const user = getState().reducerSignUp.name;
+export const successRequest = () => (dispatch) => {
     dispatch({type: SIGN_UP_SUCCESS})
 };
 
@@ -71,15 +70,13 @@ function parseErrors(errors) {
     return sendError;
 }
 
-// export default function getObject(array, searchValue) {
-//     let i = array.length;
-//     while (i--) {
-//         if (array[i].param == searchValue) {
-//             return array[i];
-//         }
-//     }
-// }
-//
-// function isEmptyObject(emptyObject) {
-//     return JSON.stringify(emptyObject) === '{}';
+// export function getProfilePhoto(data) {
+//     request
+//         .get('http://res.cloudinary.com/anyablischik/image/upload/v1508112566/sample.jpg')
+//         .then(res => {
+//             console.log("get profile photo"+res.data.resources);
+//         })
+//         .catch(e => {
+//             console.log(e)
+//         })
 // }

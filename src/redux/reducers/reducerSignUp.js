@@ -3,7 +3,6 @@ import {
     SIGN_UP_FAILURE
 } from 'constants/actionsConstants';
 
-
 const initialState = {
     errorLogin: '',
     errorEmail: '',

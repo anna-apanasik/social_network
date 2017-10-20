@@ -50,7 +50,6 @@ class SignIn extends React.Component {
                         <div className="card border-info mb-3" style={styles.form}>
                             <h4 className="card-title" style={styles.h4}>Sign in to Wall</h4>
                             <form>
-
                                 <div className="form-group">
                                     <label>Login</label>
                                     <input type="email"

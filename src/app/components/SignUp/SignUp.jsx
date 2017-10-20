@@ -1,5 +1,19 @@
 import React from 'react';
 import FieldGroup from "./FieldGroup";
+import {CloudinaryContext, Transformation, Image} from 'cloudinary-react';
+import ProFilePhoto from "../Cloudinary/ProFilePhoto";
+
+const styles = {
+    form: {
+        marginTop: "80px",
+        width: "180px",
+        height: "220px",
+    },
+    photo: {
+        margin: "15px"
+    }
+
+};
 
 class SignUp extends React.Component {
 
@@ -8,10 +22,11 @@ class SignUp extends React.Component {
         this.state = {
             name: '',
             surname: '',
-            sex:'',
+            sex: '',
             login: '',
             email: '',
             password: '',
+            public_id: ''
         };
     }
 
@@ -45,12 +60,25 @@ class SignUp extends React.Component {
         this.props.postRequest(this.state)
     }
 
+    handleAddPhoto(e) {
+        e.preventDefault();
+        let res = [];
+        cloudinary.openUploadWidget({cloud_name: 'anyablischik', upload_preset: 'ewtkco6g', tags: ['xmas']},
+            function (error, result) {
+                console.log(result[0]);
+                res = result;
+            });
+        this.setState({public_id: res[0]})
+        //this.props.getProfilePhoto(res[0])
+        //TODO delete console.log
+    }
+
     render() {
         const {errorLogin, errorEmail, errorPassword} = this.props;
         return (
             <div className="container">
                 <div className="row justify-content-center">
-                    <div className="col-12">
+                    <div className="col-5">
                         <br></br>
                         <div className="page-header">
                             <div className=" col-sm-12 col-md-12 ">
@@ -125,6 +153,25 @@ class SignUp extends React.Component {
 
                         </form>
                     </div>
+                    <div className="col-3">
+                        <div className="card border-info mb-3" style={styles.form}>
+                            <form>
+                                <div className="form-group" style={styles.photo}>
+                                    {this.state.public_id === '' ?
+                                        <ProFilePhoto public_id={"avatar_unknownl_sw63nu"}/> :
+                                        <ProFilePhoto public_id={this.state.public_id.public_id}/>}
+                                    <div className="card-body">
+                                        <button type="button"
+                                                onClick={this.handleAddPhoto.bind(this)}
+                                                className="btn btn-primary btn-sm">Add photo
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div className="col-4">
+                    </div>
                 </div>
             </div>
         );
@@ -135,6 +182,10 @@ SignUp.propTypes = {
     errorEmail: React.PropTypes.string.isRequired,
     errorLogin: React.PropTypes.string.isRequired,
     errorPassword: React.PropTypes.string.isRequired,
-    postRequest: React.PropTypes.func.isRequired
+    postRequest: React.PropTypes.func.isRequired,
+    getProfilePhoto: React.PropTypes.func.isRequired
 };
 export default SignUp;
+
+// {/*<img src={this.state.photo.url} />*/}
+//    <h4 className="card-title">Card title</h4>

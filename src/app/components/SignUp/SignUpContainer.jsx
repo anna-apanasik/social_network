@@ -8,7 +8,7 @@ import {Redirect} from 'react-router'
 class SignUpContainer extends React.Component {
     render() {
         const {errorLogin, errorEmail, errorPassword, success} = this.props;
-        const {postRequest} = this.props.signUpActions;
+        const {postRequest, getProfilePhoto} = this.props.signUpActions;
 
         if (success) {
             return ( <Redirect from="/signup" to="/success_sign_up"/>)
@@ -20,6 +20,7 @@ class SignUpContainer extends React.Component {
                         errorEmail={errorEmail}
                         errorPassword={errorPassword}
                         postRequest={postRequest}
+                        getProfilePhoto={getProfilePhoto}
                     />
                 </div>
             )
