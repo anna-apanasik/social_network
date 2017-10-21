@@ -1,8 +1,7 @@
 import React from 'react';
 import FieldGroup from "./FieldGroup";
-import ProFilePhoto from "../Cloudinary/ProFilePhoto";
-import DropZoneImage from 'app/components/Cloudinary/DropZoneImage';
-import {Dropzone} from 'react-dropzone';
+import OnePhoto from "../Cloudinary/OnePhoto";
+import {CLOUDINARY_NAME, CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_UNKNOWN_USER_AVATAR} from "constants/cloudinaryConstants";
 
 const styles = {
     form: {
@@ -11,9 +10,12 @@ const styles = {
         height: "220px",
     },
     photo: {
-        margin: "15px"
+        marginTop: "10px",
+        textAlign: "center"
+    },
+    button: {
+        textAlign: "center"
     }
-
 };
 
 class SignUp extends React.Component {
@@ -63,19 +65,30 @@ class SignUp extends React.Component {
 
     handleAddPhoto(e) {
         e.preventDefault();
-        this.props.openModal();
-        // let res = [];
-        // cloudinary.openUploadWidget({cloud_name: 'anyablischik', upload_preset: 'ewtkco6g', tags: ['xmas']},
-        //     function (error, result) {
-        //         console.log(result[0]);
-        //         res = result;
-        //     });
-        // this.setState({public_id: res[0]})
+        return new Promise((resolve, reject) =>
+            cloudinary.openUploadWidget({
+                    cloud_name: CLOUDINARY_NAME,
+                    upload_preset: CLOUDINARY_UPLOAD_PRESET,
+                    multiple: false,
+                    tags: ['xmas']
+                },
+                (error, result) => {
+                    if (result) {
+                        resolve(result[0].public_id);
+                    } else if (error) {
+                        reject(error.message);
+                    }
+                }))
+            .then(public_id => {
+                this.setState({public_id: public_id})
+            })
+            .catch(e => {
+                //TODO delete console.log
+                console.log(e)
+            })
+
     }
 
-    handleDrop([{preview}]) {
-
-    }
     render() {
         const {errorLogin, errorEmail, errorPassword} = this.props;
 
@@ -162,10 +175,10 @@ class SignUp extends React.Component {
                             <form>
                                 <div className="form-group" style={styles.photo}>
                                     {this.state.public_id === '' ?
-                                        <ProFilePhoto public_id={"avatar_unknownl_sw63nu"}/> :
-                                        <ProFilePhoto public_id={this.state.public_id}/>}
+                                        <OnePhoto public_id={CLOUDINARY_UNKNOWN_USER_AVATAR}/> :
+                                        <OnePhoto public_id={this.state.public_id}/>}
 
-                                    <div className="card-body">
+                                    <div className="card-body" style={styles.button}>
                                         <button type="button"
                                                 onClick={this.handleAddPhoto.bind(this)}
                                                 className="btn btn-primary btn-sm">Add photo
@@ -187,10 +200,7 @@ SignUp.propTypes = {
     errorEmail: React.PropTypes.string.isRequired,
     errorLogin: React.PropTypes.string.isRequired,
     errorPassword: React.PropTypes.string.isRequired,
-    postRequest: React.PropTypes.func.isRequired,
-    openModal: React.PropTypes.func.isRequired,
-
-    getProfilePhoto: React.PropTypes.func.isRequired
+    postRequest: React.PropTypes.func.isRequired
 };
 export default SignUp;
 

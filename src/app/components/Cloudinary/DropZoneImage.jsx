@@ -83,3 +83,4 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(mapStateToProps, mapDispatchToProps)(DropZoneImage);
 
+//reactProdInvariant.js?8080:31 Uncaught Error: Minified React error #130; visit http://facebook.github.io/react/docs/error-decoder.html?invariant=130&args[]=undefined&args[]=%20Check%20the%20render%20method%20of%20%60SignUp%60. for the full message or use the non-minified dev environment for full errors and additional helpful warnings.

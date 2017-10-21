@@ -20,12 +20,11 @@ export const OPEN_MODAL = 'OPEN_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const RESET_SUCCESS = 'RESET_SUCCESS';
 
-export const RESET_STATUS_OF_POST = 'RESET_STATUS_OF_POST';
-
+//Posts
+export const CREATE_POST = 'CREATE_POST';
+export const DELETE_POST = 'DELETE_POST';
 export const GET_LIST_OF_POSTS = 'GET_LIST_OF_POSTS';
 
-//Posts
-export const GET_USER_ID = 'GET_USER_ID';
 
 
 

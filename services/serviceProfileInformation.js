@@ -26,7 +26,8 @@ module.exports = {
             password:updates.password,
             surname:updates.surname,
             name:updates.name,
-            sex:updates.sex
+            sex: updates.sex,
+            public_id: updates.public_id
         },{
             where:{login:login}
         })

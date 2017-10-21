@@ -10,21 +10,24 @@ import {
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as actionsPost from 'redux/actions/actionsPost'
+import {CLOUDINARY_NAME, CLOUDINARY_UPLOAD_PRESET} from 'constants/cloudinaryConstants'
+import ManyPhotos from "../Cloudinary/ManyPhotos";
 
+const styles = {
+    photos: {
+        marginTop: "10px"
+    }
+};
 
 class NewNote extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            userId: this.props.userId,
             title: this.props.title,
-            text: this.props.text
+            text: this.props.text,
+            photos: ''
         }
     }
-
-    // componentWillMount() {
-    //     console.log("text and title " + this.state.text + this.state.title)
-    // }
 
     handleEnterTitle(e) {
         this.setState({title: e.target.value});
@@ -46,9 +49,34 @@ class NewNote extends React.Component {
         this.hideModal(e)
     }
 
+    handleAddPhoto(e) {
+        e.preventDefault();
+        return new Promise((resolve, reject) =>
+            cloudinary.openUploadWidget({
+                    cloud_name: CLOUDINARY_NAME,
+                    upload_preset: CLOUDINARY_UPLOAD_PRESET,
+                    max_files: 5,
+                    tags: ['xmas']
+                },
+                (error, result) => {
+                    if (result) {
+                        resolve(result);
+                    } else if (error) {
+                        reject(error.message);
+                    }
+                }))
+            .then(photos => {
+                this.setState({photos: photos});
+            })
+            .catch(e => {
+                //TODO delete console.log
+                console.log(e)
+            })
+
+    }
+
     render() {
         const {isOpen, editPost, title, text} = this.props;
-        console.log("text and title " + this.state.text + this.state.title);
         return (
             <div>
                 <Modal isOpen={isOpen} onRequestHide={this.hideModal.bind(this)}>
@@ -60,7 +88,7 @@ class NewNote extends React.Component {
                         <div className="form-group">
                             <label>Title</label>
                             <input type="text"
-                                   value={editPost ? title : this.state.title}
+                                   value={this.state.title}
                                    onChange={this.handleEnterTitle.bind(this)}
                                    className="form-control form-control-sm"
                                    placeholder="Enter title"/>
@@ -72,6 +100,13 @@ class NewNote extends React.Component {
                                           onChange={this.handleEnterText.bind(this)}
                                           placeholder="Enter text"/>
                             </div>
+                        </div>
+                        <button type="button"
+                                onClick={this.handleAddPhoto.bind(this)}
+                                className="btn btn-primary btn-sm">Add photos
+                        </button>
+                        <div style={styles.photos}>
+                            {this.state.photos === '' ? null : <ManyPhotos photos={this.state.photos}/>}
                         </div>
                     </ModalBody>
                     <ModalFooter>
@@ -96,16 +131,10 @@ NewNote.PropTypes = {
     closeModal: React.PropTypes.func.isRequired
 };
 
-function mapStateToProps(state) {
-    return {
-        userId: state.reducerPost.userId
-    }
-}
-
 function mapDispatchToProps(dispatch) {
     return {
         notesActions: bindActionCreators(actionsPost, dispatch)
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewNote)
+export default connect(null, mapDispatchToProps)(NewNote)

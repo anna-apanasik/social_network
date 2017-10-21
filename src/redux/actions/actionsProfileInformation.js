@@ -1,27 +1,17 @@
 import {
-    GET_LOGIN,
     RECEIVE_INFORMATION,
     RECEIVE_ERROR,
     PROFILE_EDIT_SUCCESS,
     PROFILE_EDIT_FAILURE,
     RESET_SUCCESS,
     OPEN_MODAL,
-    CLOSE_MODAL,
-    RESET_STATUS_OF_POST,
-    GET_LIST_OF_POSTS
+    CLOSE_MODAL
 } from "constants/actionsConstants";
 import functions from './functionsForActions';
+import {getPosts} from "./actionsPost";
 
 //TODO check all actions: don't need functions
 const request = require('superagent');
-
-export const getLogin = () => (dispatch, getState) => {
-    let login = getState().reducerSignIn.login;
-    dispatch({
-        type: GET_LOGIN,
-        payload: login
-    })
-};
 
 export const receiveInformation = (information) => (dispatch) => {
     dispatch({
@@ -51,7 +41,7 @@ export const failureRequest = (error) => (dispatch) => {
     })
 };
 
-export  function resetSuccess() {
+export function resetSuccess() {
     return (dispatch) => {
         dispatch({
             type: RESET_SUCCESS
@@ -59,7 +49,7 @@ export  function resetSuccess() {
     }
 }
 
-export function openModal(){
+export function openModal() {
     return (dispatch) => {
         dispatch({
             type: OPEN_MODAL
@@ -67,7 +57,7 @@ export function openModal(){
     }
 }
 
-export function closeModal(){
+export function closeModal() {
     return (dispatch) => {
         dispatch({
             type: CLOSE_MODAL
@@ -75,32 +65,18 @@ export function closeModal(){
     }
 }
 
-export function resetStatusOfPost() {
-    return (dispatch) => {
-        dispatch({
-            type: RESET_STATUS_OF_POST
-        })
-    }
-}
-
-export const getListOfPosts = (posts) => (dispatch) => {
-    dispatch({
-        type: GET_LIST_OF_POSTS,
-        payload: posts
-    })
-};
-
 export function getProfileInformation() {
     return (dispatch, getState) => {
         request
             .post('api/profile')
             .send({
-                login: getState().reducerProfileInformation.login
+                login: getState().reducerSignIn.login
             })
             .accept('application/json')
             .withCredentials()
             .then((user) => {
-                dispatch(receiveInformation(user.body.user))
+                dispatch(receiveInformation(user.body.user));
+                dispatch(getPosts())
             })
             .catch(e => {
                 //dispatch(receiveError(e));
@@ -120,7 +96,8 @@ export function postRequestEditProfile(state) {
                 login: state.login,
                 email: state.email,
                 password: state.password,
-                confirmPassword: state.confirmPassword
+                confirmPassword: state.confirmPassword,
+                public_id: state.public_id
             })
             .accept('application/json')
             .withCredentials()
@@ -130,26 +107,6 @@ export function postRequestEditProfile(state) {
             .catch(err => {
                 console.log(err);
                 dispatch(failureRequest(parseErrors(err)))
-            })
-    }
-}
-
-export function getPosts() {
-    return (dispatch, getState) => {
-        request
-            .post('api/getposts')
-            .send({
-                userId: getState().reducerProfileInformation.userId
-            })
-            .accept('application/json')
-            .withCredentials()
-            .then(posts => {
-                dispatch(getListOfPosts(posts.body));
-            })
-            .catch(e => {
-                //TODO delete console.log
-                //TODO error in get posts
-                console.log("errors in find posts " + e);
             })
     }
 }

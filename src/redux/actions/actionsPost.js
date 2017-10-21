@@ -1,34 +1,48 @@
-import {GET_USER_ID, GET_LIST_OF_POSTS} from "constants/actionsConstants"
-
+import {GET_LIST_OF_POSTS, CREATE_POST, DELETE_POST} from "constants/actionsConstants"
+//TODO some problems with delete one post
 const request = require('superagent');
 
+export function addPost() {
+    return (dispatch) => {
+        dispatch({
+            type: CREATE_POST
+        })
+    }
+}
 
-export const getUserID = () => (dispatch, getState) => {
-    let id = getState().reducerProfileInformation.userId;
-    //TODO delete console log  and check: this fun need
-    console.log("id  " + id);
+export function destroyPost() {
+    return (dispatch) => {
+        dispatch({
+            type: DELETE_POST
+        })
+    }
+}
+
+export const getListOfPosts = (posts) => (dispatch) => {
     dispatch({
-        type: GET_USER_ID,
-        payload: id
+        type: GET_LIST_OF_POSTS,
+        payload: posts
     })
 };
 
 export function createPost(data) {
-    //TODO check need dispatch
+    if (data.photos === '') {
+        data.photos = [];
+    }
     return (dispatch, getState) => {
         request
             .post('api/newpost')
             .send({
                 userId: getState().reducerProfileInformation.userId,
                 title: data.title,
-                text: data.text
+                text: data.text,
+                photos: data.photos.map(item => item.public_id)
             })
             .accept('application/json')
             .withCredentials()
-            // .then(() => {
-
-            //     console.log('note was created');
-            // })
+            .then(() => {
+                dispatch(addPost());
+            })
             .catch(e => {
                 //TODO error in create( empty textarea field)
                 console.log("errors in create note " + e);
@@ -37,7 +51,7 @@ export function createPost(data) {
 }
 
 export function deletePost(data) {
-    return () => {
+    return (dispatch) => {
         request
             .post('api/deletepost')
             .send({
@@ -46,12 +60,31 @@ export function deletePost(data) {
             .accept('application/json')
             .withCredentials()
             .then(() => {
-                //TODO error in delete
-                console.log('note was deleted');
+                dispatch(destroyPost());
             })
             .catch(e => {
                 //TODO error in delete
                 console.log("errors in delete note " + e);
+            })
+    }
+}
+
+export function getPosts() {
+    return (dispatch, getState) => {
+        request
+            .post('api/getposts')
+            .send({
+                userId: getState().reducerProfileInformation.userId
+            })
+            .accept('application/json')
+            .withCredentials()
+            .then(posts => {
+                dispatch(getListOfPosts(posts.body));
+            })
+            .catch(e => {
+                //TODO delete console.log
+                //TODO error in get posts
+                console.log("errors in find posts " + e);
             })
     }
 }

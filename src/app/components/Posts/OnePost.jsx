@@ -10,8 +10,7 @@ const styles = {
         marginLeft: "15px"
     },
     buttonDelete: {
-        left: "100px",
-        right: "15px"
+        textAlign: "right"
     }
 };
 
@@ -26,7 +25,6 @@ class OnePost extends React.Component {
     handleDeletePost(e) {
         e.preventDefault();
         this.props.actionsPost.deletePost(this.state);
-        this.props.getPosts();
     }
 
     handleEditPost(e) {
@@ -43,15 +41,19 @@ class OnePost extends React.Component {
                 <form className="form-inline">
                     <h5 className="card-title" style={styles.text}>{title}</h5>
                     <button type="button" className="close" aria-label="Close"
-                            onClick={this.handleEditPost.bind(this)}>
+                            onClick={this.handleEditPost.bind(this)}
+                            style={styles.buttonDelete}>
                         <h5>Edit</h5>
                     </button>
                     <button type="button" className="close" aria-label="Close"
+                            style={styles.buttonDelete}
                             onClick={this.handleDeletePost.bind(this)}>
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </form>
                 <p className="card-text" style={styles.text}>{text}</p>
+                <form className="form-inline">
+                </form>
                 <div>
                     <NewPost
                         isOpen={isOpen}
@@ -69,8 +71,7 @@ class OnePost extends React.Component {
 OnePost.PropTypes = {
     noteId: React.PropTypes.string.isRequired,
     title: React.PropTypes.string.isRequired,
-    text: React.PropTypes.string.isRequired,
-    getPosts: React.PropTypes.func.isRequired
+    text: React.PropTypes.string.isRequired
 };
 
 function mapStateToProps(state) {

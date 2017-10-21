@@ -1,13 +1,10 @@
 import {
-    GET_LOGIN,
     RECEIVE_INFORMATION,
     PROFILE_EDIT_SUCCESS,
     PROFILE_EDIT_FAILURE,
     RESET_SUCCESS,
     OPEN_MODAL,
-    CLOSE_MODAL,
-    RESET_STATUS_OF_POST,
-    GET_LIST_OF_POSTS
+    CLOSE_MODAL
 } from "constants/actionsConstants";
 
 const initialState = {
@@ -19,21 +16,18 @@ const initialState = {
     password: '',
     confirmPassword: '',
     dataOfRegistration: '',
+    public_id: '',
     userId: undefined,
     errorEmail: undefined,
     errorPassword: undefined,
     errorConfirmPassword: undefined,
-    listOfPosts: [],
     success: false,
-    createPost: false,
     editPost: false,
     isOpen: false
 };
 
 export default function reducerProfileInformation(state = initialState, action) {
     switch (action.type) {
-        case GET_LOGIN:
-            return Object.assign({}, state, {login: action.payload});
 
         case RECEIVE_INFORMATION:
             return Object.assign({}, state, {
@@ -45,6 +39,7 @@ export default function reducerProfileInformation(state = initialState, action) 
                 password: action.payload.password,
                 confirmPassword: action.payload.password,
                 dataOfRegistration: action.payload.createdAt,
+                public_id: action.payload.public_id,
                 userId: action.payload.userId
             });
 
@@ -78,17 +73,8 @@ export default function reducerProfileInformation(state = initialState, action) 
 
         case CLOSE_MODAL:
             return Object.assign({}, state, {
-                isOpen: false,
-                createPost: true
+                isOpen: false
             });
-
-        case RESET_STATUS_OF_POST:
-            return Object.assign({}, state, {
-                createPost: false
-            });
-
-        case GET_LIST_OF_POSTS:
-            return Object.assign({}, state, {listOfPosts: action.payload});
 
         default:
             return state

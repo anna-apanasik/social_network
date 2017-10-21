@@ -20,7 +20,7 @@ const styles = {
 class ProfileContainer extends React.Component {
 
     componentWillMount() {
-        this.props.profileInformationActions.getLogin();
+        //   this.props.profileInformationActions.getLogin();
         this.props.profileInformationActions.getProfileInformation();
     }
 
@@ -30,7 +30,7 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
-        const {login, name, surname, sex, email, dataOfRegistration, isOpen, editPost} = this.props;
+        const {login, name, surname, sex, email, dataOfRegistration, public_id, isOpen, editPost} = this.props;
         const {closeModal} = this.props.profileInformationActions;
         return (
             <div>
@@ -42,6 +42,7 @@ class ProfileContainer extends React.Component {
                             surname={surname}
                             sex={sex}
                             email={email}
+                            public_id={public_id}
                             dataOfRegistration={dataOfRegistration}/>
                     </div>
                     <div className="col ool-md-6 col-sm-6">
@@ -76,7 +77,8 @@ function mapStateToProps(state) {
         sex: state.reducerProfileInformation.sex,
         email: state.reducerProfileInformation.email,
         dataOfRegistration: state.reducerProfileInformation.dataOfRegistration,
-        editPost: state.reducerProfileInformation.editPost,
+        public_id: state.reducerProfileInformation.public_id,
+        //  editPost: state.reducerProfileInformation.editPost,
         isOpen:state.reducerProfileInformation.isOpen
     }
 }

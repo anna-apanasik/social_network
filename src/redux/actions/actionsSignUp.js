@@ -1,8 +1,8 @@
 import {
     SIGN_UP_SUCCESS,
     SIGN_UP_FAILURE,
-    OPEN_DROPZONE_MODAL,
-    CLOSE_DROPZONE_MODAL
+    // OPEN_DROPZONE_MODAL,
+    // CLOSE_DROPZONE_MODAL
 } from 'constants/actionsConstants';
 import functions from './functionsForActions'
 
@@ -19,21 +19,21 @@ export const failureRequest = (error) => (dispatch) => {
     })
 };
 
-export function openModal() {
-    return (dispatch) => {
-        dispatch({
-            type: OPEN_DROPZONE_MODAL
-        })
-    }
-}
-
-export function closeModal() {
-    return (dispatch) => {
-        dispatch({
-            type: CLOSE_DROPZONE_MODAL
-        })
-    }
-}
+// export function openModal() {
+//     return (dispatch) => {
+//         dispatch({
+//             type: OPEN_DROPZONE_MODAL
+//         })
+//     }
+// }
+//
+// export function closeModal() {
+//     return (dispatch) => {
+//         dispatch({
+//             type: CLOSE_DROPZONE_MODAL
+//         })
+//     }
+// }
 
 
 export function postRequest(state) {
@@ -46,7 +46,8 @@ export function postRequest(state) {
                 sex: state.sex,
                 login: state.login,
                 email: state.email,
-                password: state.password
+                password: state.password,
+                public_id: state.public_id
             })
             .accept('application/json')
             .withCredentials()

@@ -5,12 +5,13 @@ const models = require('../models');
 module.exports = {
     signUp: function (req) {
         let data = {
-            firstName: req.body.name,
+            name: req.body.name,
             surname: req.body.surname,
             sex: req.body.sex,
             login: req.body.login,
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
+            public_id: req.body.public_id
         };
 
         return models.users.findOne({where: {email: data.email}})
@@ -26,7 +27,6 @@ module.exports = {
                 }
                 return models.users.create(data);
             })
-            //      .then(newUser => Promise.resolve(newUser))
             .catch(e => Promise.reject(e))
     }
 };

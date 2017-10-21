@@ -4,8 +4,34 @@ import FieldGroup from '../SignUp/FieldGroup'
 import {bindActionCreators} from 'redux'
 import {Redirect} from 'react-router'
 import * as profileInformationActions from 'redux/actions/actionsProfileInformation'
+import OnePhoto from "../Cloudinary/OnePhoto";
+import {CLOUDINARY_NAME, CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_UNKNOWN_USER_AVATAR} from 'constants/cloudinaryConstants'
 
+const styles = {
+    header: {
+        marginTop: "10px"
+    },
+    form: {
+        marginTop: "10px",
+        width: "180px",
+        height: "220px",
+    },
+    photo: {
+        marginTop: "10px",
+        textAlign: "center"
+    },
+    button: {
+        textAlign: "center"
+    },
+    saveButton: {
+        marginTop: "50px",
+        marginLeft: "42px"
+    }
 
+};
+
+//TODO have the same styles for this and sign up
+//TODO  edit form, propblems with color of text for password
 class ProfileEdit extends React.Component {
     constructor(props) {
         super(props);
@@ -16,7 +42,8 @@ class ProfileEdit extends React.Component {
             email: this.props.email,
             sex: this.props.sex,
             password: this.props.password,
-            confirmPassword: this.props.confirmPassword
+            confirmPassword: this.props.confirmPassword,
+            public_id: this.props.public_id
         }
     }
 
@@ -50,6 +77,32 @@ class ProfileEdit extends React.Component {
         this.props.profileInformationActions.postRequestEditProfile(this.state)
     }
 
+    handleEditPhoto(e) {
+        e.preventDefault();
+        return new Promise((resolve, reject) =>
+            cloudinary.openUploadWidget({
+                    cloud_name: CLOUDINARY_NAME,
+                    upload_preset: CLOUDINARY_UPLOAD_PRESET,
+                    multiple: false,
+                    tags: ['xmas']
+                },
+                (error, result) => {
+                    if (result) {
+                        resolve(result[0].public_id);
+                    } else if (error) {
+                        reject(error.message);
+                    }
+                }))
+            .then(public_id => {
+                this.setState({public_id: public_id})
+            })
+            .catch(e => {
+                //TODO delete console.log
+                console.log(e)
+            })
+
+    }
+
     render() {
         const {errorEmail, errorPassword, errorConfirmPassword, success} = this.props;
         if (success) {
@@ -59,13 +112,37 @@ class ProfileEdit extends React.Component {
         return (
 
             <div className="container">
-                <div className="page-header">
+                <div className="page-header" style={styles.header}>
                     <div className=" col-sm-12 col-md-12 ">
                         <h1>Edit profile</h1>
                     </div>
                 </div>
                 <br></br>
                 <div className="row justify-content-center">
+                    <div className="col-3">
+                        <div className="card border-info mb-3" style={styles.form}>
+                            <form>
+                                <div className="form-group" style={styles.photo}>
+                                    {this.state.public_id === '' ?
+                                        <OnePhoto public_id={CLOUDINARY_UNKNOWN_USER_AVATAR}/> :
+                                        <OnePhoto public_id={this.state.public_id}/>}
+
+                                    <div className="card-body" style={styles.button}>
+                                        <button type="button"
+                                                onClick={this.handleEditPhoto.bind(this)}
+                                                className="btn btn-primary btn-sm">Edit photo
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div className=" col-sm-12 col-md-12 " style={styles.saveButton}>
+                            <button type="button"
+                                    className="btn btn-primary btm-lg"
+                                    onClick={this.handleOnSubmit.bind(this)}>Save
+                            </button>
+                        </div>
+                    </div>
                     <div className="col-3">
                         <form>
                             <FieldGroup
@@ -150,12 +227,7 @@ class ProfileEdit extends React.Component {
                             />
                         </form>
                     </div>
-                    <div className=" col-sm-12 col-md-12 ">
-                        <button type="button"
-                                className="btn btn-primary btm-lg"
-                                onClick={this.handleOnSubmit.bind(this)}>Save
-                        </button>
-                    </div>
+
                 </div>
             </div>
         )
@@ -174,7 +246,8 @@ function mapStateToProps(state) {
         errorEmail: state.reducerProfileInformation.errorEmail,
         errorPassword: state.reducerProfileInformation.errorPassword,
         errorConfirmPassword: state.reducerProfileInformation.errorConfirmPassword,
-        success: state.reducerProfileInformation.success
+        success: state.reducerProfileInformation.success,
+        public_id: state.reducerProfileInformation.public_id
     }
 }
 
