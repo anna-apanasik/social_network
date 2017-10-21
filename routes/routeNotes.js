@@ -30,22 +30,31 @@ function getListOfPosts(req, res) {
     if (!req.body) {
         return res.sendStatus(400);
     }
-
+    let data = {};
+    data.photos = [];
     servicePosts.getPosts(req)
-        .then(posts => res.status(200).json(posts))
-        .catch(e => res.status(400).json(e))
+        .then(posts => {
+            data.posts = posts;
+            Promise.all(posts.map(item => {
+                return servicePosts.getPhotos(item.noteId)
+                    .then(photos => {
+                        data.photos = data.photos.concat(photos);
+                    })
+            }))
+                .then(() => res.status(200).json(data))
+        })
+        .catch(e => res.status(400).json(e));
 }
 
 function deletePost(req, res) {
     if (!req.body) {
         return res.sendStatus(400);
     }
-
+    if (req.body.text === '') {
+        console.log("error in text")
+        return res.status(400).json('Empty text field');
+    }
     servicePosts.deletePost(req)
         .then(() => res.status(200).json())
-        .catch(e => {
-            //TODO error in delete
-            console.log("errors in delete note " + e);
-            //res.status(400).json(e)
-        })
+        .catch(e => res.status(400).json(e))
 }

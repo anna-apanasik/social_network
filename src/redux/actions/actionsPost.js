@@ -78,8 +78,9 @@ export function getPosts() {
             })
             .accept('application/json')
             .withCredentials()
-            .then(posts => {
-                dispatch(getListOfPosts(posts.body));
+            .then(data => {
+                console.log(data.body);
+                dispatch(getListOfPosts(data.body));
             })
             .catch(e => {
                 //TODO delete console.log

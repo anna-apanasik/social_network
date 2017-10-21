@@ -17,14 +17,16 @@ class ListOfPosts extends React.Component {
         if (createPost || deletePost) {
             this.props.postActions.getPosts();
         }
-        if (listOfPosts) {
+        //  if (listOfPosts) {
             list = listOfPosts.map((item) =>
                 <li style={styles.li}>
                     <OnePost noteId={item.noteId}
                              title={item.title}
                              text={item.text}/>
                 </li>);
-        }
+        // } else {
+        //     list = [];
+        // }
         return (<div>{list}</div>)
     }
 }

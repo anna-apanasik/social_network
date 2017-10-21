@@ -25,7 +25,8 @@ class NewNote extends React.Component {
         this.state = {
             title: this.props.title,
             text: this.props.text,
-            photos: ''
+            photos: '',
+            error: ''
         }
     }
 
@@ -40,11 +41,16 @@ class NewNote extends React.Component {
     hideModal(e) {
         e.preventDefault();
         this.props.closeModal();
-        this.setState({title: '', text: ''})
+        this.setState({title: '', text: '', photos: ''})
     };
 
     saveNote(e) {
         e.preventDefault();
+        if (this.state.text === '') {
+            //TODO validation on the server side
+            this.setState({error: 'Empty text field'});
+            return;
+        }
         this.props.notesActions.createPost(this.state);
         this.hideModal(e)
     }
@@ -99,6 +105,7 @@ class NewNote extends React.Component {
                                           value={this.state.text}
                                           onChange={this.handleEnterText.bind(this)}
                                           placeholder="Enter text"/>
+                                <span className="badge badge-danger">{this.state.error}</span>
                             </div>
                         </div>
                         <button type="button"
