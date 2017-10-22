@@ -61,20 +61,6 @@ describe('reducer Profile Information', () => {
         });
     });
 
-    describe('Action: GET_LOGIN ', () => {
-        beforeEach(function () {
-            this.login = 'Login';
-            this.createAction = (login) => ({type: types.GET_LOGIN, payload: login})
-        });
-
-        it('should return login after action GET_LOGIN', function () {
-            const stateAfter = reducer({}, this.createAction(this.login));
-
-            expect(stateAfter.login).toBe(this.login);
-        });
-
-    });
-
     describe('Action: RECEIVE_INFORMATION ', () => {
 
         beforeEach(function () {
@@ -202,53 +188,59 @@ describe('reducer Profile Information', () => {
         });
     });
 
-    // describe('Action: PROFILE_EDIT_FAILURE ', () => {
-    //
-    //     beforeEach(function () {
-    //         this.info = ['Error im email', 'Error in password', 'Error n confirm password'];
-    //         this.createAction = (information) => ({type: types.PROFILE_EDIT_SUCCESS, payload: information})
-    //     });
-    //
-    //     it('should set info.name in field name after action PROFILE_EDIT_SUCCESS', function () {
-    //         const stateAfter = reducer({}, this.createAction(this.info));
-    //
-    //         expect(stateAfter.name).toBe(this.info.name);
-    //     });
-    //
-    //     it('should set info.surname in field surname after action PROFILE_EDIT_SUCCESS', function () {
-    //         const stateAfter = reducer({}, this.createAction(this.info));
-    //
-    //         expect(stateAfter.surname).toBe(this.info.surname);
-    //     });
-    //
-    //     it('should set info.sex in field sex after action PROFILE_EDIT_SUCCESS', function () {
-    //         const stateAfter = reducer({}, this.createAction(this.info));
-    //
-    //         expect(stateAfter.sex).toBe(this.info.sex);
-    //     });
-    //
-    //     it('should set info.email in field email after action PROFILE_EDIT_SUCCESS', function () {
-    //         const stateAfter = reducer({}, this.createAction(this.info));
-    //
-    //         expect(stateAfter.email).toBe(this.info.email);
-    //     });
-    //
-    //     it('should set info.password in field password after action PROFILE_EDIT_SUCCESS', function () {
-    //         const stateAfter = reducer({}, this.createAction(this.info));
-    //
-    //         expect(stateAfter.password).toBe(this.info.password);
-    //     });
-    //
-    //     it('should set info.confirmPassword in field confirmPassword after action PROFILE_EDIT_SUCCESS', function () {
-    //         const stateAfter = reducer({}, this.createAction(this.info));
-    //
-    //         expect(stateAfter.confirmPassword).toBe(this.info.password);
-    //     });
-    //
-    //     it('should set info.userId in field userId after action RECEIVE_INFORMATION', function () {
-    //         const stateAfter = reducer({}, this.createAction(this.info));
-    //
-    //         expect(stateAfter.success).toBe(true);
-    //     });
-    // });
+    describe('Action: PROFILE_EDIT_FAILURE ', () => {
+
+        beforeEach(function () {
+            this.info = ['Error im email', 'Error in password', 'Error in confirm password'];
+            this.createAction = (information) => ({type: types.PROFILE_EDIT_FAILURE, payload: information})
+        });
+
+        it('should set error in field errorEmail after action PROFILE_EDIT_FAILURE', function () {
+            const stateAfter = reducer({}, this.createAction(this.info));
+
+            expect(stateAfter.errorEmail).toBe(this.info[0]);
+        });
+
+        it('should set info.surname in field surname after action PROFILE_EDIT_SUCCESS', function () {
+            const stateAfter = reducer({}, this.createAction(this.info));
+
+            expect(stateAfter.errorPassword).toBe(this.info[1]);
+        });
+
+        it('should set info.sex in field sex after action PROFILE_EDIT_SUCCESS', function () {
+            const stateAfter = reducer({}, this.createAction(this.info));
+
+            expect(stateAfter.errorConfirmPassword).toBe(this.info[2]);
+        });
+    });
+
+    describe('Action: RESET_SUCCESS ', () => {
+        it('should set false in field success after action RESET_SUCCESS', function () {
+            this.createAction = () => ({type: types.RESET_SUCCESS});
+
+            const stateAfter = reducer({}, this.createAction());
+
+            expect(stateAfter.success).toBe(false);
+        });
+    });
+
+    describe('Action: OPEN_MODAL ', () => {
+        it('should set true in field isOpen after action OPEN_MODAL', function () {
+            this.createAction = () => ({type: types.OPEN_MODAL});
+
+            const stateAfter = reducer({}, this.createAction());
+
+            expect(stateAfter.isOpen).toBe(true);
+        });
+    });
+
+    describe('Action: CLOSE_MODAL ', () => {
+        it('should set false in field isOpen after action OPEN_MODAL', function () {
+            this.createAction = () => ({type: types.CLOSE_MODAL});
+
+            const stateAfter = reducer({}, this.createAction());
+
+            expect(stateAfter.isOpen).toBe(false);
+        });
+    });
 });

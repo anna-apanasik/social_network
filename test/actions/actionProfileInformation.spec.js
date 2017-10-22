@@ -8,17 +8,6 @@ describe('action Profile Information', () => {
         this.getStateSpy = jasmine.createSpy('getState');
     });
 
-    // it('should return type GET_LOGIN and login', function () {
-    //     let info = 'Login';
-    //
-    //     actions.getLogin(info)(this.dispatchSpy,this.getStateSpy);
-    //     this.getStateSpy.and.returnValue(info);
-    //     let callArgs = this.dispatchSpy.calls.first().args[0];
-    //
-    //     expect(callArgs.type).toBe(types.GET_LOGIN);
-    //     expect(callArgs.payload).toBe(info);
-    // });
-
     it('should return type RECEIVE_INFORMATION and information', function () {
         let info = 'Information';
 
