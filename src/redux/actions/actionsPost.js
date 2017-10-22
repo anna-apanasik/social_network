@@ -79,7 +79,6 @@ export function getPosts() {
             .accept('application/json')
             .withCredentials()
             .then(data => {
-                console.log(data.body);
                 dispatch(getListOfPosts(data.body));
             })
             .catch(e => {

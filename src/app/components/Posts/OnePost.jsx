@@ -4,13 +4,19 @@ import {bindActionCreators} from 'redux'
 import * as profileInformationActions from 'redux/actions/actionsProfileInformation'
 import * as actionsPost from 'redux/actions/actionsPost'
 import NewPost from "../Posts/NewPost";
+import OnePhoto from "../Cloudinary/OnePhoto";
+import ManyPhotos from "../Cloudinary/ManyPhotos";
 
 const styles = {
     text: {
         marginLeft: "15px"
     },
-    buttonDelete: {
-        textAlign: "right"
+    right: {
+        //  marginLeft: "500px"
+        textAlign: "center"
+    },
+    photos: {
+        margin: "10px"
     }
 };
 
@@ -35,24 +41,25 @@ class OnePost extends React.Component {
     }
 
     render() {
-        const {title, text, editPost, isOpen} = this.props;
+        const {title, text, editPost, isOpen, photos} = this.props;
         const {closeModal} = this.props.profileInformationActions;
         return (<div className="card border-info mb-3">
                 <form className="form-inline">
                     <h5 className="card-title" style={styles.text}>{title}</h5>
                     <button type="button" className="close" aria-label="Close"
-                            onClick={this.handleEditPost.bind(this)}
-                            style={styles.buttonDelete}>
-                        <h5>Edit</h5>
+                            onClick={this.handleEditPost.bind(this)}>
+                        <h6>Edit</h6>
                     </button>
                     <button type="button" className="close" aria-label="Close"
-                            style={styles.buttonDelete}
                             onClick={this.handleDeletePost.bind(this)}>
-                        <span aria-hidden="true">&times;</span>
+                        <h5 aria-hidden="true">&times;</h5>
                     </button>
                 </form>
                 <p className="card-text" style={styles.text}>{text}</p>
-                <form className="form-inline">
+                <form className="form-inline" style={styles.photos}>
+                    {photos.map(item =>
+                        item ? <OnePhoto public_id={item.photo} width={'50'} height={'50'}/> : null
+                    )}
                 </form>
                 <div>
                     <NewPost
@@ -71,7 +78,8 @@ class OnePost extends React.Component {
 OnePost.PropTypes = {
     noteId: React.PropTypes.string.isRequired,
     title: React.PropTypes.string.isRequired,
-    text: React.PropTypes.string.isRequired
+    text: React.PropTypes.string.isRequired,
+    photos: React.PropTypes.string.isRequired
 };
 
 function mapStateToProps(state) {

@@ -12,21 +12,24 @@ const styles = {
 
 class ListOfPosts extends React.Component {
     render() {
-        const {listOfPosts, createPost, deletePost} = this.props;
+        const {listOfPosts, photos, createPost, deletePost} = this.props;
         let list;
         if (createPost || deletePost) {
             this.props.postActions.getPosts();
         }
-        //  if (listOfPosts) {
-            list = listOfPosts.map((item) =>
-                <li style={styles.li}>
-                    <OnePost noteId={item.noteId}
-                             title={item.title}
-                             text={item.text}/>
-                </li>);
-        // } else {
-        //     list = [];
-        // }
+        list = listOfPosts.map((item) =>
+            <li style={styles.li}>
+                <OnePost noteId={item.noteId}
+                         title={item.title}
+                         text={item.text}
+                         photos={photos.map(elem => {
+                             if (elem.noteId === item.noteId) {
+                                 return elem;
+                             }
+                         })}
+                />
+            </li>);
+
         return (<div>{list}</div>)
     }
 }
@@ -34,6 +37,7 @@ class ListOfPosts extends React.Component {
 function mapStateToProps(state) {
     return {
         listOfPosts: state.reducerPost.listOfPosts,
+        photos: state.reducerPost.photos,
         createPost: state.reducerPost.createPost,
         deletePost: state.reducerPost.deletePost
     }
