@@ -3,4 +3,6 @@ module.exports = function(app) {
     require('./routeSignIn')(app);
     require('./routeProfileInformation')(app);
     require('./routeNotes')(app);
+    require('./routeSearch')(app);
+
 };
