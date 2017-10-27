@@ -50,6 +50,7 @@ function deletePost(req, res) {
     if (!req.body) {
         return res.sendStatus(400);
     }
+    //TODO check need this if
     if (req.body.text === '') {
         console.log("error in text")
         return res.status(400).json('Empty text field');

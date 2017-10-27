@@ -26,6 +26,12 @@ module.exports = {
             .catch(e => Promise.reject(e));
     },
 
+    getLogin: function (req) {
+        return models.users.findOne({where: {userId: req.body.userId}})
+            .then(user => Promise.resolve(user))
+            .catch(e => Promise.reject(e));
+    },
+
     unique: function (arr) {
         let out = [];
         nextInput:
@@ -39,5 +45,4 @@ module.exports = {
             }
         return out;
     }
-
 };

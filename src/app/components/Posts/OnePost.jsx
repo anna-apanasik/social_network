@@ -61,6 +61,7 @@ class OnePost extends React.Component {
                         item ? <OnePhoto public_id={item.photo} width={'50'} height={'50'}/> : null
                     )}
                 </form>
+
                 <div>
                     <NewPost
                         isOpen={isOpen}
@@ -69,12 +70,11 @@ class OnePost extends React.Component {
                         title={title}
                         text={text}/>
                 </div>
-            </div>
-
-        )
+        </div>)
     }
 }
 
+//TODO check: need newPost or not
 OnePost.PropTypes = {
     noteId: React.PropTypes.string.isRequired,
     title: React.PropTypes.string.isRequired,

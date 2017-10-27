@@ -2,6 +2,7 @@ import React from 'react';
 import FieldGroup from "./FieldGroup";
 import OnePhoto from "../Cloudinary/OnePhoto";
 import {CLOUDINARY_NAME, CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_UNKNOWN_USER_AVATAR} from "constants/cloudinaryConstants";
+import st from './style.less'
 
 const styles = {
     form: {
@@ -94,6 +95,8 @@ class SignUp extends React.Component {
 
         return (
             <div className="container">
+                <p className={st.hi}
+                   style={st.hi}>hi</p>
                 <div className="row justify-content-center">
                     <div className="col-5">
                         <br></br>
@@ -171,7 +174,7 @@ class SignUp extends React.Component {
                         </form>
                     </div>
                     <div className="col-3">
-                        <div className="card border-info mb-3" style={styles.form}>
+                        <div className="card border-info mb-3 ">
                             <form>
                                 <div className="form-group" style={styles.photo}>
                                     {this.state.public_id === '' ?

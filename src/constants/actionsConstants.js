@@ -25,6 +25,15 @@ export const CREATE_POST = 'CREATE_POST';
 export const DELETE_POST = 'DELETE_POST';
 export const GET_LIST_OF_POSTS = 'GET_LIST_OF_POSTS';
 
+//Search
+export const NOT_FOUND = 'NOT_FOUND';
+export const FOUND_USERS_OR_POSTS = 'FOUND_USERS_OR_POSTS';
+export const RESET_SEARCH = 'RESET_SEARCH';
+export const GET_PHOTOS = 'GET_PHOTOS';
+
+
+
+
 
 
 

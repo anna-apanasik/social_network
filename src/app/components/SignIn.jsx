@@ -1,9 +1,8 @@
 import React from 'react';
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
-import {Redirect} from 'react-router'
-
-import * as signInActions from 'redux/actions/actionsSignIn'
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {Redirect} from 'react-router';
+import * as signInActions from 'redux/actions/actionsSignIn';
 
 const styles = {
     container: {
