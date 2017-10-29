@@ -103,3 +103,21 @@ export function getPhotos(noteId) {
             })
     }
 }
+
+export function getPosts() {
+    return (dispatch) => {
+        request
+            .post('api/home')
+            .accept('application/json')
+            .withCredentials()
+            .then(res => {
+                console.log(res)
+            })
+            .catch(e => {
+                //TODO delete console.log
+                //TODO error in get posts
+                console.log("errors in find posts " + e);
+            })
+    }
+}
+

@@ -38,7 +38,7 @@ class SuccessFound extends React.Component {
     }
 }
 
-//TODO for each post author
+//TODO for each post author and link
 function mapStateToProps(state) {
     return {
         users: state.reducerSearch.users,

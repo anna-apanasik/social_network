@@ -32,6 +32,11 @@ module.exports = {
             .catch(e => Promise.reject(e));
     },
 
+    getPosts: function () {
+        return models.notes.findAll()
+            .then(posts => Promise.resolve(posts))
+            .catch(e => Promise.reject(e));
+    },
     unique: function (arr) {
         let out = [];
         nextInput:

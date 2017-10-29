@@ -8,6 +8,8 @@ module.exports = function (app) {
         .post(getLogin);
     app.route('/api/search_photos')
         .post(getPhotos);
+    app.route('/api/home')
+        .post(getPosts);
 };
 
 function search(req, res) {
@@ -46,5 +48,15 @@ function getPhotos(req, res) {
 
     servicePosts.getPhotos(req.body.noteId)
         .then(photos => res.status(200).json(photos))
+        .catch(e => res.status(400).json(e))
+}
+
+function getPosts(req, res) {
+    if (!req.body) {
+        return res.sendStatus(400);
+    }
+
+    serviceSearch.getPosts()
+        .then(posts => res.status(200).json(posts))
         .catch(e => res.status(400).json(e))
 }

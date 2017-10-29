@@ -2,22 +2,6 @@ import React from 'react';
 import FieldGroup from "./FieldGroup";
 import OnePhoto from "../Cloudinary/OnePhoto";
 import {CLOUDINARY_NAME, CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_UNKNOWN_USER_AVATAR} from "constants/cloudinaryConstants";
-import st from './style.less'
-
-const styles = {
-    form: {
-        marginTop: "80px",
-        width: "180px",
-        height: "220px",
-    },
-    photo: {
-        marginTop: "10px",
-        textAlign: "center"
-    },
-    button: {
-        textAlign: "center"
-    }
-};
 
 class SignUp extends React.Component {
 
@@ -95,13 +79,11 @@ class SignUp extends React.Component {
 
         return (
             <div className="container">
-                <p className={st.hi}
-                   style={st.hi}>hi</p>
                 <div className="row justify-content-center">
                     <div className="col-5">
                         <br></br>
                         <div className="page-header">
-                            <div className=" col-sm-12 col-md-12 ">
+                            <div className="col-sm-12 col-md-12 ">
                                 <h1>Create a new account </h1>
                             </div>
                         </div>
@@ -175,13 +157,13 @@ class SignUp extends React.Component {
                     </div>
                     <div className="col-3">
                         <div className="card border-info mb-3 ">
-                            <form>
-                                <div className="form-group" style={styles.photo}>
+                            <form className="form">
+                                <div className="form-group">
                                     {this.state.public_id === '' ?
                                         <OnePhoto public_id={CLOUDINARY_UNKNOWN_USER_AVATAR}/> :
                                         <OnePhoto public_id={this.state.public_id}/>}
 
-                                    <div className="card-body" style={styles.button}>
+                                    <div className="card-body">
                                         <button type="button"
                                                 onClick={this.handleAddPhoto.bind(this)}
                                                 className="btn btn-primary btn-sm">Add photo

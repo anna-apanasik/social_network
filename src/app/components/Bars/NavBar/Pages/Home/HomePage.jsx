@@ -8,6 +8,10 @@ import SuccessFound from "./Search/SuccessFound";
 
 
 class HomePage extends React.Component {
+    componentWillMount() {
+        console.log('asd');
+        this.props.actionSearch.getPosts();
+    }
     render() {
         const {search} = this.props;
         return (
