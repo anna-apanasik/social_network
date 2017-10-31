@@ -30,7 +30,7 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
-        const {login, name, surname, sex, email, dataOfRegistration, public_id, isOpen, editPost} = this.props;
+        const {login, name, surname, sex, email, dataOfRegistration, public_id, isOpen, editPost, privateAccount} = this.props;
         const {closeModal} = this.props.profileInformationActions;
         return (
             <div>
@@ -43,16 +43,17 @@ class ProfileContainer extends React.Component {
                             sex={sex}
                             email={email}
                             public_id={public_id}
-                            dataOfRegistration={dataOfRegistration}/>
+                            dataOfRegistration={dataOfRegistration}
+                            privateAccount={privateAccount}/>
                     </div>
                     <div className="col ool-md-6 col-sm-6">
                         <ListOfPosts/>
                     </div>
                     <div className="col ool-md-1 col-sm-1">
-                            <button type="button"
-                                    className="btn btn-outline-primary btm-lg"
-                                    onClick={this.openModal.bind(this)}>What's new?
-                            </button>
+                        <button type="button"
+                                className="btn btn-outline-primary btm-lg"
+                                onClick={this.openModal.bind(this)}>What's new?
+                        </button>
 
                     </div>
                 </div>
@@ -78,8 +79,9 @@ function mapStateToProps(state) {
         email: state.reducerProfileInformation.email,
         dataOfRegistration: state.reducerProfileInformation.dataOfRegistration,
         public_id: state.reducerProfileInformation.public_id,
+        privateAccount: state.reducerProfileInformation.privateAccount,
         //  editPost: state.reducerProfileInformation.editPost,
-        isOpen:state.reducerProfileInformation.isOpen
+        isOpen: state.reducerProfileInformation.isOpen
     }
 }
 

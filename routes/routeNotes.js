@@ -15,14 +15,8 @@ function createNewPost(req, res) {
     }
 
     servicePosts.addNewPost(req)
-        .then(() => {
-            res.status(200).json();
-        })
-        .catch(e => {
-            //TODO delete console.log
-            console.log('error in route notes: ' + e);
-            res.status(400).json()
-        })
+        .then(() => res.status(200).json())
+        .catch(e => res.status(400).json())
 
 }
 

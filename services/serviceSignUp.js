@@ -11,7 +11,8 @@ module.exports = {
             login: req.body.login,
             email: req.body.email,
             password: req.body.password,
-            public_id: req.body.public_id
+            public_id: req.body.public_id,
+            privateAccount: req.body.privateAccount
         };
 
         return models.users.findOne({where: {email: data.email}})

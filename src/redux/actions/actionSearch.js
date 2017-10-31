@@ -1,4 +1,11 @@
-import {NOT_FOUND, FOUND_USERS_OR_POSTS, RESET_SEARCH, GET_LOGIN, GET_PHOTOS} from "constants/actionsConstants";
+import {
+    NOT_FOUND,
+    FOUND_USERS_OR_POSTS,
+    RESET_SEARCH,
+    GET_LOGIN,
+    GET_PHOTOS,
+    GET_LATEST_POSTS
+} from "constants/actionsConstants";
 
 const request = require('superagent');
 
@@ -44,6 +51,16 @@ export function getPhotosSearch(photos) {
         })
     }
 }
+
+export function getLatestPosts(posts) {
+    return (dispatch) => {
+        dispatch({
+            type: GET_LATEST_POSTS,
+            payload: posts
+        })
+    }
+}
+
 export function search(search) {
     return (dispatch) => {
         request
@@ -95,7 +112,9 @@ export function getPhotos(noteId) {
             })
             .accept('application/json')
             .withCredentials()
-            .then(res => dispatch(getPhotosSearch(res.body)))
+            .then(res => {
+                dispatch(getPhotosSearch(res.body))
+            })
             .catch(e => {
                 //TODO delete console.log
                 //TODO error in get posts
@@ -111,12 +130,13 @@ export function getPosts() {
             .accept('application/json')
             .withCredentials()
             .then(res => {
+                dispatch(getLatestPosts(res.body))
                 console.log(res)
             })
             .catch(e => {
                 //TODO delete console.log
                 //TODO error in get posts
-                console.log("errors in find posts " + e);
+                console.log("errors in get posts " + e);
             })
     }
 }

@@ -47,13 +47,11 @@ class OneUser extends React.Component {
                     }
                 </div>
                 <div className="col col-md-3 col-sm-3">
-                    <form>
-                        <div className="form-group" style={styles.text}>
-                            <label className="card-title">{this.state.login}</label>
-                            <label className="card-text">Name:&nbsp;{this.state.name}</label>
-                            <label className="card-text">Surname:&nbsp;{this.state.surname}</label>
-                            <label className="card-text">Sex:&nbsp;{this.state.sex}</label>
-                        </div>
+                    <form className="form-group" style={styles.text}>
+                        <p className="card-title">{this.state.login}</p>
+                        <p className="card-text">Name:&nbsp;{this.state.name}</p>
+                        <p className="card-text">Surname:&nbsp;{this.state.surname}</p>
+                        <p className="card-text">Sex:&nbsp;{this.state.sex}</p>
                     </form>
                 </div>
             </div>

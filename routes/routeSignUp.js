@@ -30,7 +30,6 @@ function registration(req, res) {
     if (!req.body) {
         return res.sendStatus(400);
     }
-
     let errors = validationSignUp(req);
 
     if (!errors) {

@@ -15,12 +15,7 @@ module.exports = {
                     })
                 });
             })
-            .catch(e => {
-                //TODO delete console
-                //TODO error in addNewNote
-                console.log("error" + e);
-                return Promise.reject(e)
-            })
+            .catch(e => Promise.reject(e))
     },
 
     deletePost: function (req) {

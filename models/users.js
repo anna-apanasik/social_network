@@ -9,7 +9,8 @@ module.exports = function (sequelize, DataTypes) {
         surname: {type: DataTypes.STRING, field: 'SURNAME'},
         name: {type: DataTypes.STRING, field: 'FIRST_NAME'},
         sex: {type: DataTypes.STRING, field: 'SEX'},
-        public_id: {type: DataTypes.STRING, field: 'PUBLIC_ID'}
+        public_id: {type: DataTypes.STRING, field: 'PUBLIC_ID'},
+        privateAccount: {type: DataTypes.BOOLEAN, field: 'PRIVATE ACCOUNT'}
     }, {
         freezeTableName: true,
         classMethods: {

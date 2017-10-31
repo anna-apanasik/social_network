@@ -14,7 +14,8 @@ class SignUp extends React.Component {
             login: '',
             email: '',
             password: '',
-            public_id: ''
+            public_id: '',
+            isChecked: false
         };
     }
 
@@ -46,6 +47,12 @@ class SignUp extends React.Component {
     handleOnSubmit(e) {
         e.preventDefault();
         this.props.postRequest(this.state)
+    }
+
+    handleOnCheckButton(e) {
+        //  e.preventDefault();
+        //TODO delete preventDefault
+        this.setState({isChecked: !this.state.isChecked});
     }
 
     handleAddPhoto(e) {
@@ -97,10 +104,10 @@ class SignUp extends React.Component {
                             />
 
                             <FieldGroup
-                                label="Surname"
+                                label="Last name"
                                 value={this.state.surname}
                                 onChange={this.handleSurnameChange.bind(this)}
-                                placeholder="Enter your surname"
+                                placeholder="Enter your last name"
                             />
 
                             <div className="col-sm-12 col-md-8">
@@ -156,21 +163,31 @@ class SignUp extends React.Component {
                         </form>
                     </div>
                     <div className="col-3">
-                        <div className="card border-info mb-3 ">
-                            <form className="form">
-                                <div className="form-group">
-                                    {this.state.public_id === '' ?
-                                        <OnePhoto public_id={CLOUDINARY_UNKNOWN_USER_AVATAR}/> :
-                                        <OnePhoto public_id={this.state.public_id}/>}
+                        <div className="photo">
+                            <div className="card border-info mb-3 ">
+                                <form className="form">
+                                    <div className="form-group">
+                                        {this.state.public_id === '' ?
+                                            <OnePhoto public_id={CLOUDINARY_UNKNOWN_USER_AVATAR}/> :
+                                            <OnePhoto public_id={this.state.public_id}/>}
 
-                                    <div className="card-body">
-                                        <button type="button"
-                                                onClick={this.handleAddPhoto.bind(this)}
-                                                className="btn btn-primary btn-sm">Add photo
-                                        </button>
+                                        <div className="card-body">
+                                            <button type="button"
+                                                    onClick={this.handleAddPhoto.bind(this)}
+                                                    className="btn btn-primary btn-sm">Add photo
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
+                            <div className="input-group">
+                            <span className="input-group-addon">
+                                <input type="checkbox" checked={this.state.isChecked}
+                                       onChange={this.handleOnCheckButton.bind(this)}/>
+                            </span>
+                                <label type="text" className="form-control" aria-label="Text input with checkbox">Private
+                                    account</label>
+                            </div>
                         </div>
                     </div>
                     <div className="col-4">
@@ -190,5 +207,6 @@ SignUp.propTypes = {
 export default SignUp;
 
 // {/*<img src={this.state.photo.url} />*/}
-//    <h4 className="card-title">Card title</h4>
+//
+//<h4 className="card-title">Card title</h4>
 //TODO public_id

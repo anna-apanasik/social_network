@@ -30,6 +30,7 @@ export const NOT_FOUND = 'NOT_FOUND';
 export const FOUND_USERS_OR_POSTS = 'FOUND_USERS_OR_POSTS';
 export const RESET_SEARCH = 'RESET_SEARCH';
 export const GET_PHOTOS = 'GET_PHOTOS';
+export const GET_LATEST_POSTS = 'GET_LATEST_POSTS';
 
 
 

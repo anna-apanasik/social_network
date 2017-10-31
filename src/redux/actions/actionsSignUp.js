@@ -19,23 +19,6 @@ export const failureRequest = (error) => (dispatch) => {
     })
 };
 
-// export function openModal() {
-//     return (dispatch) => {
-//         dispatch({
-//             type: OPEN_DROPZONE_MODAL
-//         })
-//     }
-// }
-//
-// export function closeModal() {
-//     return (dispatch) => {
-//         dispatch({
-//             type: CLOSE_DROPZONE_MODAL
-//         })
-//     }
-// }
-
-
 export function postRequest(state) {
     return (dispatch) => {
         request
@@ -47,7 +30,8 @@ export function postRequest(state) {
                 login: state.login,
                 email: state.email,
                 password: state.password,
-                public_id: state.public_id
+                public_id: state.public_id,
+                privateAccount: state.isChecked
             })
             .accept('application/json')
             .withCredentials()

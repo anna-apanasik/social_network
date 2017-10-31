@@ -24,7 +24,7 @@ const styles = {
         textAlign: "center"
     },
     saveButton: {
-        marginTop: "50px",
+        marginTop: "100px",
         marginLeft: "42px"
     }
 
@@ -43,7 +43,8 @@ class ProfileEdit extends React.Component {
             sex: this.props.sex,
             password: this.props.password,
             confirmPassword: this.props.confirmPassword,
-            public_id: this.props.public_id
+            public_id: this.props.public_id,
+            privateAccount: this.props.privateAccount
         }
     }
 
@@ -103,6 +104,10 @@ class ProfileEdit extends React.Component {
 
     }
 
+    handleOnCheckButton(e) {
+        this.setState({privateAccount: !this.state.privateAccount});
+    }
+
     render() {
         const {errorEmail, errorPassword, errorConfirmPassword, success} = this.props;
         if (success) {
@@ -134,8 +139,17 @@ class ProfileEdit extends React.Component {
                                         </button>
                                     </div>
                                 </div>
+                                <div className="input-group">
+                                    <span className="input-group-addon">
+                                     <input type="checkbox" checked={this.state.privateAccount}
+                                            onChange={this.handleOnCheckButton.bind(this)}/>
+                                    </span>
+                                    <label type="text" className="form-control" aria-label="Text input with checkbox">Private
+                                        account</label>
+                                </div>
                             </form>
                         </div>
+
                         <div className=" col-sm-12 col-md-12 " style={styles.saveButton}>
                             <button type="button"
                                     className="btn btn-primary btm-lg"
@@ -153,10 +167,10 @@ class ProfileEdit extends React.Component {
                             />
 
                             <FieldGroup
-                                label="Surname"
+                                label="Last name"
                                 value={this.state.surname}
                                 onChange={this.handleSurnameChange.bind(this)}
-                                placeholder="Enter your surname"
+                                placeholder="Enter your last name"
                             />
 
                             <div className="col-sm-12 col-md-8">
@@ -171,9 +185,11 @@ class ProfileEdit extends React.Component {
                                            value="Male"
                                            type="button"
                                            onClick={this.handleSexChange.bind(this)}/>
+
                                 </div>
                                 <label>Your sex: {this.state.sex}</label>
                             </div>
+
                         </form>
                     </div>
 
@@ -247,7 +263,8 @@ function mapStateToProps(state) {
         errorPassword: state.reducerProfileInformation.errorPassword,
         errorConfirmPassword: state.reducerProfileInformation.errorConfirmPassword,
         success: state.reducerProfileInformation.success,
-        public_id: state.reducerProfileInformation.public_id
+        public_id: state.reducerProfileInformation.public_id,
+        privateAccount: state.reducerProfileInformation.privateAccount
     }
 }
 

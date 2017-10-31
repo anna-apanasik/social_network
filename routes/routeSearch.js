@@ -23,8 +23,16 @@ function search(req, res) {
             return serviceSearch.searchPosts(req);
         })
         .then(posts => {
-            data.posts = posts;
-            res.status(200).json(data);
+            data.posts = [];
+            Promise.all(posts.map(item => {
+                return serviceSearch.getStatusOfAccount(item.userId)
+                    .then(user => {
+                        if (!user.privateAccount) {
+                            data.posts.push(item)
+                        }
+                    })
+            }))
+                .then(() => res.status(200).json(data))
         })
         .catch(e => {
             res.status(400).json(e)
@@ -56,7 +64,21 @@ function getPosts(req, res) {
         return res.sendStatus(400);
     }
 
+    let data = [];
     serviceSearch.getPosts()
-        .then(posts => res.status(200).json(posts))
+        .then(posts => {
+            if (posts.length > 10) {
+                posts = posts.slice(posts.length - 10, posts.length)
+            }
+            Promise.all(posts.map(item => {
+                return serviceSearch.getStatusOfAccount(item.userId)
+                    .then(user => {
+                        if (!user.privateAccount) {
+                            data.push(item)
+                        }
+                    })
+            }))
+                .then(() => res.status(200).json(data))
+        })
         .catch(e => res.status(400).json(e))
 }

@@ -3,14 +3,14 @@ const models = require('../models');
 module.exports = {
     searchUsers: function (req) {
         let users = [];
-        return models.users.findAll({where: {login: req.body.search}})
+        return models.users.findAll({where: {login: req.body.search, privateAccount: 0}})
             .then(foundUsers => {
                 users = users.concat(foundUsers);
-                return models.users.findAll({where: {name: req.body.search}})
+                return models.users.findAll({where: {name: req.body.search, privateAccount: 0}})
             })
             .then(foundUsers => {
                 users = users.concat(foundUsers);
-                return models.users.findAll({where: {surname: req.body.search}});
+                return models.users.findAll({where: {surname: req.body.search, privateAccount: 0}});
             })
             .then(foundUsers => {
                 users = users.concat(foundUsers);
@@ -37,6 +37,13 @@ module.exports = {
             .then(posts => Promise.resolve(posts))
             .catch(e => Promise.reject(e));
     },
+
+    getStatusOfAccount: function (userId) {
+        return models.users.findOne({where: {userId: userId}})
+            .then(user => Promise.resolve(user))
+            .catch(e => Promise.reject(e))
+    },
+
     unique: function (arr) {
         let out = [];
         nextInput:

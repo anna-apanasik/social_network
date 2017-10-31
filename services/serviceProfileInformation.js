@@ -19,19 +19,20 @@ module.exports = {
                 return Promise.reject(e)
             });
     },
-    update: function(updates, login){
+    update: function (updates, login) {
         return models.users.update({
-            login:updates.login,
-            email:updates.email,
-            password:updates.password,
-            surname:updates.surname,
-            name:updates.name,
+            login: updates.login,
+            email: updates.email,
+            password: updates.password,
+            surname: updates.surname,
+            name: updates.name,
             sex: updates.sex,
+            privateAccount: updates.privateAccount,
             public_id: updates.public_id
-        },{
-            where:{login:login}
+        }, {
+            where: {login: login}
         })
-            .then(()=> models.users.findOne({ where:{login:login}}))
-            .catch(e=>Promise.reject(e))
+            .then(() => models.users.findOne({where: {login: login}}))
+            .catch(e => Promise.reject(e))
     }
 };

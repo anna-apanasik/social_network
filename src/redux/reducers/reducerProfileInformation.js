@@ -17,6 +17,7 @@ const initialState = {
     confirmPassword: '',
     dataOfRegistration: '',
     public_id: '',
+    privateAccount: '',
     userId: undefined,
     errorEmail: undefined,
     errorPassword: undefined,
@@ -40,7 +41,8 @@ export default function reducerProfileInformation(state = initialState, action) 
                 confirmPassword: action.payload.password,
                 dataOfRegistration: action.payload.createdAt,
                 public_id: action.payload.public_id,
-                userId: action.payload.userId
+                userId: action.payload.userId,
+                privateAccount: action.payload.privateAccount
             });
 
         case PROFILE_EDIT_SUCCESS:
@@ -51,6 +53,7 @@ export default function reducerProfileInformation(state = initialState, action) 
                 email: action.payload.email,
                 password: action.payload.password,
                 confirmPassword: action.payload.password,
+                privateAccount: action.payload.privateAccount,
                 success: true
             });
 

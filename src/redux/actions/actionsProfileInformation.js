@@ -97,6 +97,7 @@ export function postRequestEditProfile(state) {
                 email: state.email,
                 password: state.password,
                 confirmPassword: state.confirmPassword,
+                privateAccount: state.privateAccount,
                 public_id: state.public_id
             })
             .accept('application/json')

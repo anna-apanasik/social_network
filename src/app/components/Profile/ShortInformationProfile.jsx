@@ -13,7 +13,7 @@ const styles = {
 
 class ShortInformationProfile extends React.Component {
     render() {
-        const {login, name, surname, sex, email, dataOfRegistration, public_id} = this.props;
+        const {login, name, surname, sex, email, dataOfRegistration, public_id, privateAccount} = this.props;
         return (
             <div>
                 <h3>
@@ -32,12 +32,16 @@ class ShortInformationProfile extends React.Component {
                     <li className="list-group-item list-group-item-secondary font-weight-bold">
                         <label>Name: {name}</label></li>
                     <li className="list-group-item list-group-item-secondary font-weight-bold">
-                        <label>Surname: {surname}</label></li>
+                        <label>Last name: {surname}</label></li>
                     <li className="list-group-item list-group-item-secondary font-weight-bold">
                         <label>Sex: {sex}</label>
                     </li>
                     <li className="list-group-item list-group-item-secondary font-weight-bold">
                         <label>Email: {email}</label>
+                    </li>
+                    <li className="list-group-item list-group-item-secondary font-weight-bold">
+                        {privateAccount ? <label>Your account is private</label> :
+                            <label>Your account is public</label>}
                     </li>
                     <li className="list-group-item list-group-item-secondary font-weight-bold">
                         <label>Data of registration: {dataOfRegistration}</label>
@@ -55,7 +59,8 @@ ShortInformationProfile.PropTypes = {
     sex: React.PropTypes.string.isRequired,
     email: React.PropTypes.string.isRequired,
     dataOfRegistration: React.PropTypes.data,
-    public_id: React.PropTypes.string.isRequired
+    public_id: React.PropTypes.string.isRequired,
+    privateAccount: React.PropTypes.boolean
 };
 
 export default ShortInformationProfile;
