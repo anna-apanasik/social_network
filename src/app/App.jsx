@@ -11,6 +11,8 @@ import AboutWall from "./components/Bars/NavBar/Pages/AboutWall";
 import FooterBar from "./components/Bars/FooterBar/FooterBar";
 import AboutUs from "./components/Bars/FooterBar/AboutUs";
 import ContactUs from "./components/Bars/FooterBar/ContactUs";
+import UserProfile from "./components/Profile/UserProfile";
+
 
 const App = () => (
     <div>
@@ -29,6 +31,7 @@ const App = () => (
                 <Route path='/success_sign_up' component={SignUpSuccess}/>
                 <Route path='/profile' component={ProfileContainer}/>
                 <Route path='/profile_edit' component={ProfileEdit}/>
+                <Route path='/:login' component={UserProfile}/>
             </Switch>
         </div>
     </div>

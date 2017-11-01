@@ -1,6 +1,7 @@
 import React from 'react';
 import OnePhoto from "app/components/Cloudinary/OnePhoto";
 import {CLOUDINARY_UNKNOWN_USER_AVATAR} from "constants/cloudinaryConstants";
+import {Link} from 'react-router-dom';
 
 const styles = {
     text: {
@@ -23,7 +24,8 @@ class OneUser extends React.Component {
             name: this.props.name,
             surname: this.props.surname,
             sex: this.props.sex,
-            public_id: this.props.public_id
+            public_id: this.props.public_id,
+            privateAccount: this.props.privateAccount
         }
     }
 
@@ -33,12 +35,14 @@ class OneUser extends React.Component {
             name: nextProps.name,
             surname: nextProps.surname,
             sex: nextProps.sex,
-            public_id: nextProps.public_id
+            public_id: nextProps.public_id,
+            privateAccount: nextProps.privateAccount
         })
 
     }
 
     render() {
+        console.log('user')
         return (<div className="card border-info mb-3">
             <div className="row">
                 <div className="col col-md-3 col-sm-3">
@@ -48,10 +52,11 @@ class OneUser extends React.Component {
                 </div>
                 <div className="col col-md-3 col-sm-3">
                     <form className="form-group" style={styles.text}>
-                        <p className="card-title">{this.state.login}</p>
-                        <p className="card-text">Name:&nbsp;{this.state.name}</p>
-                        <p className="card-text">Surname:&nbsp;{this.state.surname}</p>
-                        <p className="card-text">Sex:&nbsp;{this.state.sex}</p>
+                        <Link to={`${this.state.login}`}><h4 className="card-title">{this.state.login}</h4></Link>
+                        {this.state.privateAccount ? <p className="card-text">This account is private</p> :
+                            <div><p className="card-text">Name:&nbsp;{this.state.name}</p>
+                                <p className="card-text">Surname:&nbsp;{this.state.surname}</p>
+                                <p className="card-text">Sex:&nbsp;{this.state.sex}</p></div>}
                     </form>
                 </div>
             </div>
@@ -65,7 +70,8 @@ OneUser.PropTypes = {
     name: React.PropTypes.string.isRequired,
     surname: React.PropTypes.string.isRequired,
     sex: React.PropTypes.string.isRequired,
-    public_id: React.PropTypes.string.isRequired
+    public_id: React.PropTypes.string.isRequired,
+    privateAccount: React.PropTypes.boolean
 };
 
 export default OneUser;

@@ -6,6 +6,7 @@ import * as profileInformationActions from 'redux/actions/actionsProfileInformat
 import NewPost from "../Posts/NewPost";
 import ListOfPosts from "../Posts/ListOfPosts";
 //import {savePost} from "../../../redux/actions/actionsProfileInformation";
+import {CLOUDINARY_UNKNOWN_USER_AVATAR} from "constants/cloudinaryConstants";
 
 const styles = {
     container: {
@@ -18,10 +19,9 @@ const styles = {
 
 
 class ProfileContainer extends React.Component {
-
     componentWillMount() {
         //   this.props.profileInformationActions.getLogin();
-        this.props.profileInformationActions.getProfileInformation();
+        this.props.profileInformationActions.getProfileInformation(undefined);
     }
 
     openModal(e) {
@@ -42,7 +42,7 @@ class ProfileContainer extends React.Component {
                             surname={surname}
                             sex={sex}
                             email={email}
-                            public_id={public_id}
+                            public_id={public_id || CLOUDINARY_UNKNOWN_USER_AVATAR}
                             dataOfRegistration={dataOfRegistration}
                             privateAccount={privateAccount}/>
                     </div>

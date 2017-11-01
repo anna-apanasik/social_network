@@ -3,14 +3,14 @@ const models = require('../models');
 module.exports = {
     searchUsers: function (req) {
         let users = [];
-        return models.users.findAll({where: {login: req.body.search, privateAccount: 0}})
+        return models.users.findAll({where: {login: req.body.search}})
             .then(foundUsers => {
                 users = users.concat(foundUsers);
-                return models.users.findAll({where: {name: req.body.search, privateAccount: 0}})
+                return models.users.findAll({where: {name: req.body.search}})
             })
             .then(foundUsers => {
                 users = users.concat(foundUsers);
-                return models.users.findAll({where: {surname: req.body.search, privateAccount: 0}});
+                return models.users.findAll({where: {surname: req.body.search}});
             })
             .then(foundUsers => {
                 users = users.concat(foundUsers);

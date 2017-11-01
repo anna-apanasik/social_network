@@ -22,7 +22,8 @@ class SuccessFound extends React.Component {
                      public_id={item.public_id}
                      name={item.name}
                      surname={item.surname}
-                     sex={item.sex}/>
+                     sex={item.sex}
+                     privateAccount={item.privateAccount}/>
         </li>);
 
         listPosts = posts.map(item => <li style={styles.li}>

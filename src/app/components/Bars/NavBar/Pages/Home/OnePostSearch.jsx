@@ -35,14 +35,6 @@ class OnePostSearch extends React.Component {
 
     //componentWillMount() {
 
-    // console.log( this.props.userId+' '+this.state.userId)
-    //   console.log('componentWillMount for ' + this.state.noteId)
-    // console.log(this.props.photos)
-    // this.setState({
-    //     noteId: this.props.noteId,
-    //     userId: this.props.userId
-    // })
-
     // this.props.actionSearch.getLogin(this.state.userId);
     // this.props.actionSearch.getPhotos(this.state.noteId);
 

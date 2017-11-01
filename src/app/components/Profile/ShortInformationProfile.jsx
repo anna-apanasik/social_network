@@ -1,32 +1,26 @@
+import './style.less'
 import React from 'react';
 import {Link} from 'react-router-dom';
 import ProFilePhoto from "../Cloudinary/OnePhoto";
 
-const styles = {
-    buttonEdit: {
-        marginLeft: "15px"
-    },
-    li: {
-        textAlign: "center"
-    }
-};
-
 class ShortInformationProfile extends React.Component {
     render() {
-        const {login, name, surname, sex, email, dataOfRegistration, public_id, privateAccount} = this.props;
+        const {login, name, surname, sex, email, dataOfRegistration, privateAccount, public_id} = this.props;
+        const {userPage} = this.props || false;
         return (
-            <div>
+            <div className="ShortInformationProfile">
                 <h3>
                     {login}
-                    <Link to='/profile_edit'>
-                        <button className="btn badge badge-secondary" style={styles.buttonEdit}>
+                    {userPage ? null : <Link to='/profile_edit'>
+                        <button className="btn badge badge-secondary">
                             Edit
                         </button>
-                    </Link>
+                    </Link>}
+
                 </h3>
 
                 <ul className="list-group">
-                    <li className="list-group-item list-group-item-secondary font-weight-bold" style={styles.li}>
+                    <li className="profile-photo list-group-item list-group-item-secondary font-weight-bold">
                         <ProFilePhoto public_id={public_id}/>
                     </li>
                     <li className="list-group-item list-group-item-secondary font-weight-bold">
@@ -36,13 +30,16 @@ class ShortInformationProfile extends React.Component {
                     <li className="list-group-item list-group-item-secondary font-weight-bold">
                         <label>Sex: {sex}</label>
                     </li>
-                    <li className="list-group-item list-group-item-secondary font-weight-bold">
+                    {userPage ? null : <li className="list-group-item list-group-item-secondary font-weight-bold">
                         <label>Email: {email}</label>
-                    </li>
-                    <li className="list-group-item list-group-item-secondary font-weight-bold">
-                        {privateAccount ? <label>Your account is private</label> :
-                            <label>Your account is public</label>}
-                    </li>
+                    </li>}
+                    {userPage ?
+                        <li className="list-group-item list-group-item-secondary font-weight-bold"><label>This account
+                            is public</label></li> :
+                        <li className="list-group-item list-group-item-secondary font-weight-bold">
+                            {privateAccount ? <label>Your account is private</label> :
+                                <label>Your account is public</label>}
+                        </li>}
                     <li className="list-group-item list-group-item-secondary font-weight-bold">
                         <label>Data of registration: {dataOfRegistration}</label>
                     </li>
@@ -60,8 +57,8 @@ ShortInformationProfile.PropTypes = {
     email: React.PropTypes.string.isRequired,
     dataOfRegistration: React.PropTypes.data,
     public_id: React.PropTypes.string.isRequired,
-    privateAccount: React.PropTypes.boolean
+    privateAccount: React.PropTypes.boolean,
+    userPage: React.PropTypes.boolean
 };
 
 export default ShortInformationProfile;
-//style={styles.h3}

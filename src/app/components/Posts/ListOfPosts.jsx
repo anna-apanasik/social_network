@@ -12,7 +12,9 @@ const styles = {
 
 class ListOfPosts extends React.Component {
     render() {
+        //TODO in special function this code
         const {listOfPosts, photos, createPost, deletePost} = this.props;
+        const {userPage} = this.props || false;
         let list;
         if (createPost || deletePost) {
             this.props.postActions.getPosts();
@@ -20,6 +22,7 @@ class ListOfPosts extends React.Component {
         list = listOfPosts.map((item) =>
             <li style={styles.li}>
                 <OnePost noteId={item.noteId}
+                         userPage={userPage}
                          title={item.title}
                          text={item.text}
                          photos={photos.map(elem => {
@@ -34,6 +37,9 @@ class ListOfPosts extends React.Component {
     }
 }
 
+ListOfPosts.PropTypes = {
+    userPage: React.PropTypes.boolean
+};
 function mapStateToProps(state) {
     return {
         listOfPosts: state.reducerPost.listOfPosts,

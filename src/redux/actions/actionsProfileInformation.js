@@ -65,12 +65,12 @@ export function closeModal() {
     }
 }
 
-export function getProfileInformation() {
+export function getProfileInformation(login) {
     return (dispatch, getState) => {
         request
             .post('api/profile')
             .send({
-                login: getState().reducerSignIn.login
+                login: login === undefined ? getState().reducerSignIn.login : login
             })
             .accept('application/json')
             .withCredentials()
