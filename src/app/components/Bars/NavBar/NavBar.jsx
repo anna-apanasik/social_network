@@ -27,6 +27,10 @@ class NavBar extends React.Component {
         this.setState({search: e.target.value});
     }
 
+    handleClickHome(e) {
+        this.props.actionSearch.resetSearch();
+    }
+
     handleClickSearch(e) {
         e.preventDefault();
         if (this.state.search === '') {
@@ -50,8 +54,9 @@ class NavBar extends React.Component {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item active">
-                            <Link to='/home'> <a className="nav-link"> Home <span
-                                className="sr-only">(current)</span></a></Link>
+                            <Link to='/home'> <a className="nav-link" onClick={this.handleClickHome.bind(this)}> Home
+                                <span
+                                    className="sr-only">(current)</span></a></Link>
                         </li>
                         <li className="nav-item">
                             <Link to='/'><a className="nav-link"> About Wall </a></Link>

@@ -4,10 +4,6 @@ const servicePosts = require('../services/serviceNotes');
 module.exports = function (app) {
     app.route('/api/search')
         .post(search);
-    app.route('/api/search_login')
-        .post(getLogin);
-    app.route('/api/search_photos')
-        .post(getPhotos);
     app.route('/api/home')
         .post(getPosts);
 };
@@ -24,6 +20,8 @@ function search(req, res) {
         })
         .then(posts => {
             data.posts = [];
+            data.photos = [];
+            data.usersForPosts = [];
             Promise.all(posts.map(item => {
                 return serviceSearch.getStatusOfAccount(item.userId)
                     .then(user => {
@@ -32,30 +30,27 @@ function search(req, res) {
                         }
                     })
             }))
-                .then(() => res.status(200).json(data))
+                .then(() => {
+                    Promise.all(data.posts.map(item => {
+                        return servicePosts.getPhotos(item.noteId)
+                            .then(photos => {
+                                data.photos = data.photos.concat(photos);
+                            })
+                    }))
+                        .then(() => {
+                            Promise.all(data.posts.map(item => {
+                                return serviceSearch.getLogin(item.userId)
+                                    .then(user => {
+                                        data.usersForPosts = data.usersForPosts.concat(user);
+                                    })
+                            }))
+                                .then(() => {
+                                    data.usersForPosts = serviceSearch.unique(data.usersForPosts);
+                                    res.status(200).json(data)
+                                })
+                        })
+                })
         })
-        .catch(e => {
-            res.status(400).json(e)
-        })
-}
-
-function getLogin(req, res) {
-    if (!req.body) {
-        return res.sendStatus(400);
-    }
-
-    serviceSearch.getLogin(req)
-        .then(user => res.status(200).json(user.login))
-        .catch(e => res.status(400).json(e))
-}
-
-function getPhotos(req, res) {
-    if (!req.body) {
-        return res.sendStatus(400);
-    }
-
-    servicePosts.getPhotos(req.body.noteId)
-        .then(photos => res.status(200).json(photos))
         .catch(e => res.status(400).json(e))
 }
 
@@ -63,22 +58,43 @@ function getPosts(req, res) {
     if (!req.body) {
         return res.sendStatus(400);
     }
-
-    let data = [];
+    let data = {};
+    data.posts = [];
+    data.photos = [];
+    data.usersForPosts = [];
     serviceSearch.getPosts()
         .then(posts => {
-            if (posts.length > 10) {
-                posts = posts.slice(posts.length - 10, posts.length)
-            }
             Promise.all(posts.map(item => {
                 return serviceSearch.getStatusOfAccount(item.userId)
                     .then(user => {
                         if (!user.privateAccount) {
-                            data.push(item)
+                            data.posts.push(item)
                         }
                     })
             }))
-                .then(() => res.status(200).json(data))
+                .then(() => {
+                    if (data.posts.length > 5) {
+                        data.posts = data.posts.slice(data.posts.length - 5, data.posts.length)
+                    }
+                    Promise.all(data.posts.map(item => {
+                        return servicePosts.getPhotos(item.noteId)
+                            .then(photos => {
+                                data.photos = data.photos.concat(photos);
+                            })
+                    }))
+                        .then(() => {
+                            Promise.all(data.posts.map(item => {
+                                return serviceSearch.getLogin(item.userId)
+                                    .then(user => {
+                                        data.usersForPosts = data.usersForPosts.concat(user);
+                                    })
+                            }))
+                                .then(() => {
+                                    data.usersForPosts = serviceSearch.unique(data.usersForPosts);
+                                    res.status(200).json(data)
+                                })
+                        })
+                })
         })
         .catch(e => res.status(400).json(e))
 }

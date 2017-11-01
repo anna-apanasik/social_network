@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actionSearch from 'redux/actions/actionSearch';
 import OneUser from "../OneUser";
-import OnePostSearch from "../OnePostSearch";
+import OnePost from "app/components/Posts/OnePost"
 
 const styles = {
     li: {
@@ -11,13 +11,10 @@ const styles = {
     }
 };
 
-
+//TODO style for li (maybe in all app this style?)
 class SuccessFound extends React.Component {
-    render() {
-        const {users, posts} = this.props;
-        let listUsers, listPosts;
-
-        listUsers = users.map(item => <li style={styles.li}>
+    getLisOfUsers() {
+        return this.props.users.map(item => <li style={styles.li}>
             <OneUser login={item.login}
                      public_id={item.public_id}
                      name={item.name}
@@ -25,25 +22,42 @@ class SuccessFound extends React.Component {
                      sex={item.sex}
                      privateAccount={item.privateAccount}/>
         </li>);
+    }
 
-        listPosts = posts.map(item => <li style={styles.li}>
-            <OnePostSearch userId={item.userId}
-                           noteId={item.noteId}
-                           title={item.title}
-                           text={item.text}/>
+    getListOfPosts() {
+        return this.props.posts.map(item => <li style={styles.li}>
+            <OnePost noteId={item.noteId}
+                     userPage={true}
+                     homePage={true}
+                     title={item.title}
+                     text={item.text}
+                     photos={this.props.photos.map(elem => {
+                         if (elem.noteId === item.noteId) {
+                             return elem;
+                         }
+                     })}
+                     login={this.props.usersForPosts.filter(elem => {
+                         if (elem.userId === item.userId) {
+                             return true;
+                         }
+                     })[0].login}/>
         </li>);
+    }
+
+    render() {
         return (<div>
-            <div>{listUsers}</div>
-            <div>{listPosts}</div>
+            <div>{this.getLisOfUsers()}</div>
+            <div>{this.getListOfPosts()}</div>
         </div>)
     }
 }
 
-//TODO for each post author and link
 function mapStateToProps(state) {
     return {
         users: state.reducerSearch.users,
-        posts: state.reducerSearch.posts
+        posts: state.reducerSearch.posts,
+        photos: state.reducerSearch.photos,
+        usersForPosts: state.reducerSearch.usersForPosts
     }
 }
 
@@ -54,5 +68,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SuccessFound);
-
-//    <div>{listPosts}</div>

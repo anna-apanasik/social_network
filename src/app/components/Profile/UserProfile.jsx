@@ -13,7 +13,6 @@ class UserProfile extends React.Component {
         this.state = {
             login: this.props.match.params.login
         };
-        console.log(this.props)
     }
 
     componentWillMount() {

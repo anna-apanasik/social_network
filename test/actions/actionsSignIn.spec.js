@@ -27,4 +27,17 @@ describe('action Sign In', () => {
         expect(callArgs.payload).toBe(error);
     });
 
+    it('should return type dispatch and request ', function () {
+        let state = {
+            login: 'user',
+            password: 'user'
+        };
+        this.postSpy = jasmine.createSpy('post');
+
+        actions.postRequest(state)(this.dispatchSpy)
+        let callArgs = this.dispatchSpy.calls.first().args[0]
+
+        expect(callArgs).toEqual('request')
+
+    });
 });

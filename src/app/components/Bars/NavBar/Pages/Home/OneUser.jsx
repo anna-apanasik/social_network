@@ -42,12 +42,11 @@ class OneUser extends React.Component {
     }
 
     render() {
-        console.log('user')
         return (<div className="card border-info mb-3">
             <div className="row">
                 <div className="col col-md-3 col-sm-3">
                     {this.state.public_id ? <OnePhoto public_id={this.state.public_id} width={'100'} height={'100'}/> :
-                        <OnePhoto public_id={CLOUDINARY_UNKNOWN_USER_AVATAR} width={'100'} height={'1-0'}/>
+                        <OnePhoto public_id={CLOUDINARY_UNKNOWN_USER_AVATAR} width={'100'} height={'100'}/>
                     }
                 </div>
                 <div className="col col-md-3 col-sm-3">

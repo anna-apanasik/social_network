@@ -26,8 +26,8 @@ module.exports = {
             .catch(e => Promise.reject(e));
     },
 
-    getLogin: function (req) {
-        return models.users.findOne({where: {userId: req.body.userId}})
+    getLogin: function (userId) {
+        return models.users.findOne({where: {userId: userId}})
             .then(user => Promise.resolve(user))
             .catch(e => Promise.reject(e));
     },
