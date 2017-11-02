@@ -3,9 +3,7 @@ import {
     SIGN_IN_FAILURE,
 } from "constants/actionsConstants";
 import functions from './functionsForActions'
-
-
-const request = require('superagent');
+import * as request from 'superagent';
 
 export const successRequest = (login) => (dispatch) => {
     dispatch({
@@ -36,7 +34,7 @@ export function postRequest(state) {
             })
             .catch(err => {
                 dispatch(failureRequest(parseErrors(err)))
-            })
+            });
     }
 }
 

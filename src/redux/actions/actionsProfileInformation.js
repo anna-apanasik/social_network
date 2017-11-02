@@ -9,9 +9,10 @@ import {
 } from "constants/actionsConstants";
 import functions from './functionsForActions';
 import {getPosts} from "./actionsPost";
+import * as request from 'superagent';
 
 //TODO check all actions: don't need functions
-const request = require('superagent');
+
 
 export const receiveInformation = (information) => (dispatch) => {
     dispatch({

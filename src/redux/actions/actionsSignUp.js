@@ -1,12 +1,9 @@
 import {
     SIGN_UP_SUCCESS,
-    SIGN_UP_FAILURE,
-    // OPEN_DROPZONE_MODAL,
-    // CLOSE_DROPZONE_MODAL
+    SIGN_UP_FAILURE
 } from 'constants/actionsConstants';
 import functions from './functionsForActions'
-
-const request = require('superagent');
+import * as request from 'superagent';
 
 export const successRequest = () => (dispatch) => {
     dispatch({type: SIGN_UP_SUCCESS})
@@ -73,14 +70,3 @@ function parseErrors(errors) {
 
     return sendError;
 }
-
-// export function getProfilePhoto(data) {
-//     request
-//         .get('http://res.cloudinary.com/anyablischik/image/upload/v1508112566/sample.jpg')
-//         .then(res => {
-//             console.log("get profile photo"+res.data.resources);
-//         })
-//         .catch(e => {
-//             console.log(e)
-//         })
-// }

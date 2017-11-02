@@ -4,8 +4,7 @@ import {
     RESET_SEARCH,
     GET_LATEST_POSTS
 } from "constants/actionsConstants";
-
-const request = require('superagent');
+import * as request from 'superagent';
 
 export function notFound() {
     return (dispatch) => {

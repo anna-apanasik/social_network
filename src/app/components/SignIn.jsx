@@ -41,7 +41,7 @@ class SignIn extends React.Component {
     render() {
         const {errorLogin, errorPassword, success} = this.props;
         if (success) {
-            return ( <Redirect from="/login" to="/"/>)
+            return ( <Redirect from="/sign_in" to="/profile"/>)
         } else
             return (
                 <div className="row justify-content-center">
@@ -98,8 +98,5 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
-
-
-/*<img className="card-img-top"  alt="Card image cap"/>*/
 
 

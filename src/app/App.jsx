@@ -1,5 +1,6 @@
 import React from 'react';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, Redirect, withRouter} from 'react-router-dom';
+import {connect} from 'react-redux'
 import HomePage from "./components/Bars/NavBar/Pages/Home/HomePage";
 import NavBar from "./components/Bars/NavBar/NavBar";
 import SignUpContainer from "./components/SignUp/SignUpContainer";
@@ -14,7 +15,7 @@ import ContactUs from "./components/Bars/FooterBar/ContactUs";
 import UserProfile from "./components/Profile/UserProfile";
 
 
-const App = () => (
+const App = (props) => (
     <div>
         <header>
             <FooterBar/>
@@ -28,13 +29,29 @@ const App = () => (
                 <Route path='/contact_us' component={ContactUs}/>
                 <Route path='/sign_in' component={SignIn}/>
                 <Route path='/sign_up' component={SignUpContainer}/>
-                <Route path='/success_sign_up' component={SignUpSuccess}/>
-                <Route path='/profile' component={ProfileContainer}/>
-                <Route path='/profile_edit' component={ProfileEdit}/>
+                <PrivateRoute path="/success_sign_up" component={SignUpSuccess} login={props.success}/>
+                <PrivateRoute path="/profile" component={ProfileContainer} login={props.login}/>
+                <PrivateRoute path="/profile_edit" component={ProfileEdit} login={props.login}/>
                 <Route path='/:login' component={UserProfile}/>
             </Switch>
         </div>
     </div>
 );
 
-export default App;
+const PrivateRoute = ({component: Component, login, ...rest}) => (
+    <Route
+        {...rest}
+        render={props => (
+            login ? (<Component {...props} />) : (<Redirect to={{pathname: '/'}}/>)
+        )}
+    />
+);
+
+function mapStateToProps(state) {
+    return {
+        login: state.reducerSignIn.login,
+        success: state.reducerSignUp.success
+    }
+}
+
+export default withRouter(connect(mapStateToProps)(App));

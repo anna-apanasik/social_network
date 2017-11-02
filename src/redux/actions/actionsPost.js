@@ -1,6 +1,6 @@
 import {GET_LIST_OF_POSTS, CREATE_POST, DELETE_POST} from "constants/actionsConstants"
 //TODO some problems with delete one post
-const request = require('superagent');
+import * as request from 'superagent';
 
 export function addPost() {
     return (dispatch) => {
