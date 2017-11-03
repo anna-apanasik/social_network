@@ -91,6 +91,7 @@ function getPosts(req, res) {
                             }))
                                 .then(() => {
                                     data.usersForPosts = serviceSearch.unique(data.usersForPosts);
+                                    data.posts.reverse();
                                     res.status(200).json(data)
                                 })
                         })

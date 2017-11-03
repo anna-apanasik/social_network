@@ -1,19 +1,14 @@
+import './stylesForPosts.less'
 import React from 'react';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as postActions from 'redux/actions/actionsPost'
 import OnePost from "./OnePost";
 
-const styles = {
-    li: {
-        listStyleType: 'none'
-    }
-};
-
 class ListOfPosts extends React.Component {
     getListOfPosts() {
         return this.props.listOfPosts.map((item) =>
-            <li style={styles.li}>
+            <li className="ListOfPosts">
                 <OnePost noteId={item.noteId}
                          userPage={this.props.userPage || false}
                          title={item.title}

@@ -1,4 +1,4 @@
-import './style.less'
+import './stylesForProfile.less'
 import React from 'react';
 import ShortInformationProfile from "./ShortInformationProfile";
 import {connect} from 'react-redux'

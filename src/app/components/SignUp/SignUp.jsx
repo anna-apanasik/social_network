@@ -1,3 +1,4 @@
+import './styleForSignUp.less'
 import React from 'react';
 import FieldGroup from "./FieldGroup";
 import OnePhoto from "../Cloudinary/OnePhoto";
@@ -49,9 +50,7 @@ class SignUp extends React.Component {
         this.props.postRequest(this.state)
     }
 
-    handleOnCheckButton(e) {
-        //  e.preventDefault();
-        //TODO delete preventDefault
+    handleOnCheckButton() {
         this.setState({isChecked: !this.state.isChecked});
     }
 
@@ -85,10 +84,10 @@ class SignUp extends React.Component {
         const {errorLogin, errorEmail, errorPassword} = this.props;
 
         return (
-            <div className="container">
+            <div className="SignUp container">
                 <div className="row justify-content-center">
                     <div className="col-5">
-                        <br></br>
+                        <br/>
                         <div className="page-header">
                             <div className="col-sm-12 col-md-12 ">
                                 <h1>Create a new account </h1>
@@ -100,15 +99,13 @@ class SignUp extends React.Component {
                                 label="First name"
                                 value={this.state.name}
                                 onChange={this.handleNameChange.bind(this)}
-                                placeholder="Enter your first name"
-                            />
+                                placeholder="Enter your first name"/>
 
                             <FieldGroup
                                 label="Last name"
                                 value={this.state.surname}
                                 onChange={this.handleSurnameChange.bind(this)}
-                                placeholder="Enter your last name"
-                            />
+                                placeholder="Enter your last name"/>
 
                             <div className="col-sm-12 col-md-8">
                                 <div className="btn-group"
@@ -124,7 +121,7 @@ class SignUp extends React.Component {
                                 </div>
                             </div>
 
-                            <br></br>
+                            <br/>
 
                             <FieldGroup
                                 label="Login"

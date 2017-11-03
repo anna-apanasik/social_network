@@ -1,3 +1,4 @@
+import './stylesForProfile.less'
 import React from 'react';
 import {connect} from 'react-redux'
 import FieldGroup from '../SignUp/FieldGroup'
@@ -7,31 +8,6 @@ import * as profileInformationActions from 'redux/actions/actionsProfileInformat
 import OnePhoto from "../Cloudinary/OnePhoto";
 import {CLOUDINARY_NAME, CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_UNKNOWN_USER_AVATAR} from 'constants/cloudinaryConstants'
 
-const styles = {
-    header: {
-        marginTop: "10px"
-    },
-    form: {
-        marginTop: "10px",
-        width: "180px",
-        height: "220px",
-    },
-    photo: {
-        marginTop: "10px",
-        textAlign: "center"
-    },
-    button: {
-        textAlign: "center"
-    },
-    saveButton: {
-        marginTop: "100px",
-        marginLeft: "42px"
-    }
-
-};
-
-//TODO have the same styles for this and sign up
-//TODO  edit form, propblems with color of text for password
 class ProfileEdit extends React.Component {
     constructor(props) {
         super(props);
@@ -104,7 +80,7 @@ class ProfileEdit extends React.Component {
 
     }
 
-    handleOnCheckButton(e) {
+    handleOnCheckButton() {
         this.setState({privateAccount: !this.state.privateAccount});
     }
 
@@ -115,135 +91,129 @@ class ProfileEdit extends React.Component {
             return ( <Redirect to="/profile"/>)
         }
         return (
-
-            <div className="container">
-                <div className="page-header" style={styles.header}>
+            <div className="ProfileEdit container">
+                <div className="page-header">
                     <div className=" col-sm-12 col-md-12 ">
                         <h1>Edit profile</h1>
                     </div>
                 </div>
-                <br></br>
-                <div className="row justify-content-center">
-                    <div className="col-3">
-                        <div className="card border-info mb-3" style={styles.form}>
+                <br/>
+                <div className="card border-info mb-3">
+                    <div className="row justify-content-center">
+                        <div className="col-3">
                             <form>
-                                <div className="form-group" style={styles.photo}>
+                                <div className="photo form-group">
                                     {this.state.public_id === '' ?
                                         <OnePhoto public_id={CLOUDINARY_UNKNOWN_USER_AVATAR}/> :
                                         <OnePhoto public_id={this.state.public_id}/>}
 
-                                    <div className="card-body" style={styles.button}>
+                                    <div className="card-body">
                                         <button type="button"
                                                 onClick={this.handleEditPhoto.bind(this)}
                                                 className="btn btn-primary btn-sm">Edit photo
                                         </button>
                                     </div>
                                 </div>
-                                <div className="input-group">
+
+                                <div className="PrivateAccount input-group">
                                     <span className="input-group-addon">
                                      <input type="checkbox" checked={this.state.privateAccount}
                                             onChange={this.handleOnCheckButton.bind(this)}/>
                                     </span>
-                                    <label type="text" className="form-control" aria-label="Text input with checkbox">Private
+                                    <label type="text" className="form-control"
+                                           aria-label="Text input with checkbox">Private
                                         account</label>
                                 </div>
                             </form>
                         </div>
 
-                        <div className=" col-sm-12 col-md-12 " style={styles.saveButton}>
-                            <button type="button"
-                                    className="btn btn-primary btm-lg"
-                                    onClick={this.handleOnSubmit.bind(this)}>Save
-                            </button>
+                        <div className="col-3">
+                            <form>
+                                <FieldGroup
+                                    label="First name"
+                                    value={this.state.name}
+                                    onChange={this.handleNameChange.bind(this)}
+                                    placeholder="Enter your first name"/>
+
+                                <FieldGroup
+                                    label="Last name"
+                                    value={this.state.surname}
+                                    onChange={this.handleSurnameChange.bind(this)}
+                                    placeholder="Enter your last name"/>
+
+                                <div className="col-sm-12 col-md-8">
+                                    <div className="btn-group"
+                                         role="group">
+                                        <input className="btn btn-secondary  btn-sm "
+                                               value="Female"
+                                               type="button"
+                                               onClick={this.handleSexChange.bind(this)}/>
+
+                                        <input className="btn btn-secondary  btn-sm"
+                                               value="Male"
+                                               type="button"
+                                               onClick={this.handleSexChange.bind(this)}/>
+                                    </div>
+                                    <label className="Sex">Your sex: {this.state.sex}</label>
+                                </div>
+                            </form>
+                        </div>
+
+                        <br/>
+
+                        <div className="col-3">
+                            <form>
+                                <div className="form-group">
+                                    <div className="col-sm-12 col-md-12">
+                                        <label>Login</label>
+                                        <form className="form-inline">
+                                            <input type="text"
+                                                   readOnly className="form-control form-control-sm"
+                                                   value={this.state.login}/>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <FieldGroup
+                                    label="Email address"
+                                    value={this.state.email}
+                                    onChange={this.handleEmailChange.bind(this)}
+                                    placeholder="Enter email"
+                                    requiredParam={true}
+                                    errors={errorEmail}
+                                    help={"We'll never share your email with anyone else."}/>
+                            </form>
+                        </div>
+
+                        <div className="col-3">
+                            <form>
+                                <FieldGroup
+                                    label="Password"
+                                    type="password"
+                                    value={this.state.password}
+                                    onChange={this.handlePasswordChange.bind(this)}
+                                    placeholder="Password"
+                                    requiredParam={true}
+                                    errors={errorPassword}/>
+
+                                <FieldGroup
+                                    label="Confirm password"
+                                    type="password"
+                                    value={this.state.confirmPassword}
+                                    onChange={this.handleConfirmPasswordChange.bind(this)}
+                                    placeholder="Confirm password"
+                                    requiredParam={true}
+                                    errors={errorConfirmPassword}
+                                    help={"Enter a combination of a least six numbers,\n" + "letter and punctuation marks (like ! and &)."}/>
+                            </form>
                         </div>
                     </div>
-                    <div className="col-3">
-                        <form>
-                            <FieldGroup
-                                label="First name"
-                                value={this.state.name}
-                                onChange={this.handleNameChange.bind(this)}
-                                placeholder="Enter your first name"
-                            />
-
-                            <FieldGroup
-                                label="Last name"
-                                value={this.state.surname}
-                                onChange={this.handleSurnameChange.bind(this)}
-                                placeholder="Enter your last name"
-                            />
-
-                            <div className="col-sm-12 col-md-8">
-                                <div className="btn-group"
-                                     role="group">
-                                    <input className="btn btn-secondary  btn-sm "
-                                           value="Female"
-                                           type="button"
-                                           onClick={this.handleSexChange.bind(this)}/>
-
-                                    <input className="btn btn-secondary  btn-sm"
-                                           value="Male"
-                                           type="button"
-                                           onClick={this.handleSexChange.bind(this)}/>
-
-                                </div>
-                                <label>Your sex: {this.state.sex}</label>
-                            </div>
-
-                        </form>
-                    </div>
-
-                    <br></br>
-
-                    <div className="col-3">
-                        <form>
-                            <div className="form-group">
-                                <div className="col-sm-12 col-md-12">
-                                    <label>Login</label>
-                                    <form className="form-inline">
-                                        <input type="text"
-                                               readOnly className="form-control form-control-sm"
-                                               value={this.state.login}/>
-                                    </form>
-                                </div>
-                            </div>
-
-                            <FieldGroup
-                                label="Email address"
-                                value={this.state.email}
-                                onChange={this.handleEmailChange.bind(this)}
-                                placeholder="Enter email"
-                                requiredParam={true}
-                                errors={errorEmail}
-                                help={"We'll never share your email with anyone else."}
-                            />
-                        </form>
-                    </div>
-                    <div className="col-3">
-                        <form>
-                            <FieldGroup
-                                label="Password"
-                                type="password"
-                                value={this.state.password}
-                                onChange={this.handlePasswordChange.bind(this)}
-                                placeholder="Password"
-                                requiredParam={true}
-                                errors={errorPassword}
-                            />
-
-                            <FieldGroup
-                                label="Confirm password"
-                                type="password"
-                                value={this.state.confirmPassword}
-                                onChange={this.handleConfirmPasswordChange.bind(this)}
-                                placeholder="Confirm password"
-                                requiredParam={true}
-                                errors={errorConfirmPassword}
-                                help={"Enter a combination of a least six numbers,\n" + "letter and punctuation marks (like ! and &)."}
-                            />
-                        </form>
-                    </div>
-
+                </div>
+                <div className="SaveButton col-sm-12 col-md-12 ">
+                    <button type="button"
+                            className="btn btn-primary btm-lg"
+                            onClick={this.handleOnSubmit.bind(this)}>Save
+                    </button>
                 </div>
             </div>
         )

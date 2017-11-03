@@ -1,17 +1,12 @@
+import './stylesForButtons.less'
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Redirect} from 'react-router'
 
-const styles = {
-    container: {
-        marginRight: "80px"
-    }
-};
-
 class AuthorizedUser extends React.Component {
     render() {
         return (
-            <div className="btn-group" style={styles.container}>
+            <div className="AuthorizedUser btn-group">
                 <button type="button" className="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                     User

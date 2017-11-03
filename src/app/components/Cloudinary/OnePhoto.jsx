@@ -1,12 +1,7 @@
+import './stylesForPhotos.less'
 import React from 'react';
 import {CloudinaryContext, Transformation, Image} from 'cloudinary-react';
 import {CLOUDINARY_NAME, CLOUDINARY_UPLOAD_URL} from "constants/cloudinaryConstants";
-
-const styles = {
-    photos: {
-        margin: "5px"
-    }
-};
 
 class OnePhoto extends React.Component {
     constructor(props) {
@@ -17,7 +12,7 @@ class OnePhoto extends React.Component {
         const {public_id, width, height, description} = this.props;
         return (
             <CloudinaryContext cloudName={CLOUDINARY_NAME}>
-                <div className="img" style={styles.photos}>
+                <div className="Photo img">
                     <a target="_blank"
                        href={CLOUDINARY_UPLOAD_URL + public_id + '.jpg'}>
                         <Image publicId={public_id}>
@@ -26,8 +21,7 @@ class OnePhoto extends React.Component {
                                 width={width || "150"}
                                 height={height || "150"}
                                 dpr="auto"
-                                responsive_placeholder="blank"
-                            />
+                                responsive_placeholder="blank"/>
                         </Image>
                         <label>{description}</label>
                     </a>

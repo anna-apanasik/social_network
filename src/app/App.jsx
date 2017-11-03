@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import HomePage from "./components/Bars/NavBar/Pages/Home/HomePage";
 import NavBar from "./components/Bars/NavBar/NavBar";
 import SignUpContainer from "./components/SignUp/SignUpContainer";
-import SignIn from "./components/SignIn";
+import SignIn from "./components/SignIn/SignIn";
 import SignUpSuccess from "./components/SignUp/SignUpSuccess";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import ProfileEdit from "./components/Profile/ProfileEdit";

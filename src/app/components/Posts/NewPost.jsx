@@ -1,3 +1,4 @@
+import './stylesForPosts.less'
 import React from 'react';
 import {
     Modal,
@@ -12,12 +13,6 @@ import {bindActionCreators} from 'redux'
 import * as actionsPost from 'redux/actions/actionsPost'
 import {CLOUDINARY_NAME, CLOUDINARY_UPLOAD_PRESET} from 'constants/cloudinaryConstants'
 import ManyPhotos from "../Cloudinary/ManyPhotos";
-
-const styles = {
-    photos: {
-        marginTop: "10px"
-    }
-};
 
 class NewNote extends React.Component {
     constructor(props) {
@@ -112,7 +107,7 @@ class NewNote extends React.Component {
                                 onClick={this.handleAddPhoto.bind(this)}
                                 className="btn btn-primary btn-sm">Add photos
                         </button>
-                        <div style={styles.photos}>
+                        <div className="NewPostPhoto">
                             {this.state.photos === '' ? null : <ManyPhotos photos={this.state.photos}/>}
                         </div>
                     </ModalBody>

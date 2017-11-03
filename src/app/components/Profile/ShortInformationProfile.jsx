@@ -1,4 +1,4 @@
-import './style.less'
+import './stylesForProfile.less'
 import React from 'react';
 import {Link} from 'react-router-dom';
 import ProFilePhoto from "../Cloudinary/OnePhoto";

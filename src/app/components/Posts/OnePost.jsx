@@ -1,4 +1,4 @@
-import './style.less'
+import './stylesForPosts.less'
 import React from 'react';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'

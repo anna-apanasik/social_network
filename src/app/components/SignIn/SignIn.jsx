@@ -1,20 +1,9 @@
+import './stylesSignIn.less'
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Redirect} from 'react-router';
 import * as signInActions from 'redux/actions/actionsSignIn';
-
-const styles = {
-    container: {
-        marginTop: "100px"
-    },
-    form: {
-        padding: "15px"
-    },
-    h4: {
-        textAlign: "center"
-    }
-};
 
 class SignIn extends React.Component {
     constructor(props) {
@@ -44,10 +33,10 @@ class SignIn extends React.Component {
             return ( <Redirect from="/sign_in" to="/profile"/>)
         } else
             return (
-                <div className="row justify-content-center">
-                    <div className="col-3">
-                        <div className="card border-info mb-3" style={styles.form}>
-                            <h4 className="card-title" style={styles.h4}>Sign in to Wall</h4>
+                <div className="SignIn row justify-content-center">
+                    <div className="col-10 col-sm-6 col-md-6 col-lg-3">
+                        <div className="card border-info mb-3">
+                            <h4 className="card-title">Sign in to Wall</h4>
                             <form>
                                 <div className="form-group">
                                     <label>Login</label>
@@ -76,7 +65,6 @@ class SignIn extends React.Component {
                                 </button>
                             </form>
                         </div>
-
                     </div>
                 </div>
             );

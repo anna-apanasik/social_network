@@ -1,20 +1,8 @@
+import '../stylesForPages.less'
 import React from 'react';
 import OnePhoto from "app/components/Cloudinary/OnePhoto";
 import {CLOUDINARY_UNKNOWN_USER_AVATAR} from "constants/cloudinaryConstants";
 import {Link} from 'react-router-dom';
-
-const styles = {
-    text: {
-        marginLeft: "15px"
-    },
-    right: {
-        //  marginLeft: "500px"
-        textAlign: "center"
-    },
-    photos: {
-        margin: "10px"
-    }
-};
 
 class OneUser extends React.Component {
     constructor(props) {
@@ -38,25 +26,27 @@ class OneUser extends React.Component {
             public_id: nextProps.public_id,
             privateAccount: nextProps.privateAccount
         })
-
     }
 
     render() {
-        return (<div className="card border-info mb-3">
-            <div className="row">
-                <div className="col col-md-3 col-sm-3">
-                    {this.state.public_id ? <OnePhoto public_id={this.state.public_id} width={'100'} height={'100'}/> :
-                        <OnePhoto public_id={CLOUDINARY_UNKNOWN_USER_AVATAR} width={'100'} height={'100'}/>
-                    }
-                </div>
-                <div className="col col-md-3 col-sm-3">
-                    <form className="form-group" style={styles.text}>
-                        <Link to={`${this.state.login}`}><h4 className="card-title">{this.state.login}</h4></Link>
-                        {this.state.privateAccount ? <p className="card-text">This account is private</p> :
-                            <div><p className="card-text">Name:&nbsp;{this.state.name}</p>
-                                <p className="card-text">Surname:&nbsp;{this.state.surname}</p>
-                                <p className="card-text">Sex:&nbsp;{this.state.sex}</p></div>}
-                    </form>
+        return (<div className="OneUser">
+            <div className="card border-info mb-3">
+                <div className="row">
+                    <div className="photo col col-md-3 col-sm-3">
+                        {this.state.public_id ?
+                            <OnePhoto public_id={this.state.public_id} width={'100'} height={'100'}/> :
+                            <OnePhoto public_id={CLOUDINARY_UNKNOWN_USER_AVATAR} width={'100'} height={'100'}/>
+                        }
+                    </div>
+                    <div className="col col-md-3 col-sm-3">
+                        <form className="form-group">
+                            <Link to={`${this.state.login}`}><h4 className="card-title">{this.state.login}</h4></Link>
+                            {this.state.privateAccount ? <p className="card-text">This account is private</p> :
+                                <div><p className="card-text">Name:&nbsp;{this.state.name}</p>
+                                    <p className="card-text">Surname:&nbsp;{this.state.surname}</p>
+                                    <p className="card-text">Sex:&nbsp;{this.state.sex}</p></div>}
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>)

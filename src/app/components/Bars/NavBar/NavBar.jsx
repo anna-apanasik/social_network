@@ -6,7 +6,6 @@ import ButtonsSignUpAndSignIn from "./Buttons/ButtonsSignUpAndSignIn";
 import AuthorizedUser from "./Buttons/AuthorizedUser";
 import * as actionSearch from 'redux/actions/actionSearch';
 
-
 class NavBar extends React.Component {
     constructor(props) {
         super(props);

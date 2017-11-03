@@ -1,3 +1,4 @@
+import './stylesForProfile.less'
 import React from 'react';
 import ShortInformationProfile from "./ShortInformationProfile";
 import {connect} from 'react-redux'
@@ -7,16 +8,6 @@ import NewPost from "../Posts/NewPost";
 import ListOfPosts from "../Posts/ListOfPosts";
 //import {savePost} from "../../../redux/actions/actionsProfileInformation";
 import {CLOUDINARY_UNKNOWN_USER_AVATAR} from "constants/cloudinaryConstants";
-
-const styles = {
-    container: {
-        marginLeft: "50px"
-    },
-    h3: {
-        marginTop: "15px"
-    }
-};
-
 
 class ProfileContainer extends React.Component {
     componentWillMount() {
@@ -34,8 +25,8 @@ class ProfileContainer extends React.Component {
         const {closeModal} = this.props.profileInformationActions;
         return (
             <div>
-                <div className="row" style={styles.h3}>
-                    <div className="col col-md-3 col-sm-3" style={styles.container}>
+                <div className="ProfileContainer row">
+                    <div className="col col-md-3 col-sm-3">
                         <ShortInformationProfile
                             login={login}
                             name={name}

@@ -1,3 +1,4 @@
+import '../stylesForPages.less'
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -7,12 +8,6 @@ import NotFound from "./Search/NotFound";
 import SuccessFound from "./Search/SuccessFound";
 import OnePost from "app/components/Posts/OnePost"
 
-const styles = {
-    li: {
-        listStyleType: 'none'
-    }
-};
-
 class HomePage extends React.Component {
     componentWillMount() {
         this.props.actionSearch.getPosts();
@@ -21,7 +16,7 @@ class HomePage extends React.Component {
     getLatestPosts() {
         if (this.props.latestPosts.length !== 0) {
             return this.props.latestPosts.map(item => {
-                return (<li style={styles.li}>
+                return (<li className="HomePage">
                     <OnePost noteId={item.noteId}
                              userPage={true}
                              homePage={true}
