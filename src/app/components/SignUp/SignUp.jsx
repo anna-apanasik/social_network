@@ -129,8 +129,7 @@ class SignUp extends React.Component {
                                 onChange={this.handleLoginChange.bind(this)}
                                 placeholder="Enter your login"
                                 requiredParam={true}
-                                errors={errorLogin}
-                            />
+                                errors={errorLogin}/>
 
                             <FieldGroup
                                 label="Email address"
@@ -139,8 +138,7 @@ class SignUp extends React.Component {
                                 placeholder="Enter email"
                                 requiredParam={true}
                                 errors={errorEmail}
-                                help={"We'll never share your email with anyone else."}
-                            />
+                                help={"We'll never share your email with anyone else."}/>
 
                             <FieldGroup
                                 label="Password"
@@ -150,8 +148,7 @@ class SignUp extends React.Component {
                                 placeholder="Password"
                                 requiredParam={true}
                                 errors={errorPassword}
-                                help={"Enter a combination of a least six numbers,\n" + "letter and punctuation marks (like ! and &)."}
-                            />
+                                help={"Enter a combination of a least six numbers,\n" + "letter and punctuation marks (like ! and &)."}/>
 
                             <div className="col-sm-12 col-md-4">
                                 <button type="submit" className="btn btn-primary btn-sm">Create Account</button>

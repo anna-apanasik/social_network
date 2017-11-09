@@ -1,8 +1,7 @@
 import * as actions from 'redux/actions/actionsSignIn'
-import *as types from 'constants/actionsConstants'
+import * as types from 'constants/actionsConstants'
 
 describe('action Sign In', () => {
-
     beforeEach(function () {
         this.dispatchSpy = jasmine.createSpy('dispatch')
     });
@@ -25,19 +24,5 @@ describe('action Sign In', () => {
 
         expect(callArgs.type).toBe(types.SIGN_IN_FAILURE);
         expect(callArgs.payload).toBe(error);
-    });
-
-    it('should return type dispatch and request ', function () {
-        let state = {
-            login: 'user',
-            password: 'user'
-        };
-        this.postSpy = jasmine.createSpy('post');
-
-        actions.postRequest(state)(this.dispatchSpy)
-        let callArgs = this.dispatchSpy.calls.first().args[0]
-
-        expect(callArgs).toEqual('request')
-
     });
 });

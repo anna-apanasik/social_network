@@ -1,5 +1,5 @@
 const serviceSearch = require('../services/serviceSearch');
-const servicePosts = require('../services/serviceNotes');
+const servicePosts = require('../services/servicePosts');
 
 module.exports = function (app) {
     app.route('/api/search')

@@ -3,7 +3,7 @@
 const models = require('../models');
 
 module.exports = {
-    logIn: function (req) {
+    signIn: function (req) {
         let data = {
             login: req.body.login,
             password: req.body.password

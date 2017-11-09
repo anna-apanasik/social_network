@@ -5,6 +5,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const BUILD_DIR = path.resolve(__dirname, 'src/public/build');
 const APP_DIR = path.resolve(__dirname, 'src/app');
 const ROOT_DIR = path.resolve(__dirname, 'src');
+const REDUX_DIR = path.resolve(__dirname, 'src/redux');
 
 const config = {
     devtool: 'cheap-module-source-map',
@@ -50,10 +51,24 @@ const config = {
         // ]
         rules: [
             {
+                test: /\.js$/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['es2015', 'stage-2']
+                    }
+                },
+                include: [REDUX_DIR, path.join(__dirname, 'test')],
+                exclude: path.join(__dirname, 'node_modules'),
+            },
+            {
                 test: /\.jsx?$/,
-                use: [
-                    'babel-loader',
-                ],
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['es2015', 'react', 'stage-2']
+                    }
+                },
                 include: [APP_DIR, path.join(__dirname, 'test')],
                 exclude: path.join(__dirname, 'node_modules'),
             },
@@ -85,27 +100,23 @@ const config = {
     plugins: [
         new webpack.optimize.ModuleConcatenationPlugin(),
         //плагин, который сжимает скрипты.
-        new webpack.optimize.UglifyJsPlugin({
-            beautify: false,
-            comments: false,
-            compress: {
-                sequences: true,
-                booleans: true,
-                conditionals: true,
-                comparisons: true,
-                loops: true,
-                dead_code: true,
-                unused: true,
-                warnings: false,
-                drop_console: true,
-                unsafe: true,
-                if_return: true,
-            }
-            //     screw_ie8: true,
-            //     evaluate: true,
-            //     join_vars: true
-
-        }),
+        // new webpack.optimize.UglifyJsPlugin({
+        //     beautify: false,
+        //     comments: false,
+        //     compress: {
+        //         sequences: true,
+        //         booleans: true,
+        //         conditionals: true,
+        //         comparisons: true,
+        //         loops: true,
+        //         dead_code: true,
+        //         unused: true,
+        //         warnings: false,
+        //         drop_console: true,
+        //         unsafe: true,
+        //         if_return: true,
+        //     }
+        // }),
 
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production')

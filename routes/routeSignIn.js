@@ -1,12 +1,12 @@
-const validationSignIn = require('../validation/validationLogIn');
-const logInService = require('../services/serviceLogIn');
+const validationSignIn = require('../validation/validationSignIn');
+const signInService = require('../services/serviceSignIn');
 
 module.exports = function (app) {
     app.route('/api/login')
-        .post(logIn);
+        .post(signIn);
 };
 
-function logIn(req, res) {
+function signIn(req, res) {
     if (!req.body) {
         return res.sendStatus(400);
     }
@@ -14,7 +14,7 @@ function logIn(req, res) {
     let errors = validationSignIn(req);
 
     if (!errors) {
-        logInService.logIn(req)
+        signInService.signIn(req)
             .then(() => {
                 return res.status(200).json()
             })

@@ -1,5 +1,5 @@
-const servicePosts = require('../services/serviceNotes');
-
+const servicePosts = require('../services/servicePosts');
+//TODo check new post ( not in needed queue)
 module.exports = function (app) {
     app.route('/api/newpost')
         .post(createNewPost);
@@ -45,10 +45,10 @@ function deletePost(req, res) {
         return res.sendStatus(400);
     }
     //TODO check need this if
-    if (req.body.text === '') {
-        console.log("error in text")
-        return res.status(400).json('Empty text field');
-    }
+    // if (req.body.text === '') {
+    //     console.log("error in text")
+    //     return res.status(400).json('Empty text field');
+    // }
     servicePosts.deletePost(req)
         .then(() => res.status(200).json())
         .catch(e => res.status(400).json(e))
