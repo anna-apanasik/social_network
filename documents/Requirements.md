@@ -61,9 +61,8 @@ This web application can be suitable for any active user of the Internet and per
  *	Yandex-Browser
 
 ### 3.1 Functional Requirements
-Each view is represented in mockups.
+ The application will contain 2 roles: user, guest.
 
-* The application will contain 2 roles: user, guest.
 ####	User can:
 1.	Create his own ‘wall’ with some post
 2.	Edit profile information and change profile’s photo
