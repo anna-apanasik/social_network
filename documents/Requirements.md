@@ -22,37 +22,9 @@ The name of this social network is “The Wall”.
 
 User interface will provide signing up, loging in, editing profile information, creating new posts  and editing them, also deleting posts, commenting on other people's posts.
 
-2.2.1 Navigation bar with sections for guest and  unauthorized  user:
-### 2.2 User Interfaces
-
-User interface will provide signing up, loging in, editing profile information, creating new posts  and editing them, also deleting posts, commenting on other people's posts.
-For more details see mockups.
-
-### 2.3 User Characteristics
-	The application will contain 2 roles: user, guest.
-####	User can:
-1.	create his own ‘wall’ with some post
-2.	edit profile information and change profile’s photo
-3.	add photos to posts
-4.	make his account private
-5.	comment on other people’s posts.
-
-	Guest is allowed to look through other people’s posts and to read some information about this website
-
-### 2.4 Assumptions and Dependencies
- Easy extensibility and changeability of content.
-
-## 3 System Requirements
- To use this application, you need a device with Internet access and latest web browser installed. Recommended browsers:
- *	Google Chrome
- *	Mozilla Firefox
- *	Safari
- *	Yandex-Browser
-
-### 3.1 Functional Requirements
 Each view is represented in mockups.
 
-3.1.1 Navigation bar with sections for guest and  unauthorized  user:
+2.2.1 Navigation bar with sections for guest and  unauthorized  user:
 *	Home
 *	About wall
 *	Search
@@ -75,6 +47,7 @@ Each view is represented in mockups.
 
 ### 2.3 User Characteristics
 This web application can be suitable for any active user of the Internet and personal сomputer, which would like to share their thoughts with others or just save it for yourself.
+
 ### 2.4 Assumptions and Dependencies
  * Easy extensibility and changeability of content.
  * It is possible that frequently used library can not work in the old browser, and excellent display application from mockups ,because more appropriate solutions can occur.
