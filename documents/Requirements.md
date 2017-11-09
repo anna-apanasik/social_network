@@ -22,8 +22,6 @@ The name of this social network is “The Wall”.
 
 User interface will provide signing up, loging in, editing profile information, creating new posts  and editing them, also deleting posts, commenting on other people's posts.
 
-Each view is represented in mockups.
-
 2.2.1 Navigation bar with sections for guest and  unauthorized  user:
 *	Home
 *	About wall
@@ -44,6 +42,8 @@ Each view is represented in mockups.
 2.2.4 On the “Home” page users will see the latest posts of people whose account is public.
 
 2.2.5 “About Wall” page will contain information about this project.
+
+Each view is represented in mockups.
 
 ### 2.3 User Characteristics
 This web application can be suitable for any active user of the Internet and personal сomputer, which would like to share their thoughts with others or just save it for yourself.
