@@ -42,7 +42,6 @@ class NewNote extends React.Component {
     saveNote(e) {
         e.preventDefault();
         if (this.state.text === '') {
-            //TODO validation on the server side
             this.setState({error: 'Empty text field'});
             return;
         }

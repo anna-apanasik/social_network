@@ -37,7 +37,7 @@ class ProfileContainer extends React.Component {
                             dataOfRegistration={dataOfRegistration}
                             privateAccount={privateAccount}/>
                     </div>
-                    <div className="col ool-md-6 col-sm-6">
+                    <div className="ListOfPosts col ool-md-6 col-sm-6">
                         <ListOfPosts/>
                     </div>
                     <div className="col ool-md-1 col-sm-1">

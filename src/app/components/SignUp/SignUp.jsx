@@ -198,9 +198,5 @@ SignUp.propTypes = {
     errorPassword: React.PropTypes.string.isRequired,
     postRequest: React.PropTypes.func.isRequired
 };
-export default SignUp;
 
-// {/*<img src={this.state.photo.url} />*/}
-//
-//<h4 className="card-title">Card title</h4>
-//TODO public_id
+export default SignUp;

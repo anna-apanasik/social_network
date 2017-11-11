@@ -20,23 +20,26 @@ export default function reducerSearch(state = initialState, action) {
             return Object.assign({}, state, {search: NOT_FOUND});
 
         case FOUND_USERS_OR_POSTS:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 search: FOUND_USERS_OR_POSTS,
                 users: action.payload.users,
                 posts: action.payload.posts,
                 photos: action.payload.photos,
-                usersForPosts: action.payload.usersForPosts
-            });
-//TODO clear state(maybe don't need)
+                usersForPosts: action.payload.usersForPosts,
+                latestPosts: []
+            };
+
         case RESET_SEARCH:
-            return Object.assign({}, state, {search: undefined});
+            return {...state, search: undefined};
 
         case GET_LATEST_POSTS:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 latestPosts: action.payload.posts,
                 photos: action.payload.photos,
                 usersForPosts: action.payload.usersForPosts
-            });
+            };
 
         default:
             return state

@@ -74,7 +74,7 @@ class ProfileEdit extends React.Component {
                 this.setState({public_id: public_id})
             })
             .catch(e => {
-                //TODO delete console.log
+                //TODO delete console.log (write error: bad internet connection)
                 console.log(e)
             })
 

@@ -7,6 +7,7 @@ export const CLOSE_DROPZONE_MODAL = 'CLOSE_DROPZONE_MODAL';
 // Sign in constants
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
 export const SIGN_IN_FAILURE = 'SIGN_IN_FAILURE';
+export const SIGN_OUT = 'SIGN_OUT';
 
 //Profile information constants
 export const GET_LOGIN = 'GET_LOGIN';

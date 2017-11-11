@@ -8,7 +8,7 @@ import OnePost from "./OnePost";
 class ListOfPosts extends React.Component {
     getListOfPosts() {
         return this.props.listOfPosts.map((item) =>
-            <li className="ListOfPosts">
+            <li>
                 <OnePost noteId={item.noteId}
                          userPage={this.props.userPage || false}
                          title={item.title}
@@ -26,7 +26,7 @@ class ListOfPosts extends React.Component {
         if (createPost || deletePost) {
             this.props.postActions.getPosts();
         }
-        return (<div>{this.getListOfPosts()}</div>)
+        return (<div className="ListOfPosts">{this.getListOfPosts()}</div>)
     }
 }
 

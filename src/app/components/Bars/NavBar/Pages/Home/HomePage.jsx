@@ -3,7 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actionSearch from 'redux/actions/actionSearch';
-import {NOT_FOUND, FOUND_USERS_OR_POSTS} from "constants/actionsConstants";
+import {NOT_FOUND, FOUND_USERS_OR_POSTS, GET_LATEST_POSTS} from "constants/actionsConstants";
 import NotFound from "./Search/NotFound";
 import SuccessFound from "./Search/SuccessFound";
 import OnePost from "app/components/Posts/OnePost"
@@ -13,10 +13,16 @@ class HomePage extends React.Component {
         this.props.actionSearch.getPosts();
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.search === undefined && (this.props.search === NOT_FOUND || this.props.search === FOUND_USERS_OR_POSTS)) {
+            this.props.actionSearch.getPosts();
+        }
+    }
+
     getLatestPosts() {
         if (this.props.latestPosts.length !== 0) {
             return this.props.latestPosts.map(item => {
-                return (<li className="HomePage">
+                return (<li className="OnePostHomePage">
                     <OnePost noteId={item.noteId}
                              userPage={true}
                              homePage={true}
@@ -40,7 +46,7 @@ class HomePage extends React.Component {
     render() {
         const {search} = this.props;
         return (
-            <div className="row justify-content-center">
+            <div className="HomePage row justify-content-center">
                 <div className="col-6">
                     {search === NOT_FOUND ? <NotFound/> : null}
                     {search === FOUND_USERS_OR_POSTS ? <SuccessFound/> : null}

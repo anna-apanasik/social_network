@@ -31,7 +31,8 @@ export default function reducerProfileInformation(state = initialState, action) 
     switch (action.type) {
 
         case RECEIVE_INFORMATION:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 login: action.payload.login,
                 name: action.payload.name,
                 surname: action.payload.surname,
@@ -43,10 +44,11 @@ export default function reducerProfileInformation(state = initialState, action) 
                 public_id: action.payload.public_id,
                 userId: action.payload.userId,
                 privateAccount: action.payload.privateAccount
-            });
+            };
 
         case PROFILE_EDIT_SUCCESS:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 name: action.payload.name,
                 surname: action.payload.surname,
                 sex: action.payload.sex,
@@ -55,29 +57,33 @@ export default function reducerProfileInformation(state = initialState, action) 
                 confirmPassword: action.payload.password,
                 privateAccount: action.payload.privateAccount,
                 success: true
-            });
+            };
 
         case PROFILE_EDIT_FAILURE:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 errorEmail: action.payload[0],
                 errorPassword: action.payload[1],
                 errorConfirmPassword: action.payload[2]
-            });
+            };
 
         case RESET_SUCCESS:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 success: false
-            });
+            };
 
         case OPEN_MODAL:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 isOpen: true
-            });
+            };
 
         case CLOSE_MODAL:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 isOpen: false
-            });
+            };
 
         default:
             return state

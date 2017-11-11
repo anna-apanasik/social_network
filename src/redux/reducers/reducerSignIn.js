@@ -1,10 +1,11 @@
 import {
     SIGN_IN_SUCCESS,
     SIGN_IN_FAILURE,
+    SIGN_OUT
 } from "constants/actionsConstants";
 
 export const initialState = {
-    login:'',
+    login: '',
     errorLogin: '',
     errorPassword: '',
     success: false
@@ -13,14 +14,22 @@ export const initialState = {
 export default function reducerSignIn(state = initialState, action) {
     switch (action.type) {
         case SIGN_IN_SUCCESS:
-            return Object.assign({}, state, {login:action.payload, errorLogin: '', errorPassword: '', success: true});
+            return {...state, login: action.payload, errorLogin: '', errorPassword: '', success: true};
+
         case SIGN_IN_FAILURE:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 errorLogin: action.payload[0],
                 errorPassword: action.payload[1],
                 success: false
-            });
+            };
 
+        case SIGN_OUT:
+            return {
+                ...state,
+                login: '',
+                success: false
+            };
         default:
             return state
     }

@@ -1,8 +1,9 @@
 import {
     SIGN_IN_SUCCESS,
     SIGN_IN_FAILURE,
+    SIGN_OUT
 } from "constants/actionsConstants";
-import functions from './functionsForActions'
+import functions from './functionsForActions';
 import * as request from 'superagent';
 
 export const successRequest = (login) => (dispatch) => {
@@ -16,6 +17,12 @@ export const failureRequest = (error) => (dispatch) => {
     dispatch({
         type: SIGN_IN_FAILURE,
         payload: error
+    })
+};
+
+export const signOut = () => (dispatch) => {
+    dispatch({
+        type: SIGN_OUT
     })
 };
 

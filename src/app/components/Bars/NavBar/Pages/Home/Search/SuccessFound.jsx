@@ -1,3 +1,4 @@
+import '../../stylesForPages.less'
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -5,16 +6,9 @@ import * as actionSearch from 'redux/actions/actionSearch';
 import OneUser from "../OneUser";
 import OnePost from "app/components/Posts/OnePost"
 
-const styles = {
-    li: {
-        listStyleType: 'none'
-    }
-};
-
-//TODO style for li (maybe in all app this style?)
 class SuccessFound extends React.Component {
     getLisOfUsers() {
-        return this.props.users.map(item => <li style={styles.li}>
+        return this.props.users.map(item => <li className="SuccessFound">
             <OneUser login={item.login}
                      public_id={item.public_id}
                      name={item.name}
@@ -25,7 +19,7 @@ class SuccessFound extends React.Component {
     }
 
     getListOfPosts() {
-        return this.props.posts.map(item => <li style={styles.li}>
+        return this.props.posts.map(item => <li className="SuccessFound">
             <OnePost noteId={item.noteId}
                      userPage={true}
                      homePage={true}
