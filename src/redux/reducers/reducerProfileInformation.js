@@ -4,7 +4,8 @@ import {
     PROFILE_EDIT_FAILURE,
     RESET_SUCCESS,
     OPEN_MODAL,
-    CLOSE_MODAL
+    CLOSE_MODAL,
+    EDIT_POST
 } from "constants/actionsConstants";
 
 const initialState = {
@@ -82,9 +83,15 @@ export default function reducerProfileInformation(state = initialState, action) 
         case CLOSE_MODAL:
             return {
                 ...state,
-                isOpen: false
+                isOpen: false,
+                editPost: false
             };
-
+        case  EDIT_POST:
+            return {
+                ...state,
+                isOpen: true,
+                editPost: true
+            };
         default:
             return state
     }

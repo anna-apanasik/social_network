@@ -4,6 +4,7 @@ import {
     PROFILE_EDIT_SUCCESS,
     PROFILE_EDIT_FAILURE,
     RESET_SUCCESS,
+    EDIT_POST,
     OPEN_MODAL,
     CLOSE_MODAL
 } from "constants/actionsConstants";
@@ -66,6 +67,13 @@ export function closeModal() {
     }
 }
 
+export function editPostAndOpenModal() {
+    return (dispatch) => {
+        dispatch({
+            type: EDIT_POST
+        })
+    }
+}
 export function getProfileInformation(login) {
     return (dispatch, getState) => {
         request

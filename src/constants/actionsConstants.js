@@ -20,11 +20,15 @@ export const PROFILE_EDIT_FAILURE = 'PROFILE_EDIT_FAILURE';
 export const OPEN_MODAL = 'OPEN_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const RESET_SUCCESS = 'RESET_SUCCESS';
+export const EDIT_POST = 'EDIT_POST';
 
 //Posts
 export const CREATE_POST = 'CREATE_POST';
 export const DELETE_POST = 'DELETE_POST';
 export const GET_LIST_OF_POSTS = 'GET_LIST_OF_POSTS';
+export const EDIT_POST_DATA = 'EDIT_POST_DATA';
+export const RESET_EDIT_POST_DATA = 'RESET_EDIT_POST_DATA';
+export const EDIT_POST_FLAG = 'EDIT_POST_FLAG';
 
 //Search
 export const NOT_FOUND = 'NOT_FOUND';

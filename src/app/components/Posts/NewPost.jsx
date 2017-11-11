@@ -18,10 +18,16 @@ class NewNote extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: this.props.title,
-            text: this.props.text,
+            title: '',
+            text: '',
             photos: '',
             error: ''
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.editPost) {
+            this.setState({title: nextProps.titleEditPost, text: nextProps.textEditPost})
         }
     }
 
@@ -36,7 +42,8 @@ class NewNote extends React.Component {
     hideModal(e) {
         e.preventDefault();
         this.props.closeModal();
-        this.setState({title: '', text: '', photos: ''})
+        this.setState({title: '', text: '', photos: ''});
+        this.props.notesActions.resetEditPostData();
     };
 
     saveNote(e) {
@@ -45,7 +52,18 @@ class NewNote extends React.Component {
             this.setState({error: 'Empty text field'});
             return;
         }
-        this.props.notesActions.createPost(this.state);
+
+        if (this.props.editPost) {
+            this.props.notesActions.updatePost({
+                postId: this.props.postIdEditPost,
+                title: this.state.title,
+                text: this.state.text,
+                photos: this.state.photos
+            })
+        } else {
+            this.props.notesActions.createPost(this.state);
+        }
+
         this.hideModal(e)
     }
 
@@ -76,7 +94,7 @@ class NewNote extends React.Component {
     }
 
     render() {
-        const {isOpen, editPost, title, text} = this.props;
+        const {isOpen} = this.props;
         return (
             <div>
                 <Modal isOpen={isOpen} onRequestHide={this.hideModal.bind(this)}>
@@ -127,10 +145,16 @@ class NewNote extends React.Component {
 NewNote.PropTypes = {
     isOpen: React.PropTypes.bool.isRequired,
     editPost: React.PropTypes.bool.isRequired,
-    title: React.PropTypes.string.isRequired,
-    text: React.PropTypes.string.isRequired,
     closeModal: React.PropTypes.func.isRequired
 };
+
+function mapStateToProps(state) {
+    return {
+        titleEditPost: state.reducerPost.titleEditPost,
+        textEditPost: state.reducerPost.textEditPost,
+        postIdEditPost: state.reducerPost.postIdEditPost,
+    }
+}
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -138,4 +162,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(null, mapDispatchToProps)(NewNote)
+export default connect(mapStateToProps, mapDispatchToProps)(NewNote)

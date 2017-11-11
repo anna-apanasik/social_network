@@ -1,4 +1,11 @@
-import {GET_LIST_OF_POSTS, CREATE_POST, DELETE_POST} from "constants/actionsConstants"
+import {
+    GET_LIST_OF_POSTS,
+    CREATE_POST,
+    DELETE_POST,
+    EDIT_POST_DATA,
+    RESET_EDIT_POST_DATA,
+    EDIT_POST_FLAG
+} from "constants/actionsConstants"
 //TODO some problems with delete one post
 import * as request from 'superagent';
 
@@ -14,6 +21,31 @@ export function destroyPost() {
     return (dispatch) => {
         dispatch({
             type: DELETE_POST
+        })
+    }
+}
+
+export function updatePostAction() {
+    return (dispatch) => {
+        dispatch({
+            type: EDIT_POST_FLAG
+        })
+    }
+}
+
+export function editPostData(data) {
+    return (dispatch) => {
+        dispatch({
+            type: EDIT_POST_DATA,
+            payload: data
+        })
+    }
+}
+
+export function resetEditPostData() {
+    return (dispatch) => {
+        dispatch({
+            type: RESET_EDIT_POST_DATA
         })
     }
 }
@@ -61,6 +93,28 @@ export function deletePost(data) {
             .withCredentials()
             .then(() => {
                 dispatch(destroyPost());
+            })
+            .catch(e => {
+                //TODO error in delete
+                console.log("errors in delete note " + e);
+            })
+    }
+}
+
+export function updatePost(data) {
+    return (dispatch) => {
+        request
+            .post('api/editpost')
+            .send({
+                noteId: data.postId,
+                title: data.title,
+                text: data.text,
+                photos: data.photos.length !== 0 ? data.photos.map(item => item.public_id) : ''
+            })
+            .accept('application/json')
+            .withCredentials()
+            .then(() => {
+                dispatch(updatePostAction());
             })
             .catch(e => {
                 //TODO error in delete

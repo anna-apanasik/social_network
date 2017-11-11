@@ -6,12 +6,10 @@ import {bindActionCreators} from 'redux'
 import * as profileInformationActions from 'redux/actions/actionsProfileInformation'
 import NewPost from "../Posts/NewPost";
 import ListOfPosts from "../Posts/ListOfPosts";
-//import {savePost} from "../../../redux/actions/actionsProfileInformation";
 import {CLOUDINARY_UNKNOWN_USER_AVATAR} from "constants/cloudinaryConstants";
 
 class ProfileContainer extends React.Component {
     componentWillMount() {
-        //   this.props.profileInformationActions.getLogin();
         this.props.profileInformationActions.getProfileInformation(undefined);
     }
 
@@ -52,8 +50,6 @@ class ProfileContainer extends React.Component {
                     <NewPost
                         isOpen={isOpen}
                         editPost={editPost}
-                        title={''}
-                        text={''}
                         closeModal={closeModal}/>
                 </div>
             </div>
@@ -71,7 +67,7 @@ function mapStateToProps(state) {
         dataOfRegistration: state.reducerProfileInformation.dataOfRegistration,
         public_id: state.reducerProfileInformation.public_id,
         privateAccount: state.reducerProfileInformation.privateAccount,
-        //  editPost: state.reducerProfileInformation.editPost,
+        editPost: state.reducerProfileInformation.editPost,
         isOpen: state.reducerProfileInformation.isOpen
     }
 }

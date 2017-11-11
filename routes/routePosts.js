@@ -7,6 +7,8 @@ module.exports = function (app) {
         .post(getListOfPosts);
     app.route('/api/deletepost')
         .post(deletePost);
+    app.route('/api/editpost')
+        .post(editPost);
 };
 
 function createNewPost(req, res) {
@@ -46,6 +48,16 @@ function deletePost(req, res) {
     }
 
     servicePosts.deletePost(req)
+        .then(() => res.status(200).json())
+        .catch(e => res.status(400).json(e))
+}
+
+function editPost(req, res) {
+    if (!req.body) {
+        return res.sendStatus(400);
+    }
+
+    servicePosts.editPost(req)
         .then(() => res.status(200).json())
         .catch(e => res.status(400).json(e))
 }

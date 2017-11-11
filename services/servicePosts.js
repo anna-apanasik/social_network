@@ -37,5 +37,26 @@ module.exports = {
         return models.photos.findAll({where: {noteId: postId}})
             .then(photos => Promise.resolve(photos))
             .catch(e => Promise.reject(e))
+    },
+
+    editPost: function (req) {
+        return models.notes.update({
+            title: req.body.title,
+            text: req.body.text
+        }, {
+            where: {noteId: req.body.noteId}
+        })
+            .then(() => models.photos.destroy({where: {noteId: req.body.noteId}}))
+            .then(() => {
+                if (req.body.photos.length !== 0) {
+                    req.body.photos.forEach(item => {
+                        return models.photos.create({
+                            photo: item,
+                            noteId: req.body.noteId
+                        })
+                    });
+                }
+            })
+            .catch(e => Promise.reject(e))
     }
 };

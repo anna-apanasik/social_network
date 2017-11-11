@@ -23,9 +23,16 @@ class OnePost extends React.Component {
 
     handleEditPost(e) {
         e.preventDefault();
-        //TODO delete console.log
-        console.log('edit button');
-        this.props.profileInformationActions.openModal()
+        this.props.profileInformationActions.editPostAndOpenModal();
+        this.props.actionsPost.editPostData({
+            titleEditPost: this.props.title,
+            textEditPost: this.props.text,
+            postIdEditPost: this.state.noteId
+        });
+        return ( <NewPost
+            isOpen={this.props.isOpen}
+            editPost={this.props.editPost}
+            closeModal={this.props.closeModal}/>)
     }
 
     buttons() {
@@ -58,8 +65,7 @@ class OnePost extends React.Component {
     }
 
     render() {
-        const {title, text, editPost, isOpen, photos, userPage} = this.props;
-        const {closeModal} = this.props.profileInformationActions;
+        const {text, photos, userPage} = this.props;
         return (<div className="OnePost">
             <div className="card border-info mb-3">
                 {userPage ? this.byLogin() : this.buttons()}
@@ -69,21 +75,11 @@ class OnePost extends React.Component {
                         item ? <OnePhoto public_id={item.photo} width={'50'} height={'50'}/> : null
                     )}
                 </form>
-
-                <div>
-                    <NewPost
-                        isOpen={isOpen}
-                        editPost={editPost}
-                        closeModal={closeModal}
-                        title={title}
-                        text={text}/>
-                </div>
             </div>
         </div>)
     }
 }
 
-//TODO check: need newPost or not
 OnePost.PropTypes = {
     noteId: React.PropTypes.string.isRequired,
     login: React.PropTypes.string.isRequired,
@@ -97,7 +93,9 @@ OnePost.PropTypes = {
 function mapStateToProps(state) {
     return {
         editPost: state.reducerProfileInformation.editPost,
-        isOpen: state.reducerProfileInformation.isOpen
+        isOpen: state.reducerProfileInformation.isOpen,
+        titleEditPost: state.reducerPost.titleEditPost,
+        textEditPost: state.reducerPost.textEditPost
     }
 }
 

@@ -22,8 +22,8 @@ class ListOfPosts extends React.Component {
     }
 
     render() {
-        const {createPost, deletePost} = this.props;
-        if (createPost || deletePost) {
+        const {createPost, deletePost, updatePost} = this.props;
+        if (createPost || deletePost || updatePost) {
             this.props.postActions.getPosts();
         }
         return (<div className="ListOfPosts">{this.getListOfPosts()}</div>)
@@ -39,7 +39,8 @@ function mapStateToProps(state) {
         listOfPosts: state.reducerPost.listOfPosts,
         photos: state.reducerPost.photos,
         createPost: state.reducerPost.createPost,
-        deletePost: state.reducerPost.deletePost
+        deletePost: state.reducerPost.deletePost,
+        updatePost: state.reducerPost.updatePost
     }
 }
 
