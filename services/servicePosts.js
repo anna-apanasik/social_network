@@ -15,28 +15,25 @@ module.exports = {
                     })
                 });
             })
-            .catch(e => Promise.reject(e))
+            .catch(() => Promise.reject())
     },
 
     deletePost: function (req) {
         return models.photos.destroy({where: {noteId: req.body.noteId}})
             .then(() => models.notes.destroy({where: {noteId: req.body.noteId}}))
-            .catch(e => {
-//TODO delete
-                console.log("errorr in delete " + e)
-            })
+            .catch(() => Promise.reject());
     },
 
     getPosts: function (req) {
         return models.notes.findAll({where: {userId: req.body.userId}})
             .then(posts => Promise.resolve(posts))
-            .catch(e => Promise.reject(e));
+            .catch(() => Promise.reject());
     },
 
     getPhotos: function (postId) {
         return models.photos.findAll({where: {noteId: postId}})
             .then(photos => Promise.resolve(photos))
-            .catch(e => Promise.reject(e))
+            .catch(() => Promise.reject())
     },
 
     editPost: function (req) {
@@ -57,6 +54,6 @@ module.exports = {
                     });
                 }
             })
-            .catch(e => Promise.reject(e))
+            .catch(() => Promise.reject())
     }
 };

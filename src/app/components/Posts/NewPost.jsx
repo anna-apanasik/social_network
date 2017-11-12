@@ -69,6 +69,7 @@ class NewNote extends React.Component {
 
     handleAddPhoto(e) {
         e.preventDefault();
+
         return new Promise((resolve, reject) =>
             cloudinary.openUploadWidget({
                     cloud_name: CLOUDINARY_NAME,
@@ -90,7 +91,6 @@ class NewNote extends React.Component {
                 //TODO delete console.log
                 console.log(e)
             })
-
     }
 
     render() {

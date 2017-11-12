@@ -18,7 +18,7 @@ function createNewPost(req, res) {
 
     servicePosts.addNewPost(req)
         .then(() => res.status(200).json())
-        .catch(e => res.status(400).json())
+        .catch(e => res.status(500).json())
 
 }
 
@@ -39,7 +39,7 @@ function getListOfPosts(req, res) {
             }))
                 .then(() => res.status(200).json(data))
         })
-        .catch(e => res.status(400).json(e));
+        .catch(() => res.status(500).json());
 }
 
 function deletePost(req, res) {
@@ -49,7 +49,7 @@ function deletePost(req, res) {
 
     servicePosts.deletePost(req)
         .then(() => res.status(200).json())
-        .catch(e => res.status(400).json(e))
+        .catch(() => res.status(500).json())
 }
 
 function editPost(req, res) {
@@ -59,5 +59,5 @@ function editPost(req, res) {
 
     servicePosts.editPost(req)
         .then(() => res.status(200).json())
-        .catch(e => res.status(400).json(e))
+        .catch(() => res.status(500).json())
 }

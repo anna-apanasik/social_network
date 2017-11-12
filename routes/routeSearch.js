@@ -51,7 +51,7 @@ function search(req, res) {
                         })
                 })
         })
-        .catch(e => res.status(400).json(e))
+        .catch(() => res.status(500).json())
 }
 
 function getPosts(req, res) {
@@ -97,5 +97,5 @@ function getPosts(req, res) {
                         })
                 })
         })
-        .catch(e => res.status(400).json(e))
+        .catch(() => res.status(500).json())
 }

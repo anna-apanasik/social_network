@@ -56,10 +56,7 @@ export function search(search) {
                     dispatch(foundUsersOrPosts(res.body))
                 }
             })
-            .catch(e => {
-                //TODO delete console.log
-                //TODO error in get posts
-                console.log("errors in find posts " + e);
+            .catch(() => {
             })
     }
 }
@@ -72,12 +69,9 @@ export function getPosts() {
             .withCredentials()
             .then(res => {
                 dispatch(getLatestPosts(res.body))
-
             })
-            .catch(e => {
-                //TODO delete console.log
-                //TODO error in get posts
-                console.log("errors in get posts " + e);
+            //TODO ask about this catch
+            .catch(() => {
             })
     }
 }

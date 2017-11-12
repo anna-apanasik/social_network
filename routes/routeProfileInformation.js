@@ -33,10 +33,7 @@ function update(req, res) {
             .then(user => {
                 return res.status(200).json(user)
             })
-            .catch(e => {
-                //TODO error route prof info
-                console.log("errors " + e);
-            })
+            .catch(() => res.status(500).json())
     } else {
         res.status(400).json({errors: errors});
     }

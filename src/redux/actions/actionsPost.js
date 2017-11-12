@@ -6,7 +6,6 @@ import {
     RESET_EDIT_POST_DATA,
     EDIT_POST_FLAG
 } from "constants/actionsConstants"
-//TODO some problems with delete one post
 import * as request from 'superagent';
 
 export function addPost() {
@@ -75,9 +74,7 @@ export function createPost(data) {
             .then(() => {
                 dispatch(addPost());
             })
-            .catch(e => {
-                //TODO error in create( empty textarea field)
-                console.log("errors in create note " + e);
+            .catch(() => {
             })
     }
 }
@@ -94,9 +91,7 @@ export function deletePost(data) {
             .then(() => {
                 dispatch(destroyPost());
             })
-            .catch(e => {
-                //TODO error in delete
-                console.log("errors in delete note " + e);
+            .catch(() => {
             })
     }
 }
@@ -116,9 +111,7 @@ export function updatePost(data) {
             .then(() => {
                 dispatch(updatePostAction());
             })
-            .catch(e => {
-                //TODO error in delete
-                console.log("errors in delete note " + e);
+            .catch(() => {
             })
     }
 }
@@ -136,9 +129,6 @@ export function getPosts() {
                 dispatch(getListOfPosts(data.body));
             })
             .catch(e => {
-                //TODO delete console.log
-                //TODO error in get posts
-                console.log("errors in find posts " + e);
             })
     }
 }

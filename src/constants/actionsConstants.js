@@ -12,7 +12,6 @@ export const SIGN_OUT = 'SIGN_OUT';
 //Profile information constants
 export const GET_LOGIN = 'GET_LOGIN';
 export const RECEIVE_INFORMATION = 'RECEIVE_INFORMATION';
-export const RECEIVE_ERROR = 'RECEIVE_ERROR';
 
 //Profile edit
 export const PROFILE_EDIT_SUCCESS = 'PROFILE_EDIT_SUCCESS';

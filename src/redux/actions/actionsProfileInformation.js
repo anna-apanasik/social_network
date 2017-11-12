@@ -12,20 +12,10 @@ import functions from './functionsForActions';
 import {getPosts} from "./actionsPost";
 import * as request from 'superagent';
 
-//TODO check all actions: don't need functions
-
-
 export const receiveInformation = (information) => (dispatch) => {
     dispatch({
         type: RECEIVE_INFORMATION,
         payload: information
-    })
-};
-
-export const receiveError = (error) => (dispatch) => {
-    dispatch({
-        type: RECEIVE_ERROR,
-        payload: error
     })
 };
 
@@ -74,6 +64,7 @@ export function editPostAndOpenModal() {
         })
     }
 }
+
 export function getProfileInformation(login) {
     return (dispatch, getState) => {
         request
@@ -87,9 +78,7 @@ export function getProfileInformation(login) {
                 dispatch(receiveInformation(user.body.user));
                 dispatch(getPosts())
             })
-            .catch(e => {
-                //dispatch(receiveError(e));
-                console.log('error get profile info' + e);
+            .catch(() => {
             })
     }
 }
