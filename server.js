@@ -5,6 +5,7 @@ const expressValidator = require('express-validator');
 const bodyParser = require('body-parser');
 const path = require('path');
 const models = require('./models');
+const cookieParser = require('cookie-parser');
 
 const port = process.env.port || 3000;
 
@@ -13,6 +14,7 @@ let app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(expressValidator());
+app.use(cookieParser());
 
 app.set('views', path.join(__dirname, '/src/public'));
 app.set('view engine', 'html');
