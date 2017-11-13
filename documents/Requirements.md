@@ -20,7 +20,7 @@ The name of this social network is “The Wall”.
 
 ### 2.2 User Interfaces
 
-User interface will provide signing up, loging in, editing profile information, creating new posts  and editing them, also deleting posts, commenting on other people's posts.
+User interface will provide signing up, loging in, editing profile information, creating new posts  and editing them, also deleting posts.
 
 2.2.1 Navigation bar with sections for guest and  unauthorized  user:
 *	Home
@@ -49,7 +49,6 @@ Each view is represented in mockups.
 This web application can be suitable for any active user of the Internet and personal сomputer, which would like to share their thoughts with others or just save it for yourself.
 
 ### 2.4 Assumptions and Dependencies
- * Easy extensibility and changeability of content.
  * It is possible that frequently used library can not work in the old browser, and excellent display application from mockups ,because more appropriate solutions can occur.
  * It is also needed the presence of the Internet to provide the proper operation of application.
 
@@ -64,18 +63,30 @@ This web application can be suitable for any active user of the Internet and per
  The application will contain 2 roles: user, guest.
 
 ####	User can:
-1.	Create his own ‘wall’ with some post
-2.	Edit profile information and change profile’s photo
-3.	Add photos to posts
-4.	Make his account private
-5.	Comment on other people’s posts.
+1. Sign up and sign in;
+2. Create new post;
+4.	Add photos to post;
+5.	Edit post;
+6. Delete post;
+7. Edit profile information and change profile’s photo;
+8.	Make account private;
+9. Search users’ by login, name, surname, title of post.
+10. Read information about this website;
+11. Look through other user's posts;
+12. Look through other user's pages.
 
-* Guest is allowed to look through other people’s posts and to read some information about this website.
-* User can sign up, log in, edit profile information, creat new posts  and edit them, also deletposts, commenton other people's posts.
-* To search users’ accounts will be possible by login, name, surname, title of post.
+####	Guest can:
+1. Sign up;
+2. Search users’ by login, name, surname, title of post;
+3. Read information about this website;
+4. Look through other user's posts;
+5. Look through other user's pages. 
 
 ### 3.2 Non-Functional Requirements
 #### 3.2.1 Software quality attributes
 * Responsive Design - content must be readable on mobile, tablet and desktop devices.
-* Performance - people don't want to wait much time while web page is loading. To avoid wasting time user must wait at maximum 1 second to load any page on web app.
+* Performance. To avoid wasting time user must wait at maximum 1 second to load any page on web app.
+
+#### 3.2.2 External interfaces
+User monitor should support resolution at least 620 х 769 .
 
