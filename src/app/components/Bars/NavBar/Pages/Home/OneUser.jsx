@@ -32,13 +32,13 @@ class OneUser extends React.Component {
         return (<div className="OneUser">
             <div className="card border-info mb-3">
                 <div className="row">
-                    <div className="photo col col-md-3 col-sm-3">
+                    <div className="photo col col-lg-3 ">
                         {this.state.public_id ?
                             <OnePhoto public_id={this.state.public_id} width={'100'} height={'100'}/> :
                             <OnePhoto public_id={CLOUDINARY_UNKNOWN_USER_AVATAR} width={'100'} height={'100'}/>
                         }
                     </div>
-                    <div className="col col-md-3 col-sm-3">
+                    <div className="col col-lg-3 ">
                         <form className="form-group">
                             <Link to={`${this.state.login}`}><h4 className="card-title">{this.state.login}</h4></Link>
                             {this.state.privateAccount ? <p className="card-text">This account is private</p> :

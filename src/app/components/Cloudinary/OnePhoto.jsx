@@ -12,19 +12,21 @@ class OnePhoto extends React.Component {
         const {public_id, width, height, description} = this.props;
         return (
             <CloudinaryContext cloudName={CLOUDINARY_NAME}>
-                <div className="Photo img">
-                    <a target="_blank"
-                       href={CLOUDINARY_UPLOAD_URL + public_id + '.jpg'}>
-                        <Image publicId={public_id}>
-                            <Transformation
-                                crop="scale"
-                                width={width || "150"}
-                                height={height || "150"}
-                                dpr="auto"
-                                responsive_placeholder="blank"/>
-                        </Image>
-                        <label>{description}</label>
-                    </a>
+                <div className="responsive">
+                    <div className="Photo img">
+                        <a target="_blank"
+                           href={CLOUDINARY_UPLOAD_URL + public_id + '.jpg'}>
+                            <Image publicId={public_id}>
+                                <Transformation
+                                    crop="scale"
+                                    width={width || "150"}
+                                    height={height || "150"}
+                                    dpr="auto"
+                                    responsive_placeholder="blank"/>
+                            </Image>
+                            <label>{description}</label>
+                        </a>
+                    </div>
                 </div>
             </CloudinaryContext>
         )

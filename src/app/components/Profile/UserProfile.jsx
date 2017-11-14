@@ -6,6 +6,7 @@ import {bindActionCreators} from 'redux'
 import * as profileInformationActions from 'redux/actions/actionsProfileInformation'
 import {CLOUDINARY_UNKNOWN_USER_AVATAR} from "constants/cloudinaryConstants";
 import ListOfPosts from 'app/components/Posts/ListOfPosts'
+import {parseDate} from "./profileHelper";
 
 class UserProfile extends React.Component {
     constructor(props) {
@@ -21,6 +22,7 @@ class UserProfile extends React.Component {
 
     render() {
         const {login, name, surname, sex, dataOfRegistration, public_id, privateAccount} = this.props;
+        let formatDate = parseDate(dataOfRegistration);
         if (privateAccount) {
             return (
                 <div className="UserProfilePrivateAccount">
@@ -36,7 +38,7 @@ class UserProfile extends React.Component {
             return (
                 <div className="UserProfilePublicAccount">
                     <div className="row">
-                        <div className="col col-md-3 col-sm-3">
+                        <div className="col col-lg-3 col-md-3 col-sm-6 col-10">
                             <ShortInformationProfile
                                 userPage={true}
                                 login={login}
@@ -44,13 +46,11 @@ class UserProfile extends React.Component {
                                 surname={surname}
                                 sex={sex}
                                 public_id={public_id || CLOUDINARY_UNKNOWN_USER_AVATAR}
-                                dataOfRegistration={dataOfRegistration}
+                                dataOfRegistration={formatDate}
                                 privateAccount={privateAccount}/>
                         </div>
-                        <div className="col ool-md-6 col-sm-6">
+                        <div className="col col-lg-6 col-md-6 col-sm-6 col-10">
                             <ListOfPosts userPage={true}/>
-                        </div>
-                        <div className="col ool-md-1 col-sm-1">
                         </div>
                     </div>
                 </div>)

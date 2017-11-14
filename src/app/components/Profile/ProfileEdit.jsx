@@ -11,6 +11,7 @@ import {CLOUDINARY_NAME, CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_UNKNOWN_USER_AVATA
 class ProfileEdit extends React.Component {
     constructor(props) {
         super(props);
+        this.props.profileInformationActions.getProfileInformation(undefined);
         this.state = {
             name: this.props.name,
             surname: this.props.surname,
@@ -21,7 +22,22 @@ class ProfileEdit extends React.Component {
             confirmPassword: this.props.confirmPassword,
             public_id: this.props.public_id,
             privateAccount: this.props.privateAccount
-        }
+        };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            name: nextProps.name,
+            surname: nextProps.surname,
+            login: nextProps.login,
+            email: nextProps.email,
+            sex: nextProps.sex,
+            password: nextProps.password,
+            confirmPassword: nextProps.confirmPassword,
+            public_id: nextProps.public_id,
+            privateAccount: nextProps.privateAccount
+        })
+
     }
 
     handleNameChange(e) {
@@ -100,7 +116,7 @@ class ProfileEdit extends React.Component {
                 <br/>
                 <div className="card border-info mb-3">
                     <div className="row justify-content-center">
-                        <div className="col-3">
+                        <div className="col-3 col-md-3 col-sm-6 col-xs-12">
                             <form>
                                 <div className="photo form-group">
                                     {this.state.public_id === '' ?
@@ -127,7 +143,7 @@ class ProfileEdit extends React.Component {
                             </form>
                         </div>
 
-                        <div className="col-3">
+                        <div className="col-3 col-md-3 col-sm-6 col-xs-12">
                             <form>
                                 <FieldGroup
                                     label="First name"
@@ -161,7 +177,7 @@ class ProfileEdit extends React.Component {
 
                         <br/>
 
-                        <div className="col-3">
+                        <div className="col-3 col-md-3 col-sm-6 col-xs-12">
                             <form>
                                 <div className="form-group">
                                     <div className="col-sm-12 col-md-12">
@@ -185,7 +201,7 @@ class ProfileEdit extends React.Component {
                             </form>
                         </div>
 
-                        <div className="col-3">
+                        <div className="col-3  col-md-3 col-sm-6 col-xs-12">
                             <form>
                                 <FieldGroup
                                     label="Password"

@@ -86,7 +86,7 @@ class SignUp extends React.Component {
         return (
             <div className="SignUp container">
                 <div className="row justify-content-center">
-                    <div className="col-5">
+                    <div className="col-5 col-sm-6 col-md-5">
                         <br/>
                         <div className="page-header">
                             <div className="col-sm-12 col-md-12 ">
@@ -156,7 +156,7 @@ class SignUp extends React.Component {
 
                         </form>
                     </div>
-                    <div className="col-3">
+                    <div className="col-3 col-md-4 col-lg-3  col-sm-6 col-xs-6">
                         <div className="photo">
                             <div className="card border-info mb-3 ">
                                 <form className="form">

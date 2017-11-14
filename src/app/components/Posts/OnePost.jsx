@@ -36,13 +36,13 @@ class OnePost extends React.Component {
     }
 
     buttons() {
-        return ( <form className="buttons form-inline">
+        return ( <form className="Title  form-inline">
             <h5 className="card-title">{this.props.title}</h5>
-            <button type="button" className="close" aria-label="Close"
+            <button type="button" className="ButtonEdit close" aria-label="Close"
                     onClick={this.handleEditPost.bind(this)}>
                 <h6>Edit</h6>
             </button>
-            <button type="button" className="close" aria-label="Close"
+            <button type="button" className="ButtonClose close" aria-label="Close"
                     onClick={this.handleDeletePost.bind(this)}>
                 <h5 aria-hidden="true">&times;</h5>
             </button>

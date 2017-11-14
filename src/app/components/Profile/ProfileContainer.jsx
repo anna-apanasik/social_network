@@ -7,6 +7,7 @@ import * as profileInformationActions from 'redux/actions/actionsProfileInformat
 import NewPost from "../Posts/NewPost";
 import ListOfPosts from "../Posts/ListOfPosts";
 import {CLOUDINARY_UNKNOWN_USER_AVATAR} from "constants/cloudinaryConstants";
+import {parseDate} from "./profileHelper";
 
 class ProfileContainer extends React.Component {
     componentWillMount() {
@@ -18,13 +19,15 @@ class ProfileContainer extends React.Component {
         this.props.profileInformationActions.openModal()
     }
 
+
     render() {
         const {login, name, surname, sex, email, dataOfRegistration, public_id, isOpen, editPost, privateAccount} = this.props;
         const {closeModal} = this.props.profileInformationActions;
+        let formatDate = parseDate(dataOfRegistration);
         return (
             <div>
                 <div className="ProfileContainer row">
-                    <div className="col col-md-3 col-sm-3">
+                    <div className="col col-lg-3 col-md-3 col-sm-6 col-10">
                         <ShortInformationProfile
                             login={login}
                             name={name}
@@ -32,14 +35,14 @@ class ProfileContainer extends React.Component {
                             sex={sex}
                             email={email}
                             public_id={public_id || CLOUDINARY_UNKNOWN_USER_AVATAR}
-                            dataOfRegistration={dataOfRegistration}
+                            dataOfRegistration={formatDate}
                             privateAccount={privateAccount}/>
                     </div>
-                    <div className="ListOfPosts col ool-md-6 col-sm-6">
+                    <div className="ListOfPosts col col-lg-6 col-md-6 col-sm-6 col-10">
                         <ListOfPosts/>
                     </div>
-                    <div className="col ool-md-1 col-sm-1">
-                        <button type="button"
+                    <div className="WhatsNew col col-lg-1 col-md-1 col-sm-12 col-10">
+                        <button type="button "
                                 className="btn btn-outline-primary btm-lg"
                                 onClick={this.openModal.bind(this)}>What's new?
                         </button>
