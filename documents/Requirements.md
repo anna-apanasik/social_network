@@ -86,6 +86,7 @@ This web application can be suitable for any active user of the Internet and per
 #### 3.2.1 Software quality attributes
 * Responsive Design - content must be readable on mobile, tablet and desktop devices.
 * Performance. To avoid wasting time user must wait at maximum 1 second to load any page on web app.
+* Size of script will be less then 1 Mb.
 
 #### 3.2.2 External interfaces
 User monitor should support resolution at least 620 х 769 .
